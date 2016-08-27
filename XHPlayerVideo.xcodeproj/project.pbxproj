@@ -16,8 +16,6 @@
 		FC5A85001D7089C200267B7F /* XHPlayerVideoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A84FF1D7089C200267B7F /* XHPlayerVideoUITests.m */; };
 		FC5A85451D70AEC100267B7F /* PlayerVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A85381D70AEC100267B7F /* PlayerVideoViewController.m */; };
 		FC5A85461D70AEC100267B7F /* PlayerVideoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A853A1D70AEC100267B7F /* PlayerVideoWindowController.m */; };
-		FC5A85471D70AEC100267B7F /* PlayListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A85401D70AEC100267B7F /* PlayListVC.m */; };
-		FC5A85481D70AEC100267B7F /* PlayListWC.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A85421D70AEC100267B7F /* PlayListWC.m */; };
 		FC5A854B1D70B77400267B7F /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC5A854A1D70B77400267B7F /* background.jpg */; };
 		FCDD9EA61D71934A0098C259 /* ControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDD9EA51D71934A0098C259 /* ControllerView.m */; };
 		FCDD9EA91D719C220098C259 /* VLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDD9EA71D719C140098C259 /* VLCKit.framework */; };
@@ -76,10 +74,6 @@
 		FC5A85381D70AEC100267B7F /* PlayerVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerVideoViewController.m; sourceTree = "<group>"; };
 		FC5A85391D70AEC100267B7F /* PlayerVideoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerVideoWindowController.h; sourceTree = "<group>"; };
 		FC5A853A1D70AEC100267B7F /* PlayerVideoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerVideoWindowController.m; sourceTree = "<group>"; };
-		FC5A853F1D70AEC100267B7F /* PlayListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListVC.h; sourceTree = "<group>"; };
-		FC5A85401D70AEC100267B7F /* PlayListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListVC.m; sourceTree = "<group>"; };
-		FC5A85411D70AEC100267B7F /* PlayListWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListWC.h; sourceTree = "<group>"; };
-		FC5A85421D70AEC100267B7F /* PlayListWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListWC.m; sourceTree = "<group>"; };
 		FC5A85491D70B38000267B7F /* Macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
 		FC5A854A1D70B77400267B7F /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
 		FCDD9EA41D71934A0098C259 /* ControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControllerView.h; sourceTree = "<group>"; };
@@ -303,10 +297,6 @@
 		FC5A853E1D70AEC100267B7F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FC5A853F1D70AEC100267B7F /* PlayListVC.h */,
-				FC5A85401D70AEC100267B7F /* PlayListVC.m */,
-				FC5A85411D70AEC100267B7F /* PlayListWC.h */,
-				FC5A85421D70AEC100267B7F /* PlayListWC.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -510,10 +500,8 @@
 				FC5A85461D70AEC100267B7F /* PlayerVideoWindowController.m in Sources */,
 				FC5A84E21D7089C200267B7F /* main.m in Sources */,
 				FC5A84DF1D7089C200267B7F /* AppDelegate.m in Sources */,
-				FC5A85481D70AEC100267B7F /* PlayListWC.m in Sources */,
 				FC5A85451D70AEC100267B7F /* PlayerVideoViewController.m in Sources */,
 				FCDD9EA61D71934A0098C259 /* ControllerView.m in Sources */,
-				FC5A85471D70AEC100267B7F /* PlayListVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

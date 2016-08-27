@@ -36,7 +36,7 @@
     
     player = [[VLCMediaPlayer alloc] initWithVideoView:videoPlayView];
     player.delegate = self;
-    [player setMedia:[VLCMedia mediaWithPath:@"/Users/CXH/Documents/视频/MMD/【MMD】极乐净土 【楪祈】_MMD·3D_动画_bilibili_哔哩哔哩弹幕视频网_1.flv"]];
+    [player setMedia:[VLCMedia mediaWithPath:@"/Users/CXH/Documents/视频/MMD/红菱舞姬巡音LUKA】极乐净土【写实向环境渲染】_MMD·3D_动画_bilibili_哔哩哔哩弹幕视频网_1.flv"]];
   
 
 }
@@ -49,6 +49,15 @@
     [controllerView.videoSlider setAction:@selector(videoSliderAction:)];
     [controllerView.soundSwitchBtn setAction:@selector(soundSwitch:)];
     [controllerView.volumeSlider setAction:@selector(volumeSliderAction:)];
+    
+    // 创建监视区
+    NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:self.view.bounds options:
+                                    NSTrackingMouseMoved |
+                                    NSTrackingMouseEnteredAndExited |
+                                    NSTrackingActiveAlways owner:self userInfo:nil];
+    
+    // 添加到View中
+    [self.view addTrackingArea:trackingArea];
 }
 #pragma BottonActions
 - (void)playSwitch:(id)sender {
@@ -62,7 +71,12 @@
     
 }
 - (void)nextVideo:(id)sender{
-    
+    NSWindow* window = [[NSWindow alloc] init];
+    [window setContentSize:NSMakeSize(300, 618)];
+    [window setFrameOrigin:NSMakePoint(1000, 0)];
+    [window setStyleMask:NSBorderlessWindowMask];
+    [window setMovableByWindowBackground:YES];
+    [[NSApplication sharedApplication] beginModalSessionForWindow:window];
 }
 - (void)soundSwitch:(id)sender {
     if(player.audio.volume){
@@ -72,7 +86,15 @@
     }
 }
 
-
+#pragma mouseActions
+// 鼠标进入监视区
+- (void)mouseEntered:(NSEvent *)theEvent{
+    controllerView.alphaValue = 1;
+}
+// 鼠标推出监视区
+- (void)mouseExited:(NSEvent *)theEvent{
+    controllerView.alphaValue = 0;
+}
 #pragma SliderActions
 
 - (void)videoSliderAction:(id)sender {
