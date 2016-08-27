@@ -33,7 +33,11 @@ xcuserdata/
 # you should judge for yourself, the pros and cons are mentioned at:
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
-# Pods/
+#
+ Pods/
+ xcuserdata/
+ *.xcworkspace
+ *.lock
 
 # Carthage
 #
@@ -59,3 +63,5 @@ fastlane/screenshots
 
 iOSInjectionProject/
 */.DS_Store
+VLCKit.framework
+

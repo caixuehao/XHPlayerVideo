@@ -7,13 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9DF276ECBEC4FC82FEC4B901 /* libPods-XHPlayerVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 029B916A20BEB233407D41E3 /* libPods-XHPlayerVideo.a */; };
 		FC5A84DF1D7089C200267B7F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A84DE1D7089C200267B7F /* AppDelegate.m */; };
 		FC5A84E21D7089C200267B7F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A84E11D7089C200267B7F /* main.m */; };
-		FC5A84E51D7089C200267B7F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A84E41D7089C200267B7F /* ViewController.m */; };
 		FC5A84E71D7089C200267B7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC5A84E61D7089C200267B7F /* Assets.xcassets */; };
 		FC5A84EA1D7089C200267B7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC5A84E81D7089C200267B7F /* Main.storyboard */; };
 		FC5A84F51D7089C200267B7F /* XHPlayerVideoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A84F41D7089C200267B7F /* XHPlayerVideoTests.m */; };
 		FC5A85001D7089C200267B7F /* XHPlayerVideoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A84FF1D7089C200267B7F /* XHPlayerVideoUITests.m */; };
+		FC5A85451D70AEC100267B7F /* PlayerVideoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A85381D70AEC100267B7F /* PlayerVideoVC.m */; };
+		FC5A85461D70AEC100267B7F /* PlayerVideoWC.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A853A1D70AEC100267B7F /* PlayerVideoWC.m */; };
+		FC5A85471D70AEC100267B7F /* PlayListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A85401D70AEC100267B7F /* PlayListVC.m */; };
+		FC5A85481D70AEC100267B7F /* PlayListWC.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A85421D70AEC100267B7F /* PlayListWC.m */; };
+		FC5A854B1D70B77400267B7F /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC5A854A1D70B77400267B7F /* background.jpg */; };
+		FCDD9EA61D71934A0098C259 /* ControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDD9EA51D71934A0098C259 /* ControllerView.m */; };
+		FCDD9EA91D719C220098C259 /* VLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDD9EA71D719C140098C259 /* VLCKit.framework */; };
+		FCDD9EAA1D719C220098C259 /* VLCKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCDD9EA71D719C140098C259 /* VLCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,13 +41,28 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FCDD9EAB1D719C220098C259 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FCDD9EAA1D719C220098C259 /* VLCKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		029B916A20BEB233407D41E3 /* libPods-XHPlayerVideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XHPlayerVideo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		11B324F5AA03EBDC27F8F80C /* Pods-XHPlayerVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XHPlayerVideo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XHPlayerVideo/Pods-XHPlayerVideo.debug.xcconfig"; sourceTree = "<group>"; };
+		EB1A32EA5DFDC2FFA65D77A3 /* Pods-XHPlayerVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XHPlayerVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-XHPlayerVideo/Pods-XHPlayerVideo.release.xcconfig"; sourceTree = "<group>"; };
 		FC5A84DA1D7089C200267B7F /* XHPlayerVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XHPlayerVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5A84DD1D7089C200267B7F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC5A84DE1D7089C200267B7F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FC5A84E11D7089C200267B7F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		FC5A84E31D7089C200267B7F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FC5A84E41D7089C200267B7F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		FC5A84E61D7089C200267B7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC5A84E91D7089C200267B7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC5A84EB1D7089C200267B7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +72,19 @@
 		FC5A84FB1D7089C200267B7F /* XHPlayerVideoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XHPlayerVideoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5A84FF1D7089C200267B7F /* XHPlayerVideoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHPlayerVideoUITests.m; sourceTree = "<group>"; };
 		FC5A85011D7089C200267B7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC5A85371D70AEC100267B7F /* PlayerVideoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerVideoVC.h; sourceTree = "<group>"; };
+		FC5A85381D70AEC100267B7F /* PlayerVideoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerVideoVC.m; sourceTree = "<group>"; };
+		FC5A85391D70AEC100267B7F /* PlayerVideoWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerVideoWC.h; sourceTree = "<group>"; };
+		FC5A853A1D70AEC100267B7F /* PlayerVideoWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerVideoWC.m; sourceTree = "<group>"; };
+		FC5A853F1D70AEC100267B7F /* PlayListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListVC.h; sourceTree = "<group>"; };
+		FC5A85401D70AEC100267B7F /* PlayListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListVC.m; sourceTree = "<group>"; };
+		FC5A85411D70AEC100267B7F /* PlayListWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListWC.h; sourceTree = "<group>"; };
+		FC5A85421D70AEC100267B7F /* PlayListWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListWC.m; sourceTree = "<group>"; };
+		FC5A85491D70B38000267B7F /* Macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
+		FC5A854A1D70B77400267B7F /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		FCDD9EA41D71934A0098C259 /* ControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControllerView.h; sourceTree = "<group>"; };
+		FCDD9EA51D71934A0098C259 /* ControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControllerView.m; sourceTree = "<group>"; };
+		FCDD9EA71D719C140098C259 /* VLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VLCKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DF276ECBEC4FC82FEC4B901 /* libPods-XHPlayerVideo.a in Frameworks */,
+				FCDD9EA91D719C220098C259 /* VLCKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +114,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		299757B0AF4FC4298EC2A56A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				029B916A20BEB233407D41E3 /* libPods-XHPlayerVideo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B9C3444C997070C3BA397E28 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				11B324F5AA03EBDC27F8F80C /* Pods-XHPlayerVideo.debug.xcconfig */,
+				EB1A32EA5DFDC2FFA65D77A3 /* Pods-XHPlayerVideo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		FC5A84D11D7089C200267B7F = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +138,8 @@
 				FC5A84F31D7089C200267B7F /* XHPlayerVideoTests */,
 				FC5A84FE1D7089C200267B7F /* XHPlayerVideoUITests */,
 				FC5A84DB1D7089C200267B7F /* Products */,
+				B9C3444C997070C3BA397E28 /* Pods */,
+				299757B0AF4FC4298EC2A56A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,10 +156,11 @@
 		FC5A84DC1D7089C200267B7F /* XHPlayerVideo */ = {
 			isa = PBXGroup;
 			children = (
+				FC5A850E1D70A21F00267B7F /* Class */,
+				FC5A850F1D70A21F00267B7F /* Librarys */,
+				FC5A85101D70A21F00267B7F /* Resources */,
 				FC5A84DD1D7089C200267B7F /* AppDelegate.h */,
 				FC5A84DE1D7089C200267B7F /* AppDelegate.m */,
-				FC5A84E31D7089C200267B7F /* ViewController.h */,
-				FC5A84E41D7089C200267B7F /* ViewController.m */,
 				FC5A84E61D7089C200267B7F /* Assets.xcassets */,
 				FC5A84E81D7089C200267B7F /* Main.storyboard */,
 				FC5A84EB1D7089C200267B7F /* Info.plist */,
@@ -137,6 +195,136 @@
 			path = XHPlayerVideoUITests;
 			sourceTree = "<group>";
 		};
+		FC5A850E1D70A21F00267B7F /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				FC5A85341D70AEC100267B7F /* Modules */,
+				FC5A85311D70AEC100267B7F /* Category */,
+				FC5A85321D70AEC100267B7F /* Common */,
+				FC5A85331D70AEC100267B7F /* Macro */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		FC5A850F1D70A21F00267B7F /* Librarys */ = {
+			isa = PBXGroup;
+			children = (
+				FCDD9EA71D719C140098C259 /* VLCKit.framework */,
+			);
+			path = Librarys;
+			sourceTree = "<group>";
+		};
+		FC5A85101D70A21F00267B7F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FC5A854A1D70B77400267B7F /* background.jpg */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FC5A85311D70AEC100267B7F /* Category */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		FC5A85321D70AEC100267B7F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		FC5A85331D70AEC100267B7F /* Macro */ = {
+			isa = PBXGroup;
+			children = (
+				FC5A85491D70B38000267B7F /* Macro.h */,
+			);
+			path = Macro;
+			sourceTree = "<group>";
+		};
+		FC5A85341D70AEC100267B7F /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				FC5A85351D70AEC100267B7F /* PlayerVideo */,
+				FC5A853D1D70AEC100267B7F /* PlayList */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		FC5A85351D70AEC100267B7F /* PlayerVideo */ = {
+			isa = PBXGroup;
+			children = (
+				FC5A85361D70AEC100267B7F /* Controllers */,
+				FC5A853B1D70AEC100267B7F /* Models */,
+				FC5A853C1D70AEC100267B7F /* Views */,
+			);
+			path = PlayerVideo;
+			sourceTree = "<group>";
+		};
+		FC5A85361D70AEC100267B7F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FC5A85371D70AEC100267B7F /* PlayerVideoVC.h */,
+				FC5A85381D70AEC100267B7F /* PlayerVideoVC.m */,
+				FC5A85391D70AEC100267B7F /* PlayerVideoWC.h */,
+				FC5A853A1D70AEC100267B7F /* PlayerVideoWC.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FC5A853B1D70AEC100267B7F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FC5A853C1D70AEC100267B7F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FCDD9EA41D71934A0098C259 /* ControllerView.h */,
+				FCDD9EA51D71934A0098C259 /* ControllerView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FC5A853D1D70AEC100267B7F /* PlayList */ = {
+			isa = PBXGroup;
+			children = (
+				FC5A853E1D70AEC100267B7F /* Controllers */,
+				FC5A85431D70AEC100267B7F /* Models */,
+				FC5A85441D70AEC100267B7F /* Views */,
+			);
+			path = PlayList;
+			sourceTree = "<group>";
+		};
+		FC5A853E1D70AEC100267B7F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FC5A853F1D70AEC100267B7F /* PlayListVC.h */,
+				FC5A85401D70AEC100267B7F /* PlayListVC.m */,
+				FC5A85411D70AEC100267B7F /* PlayListWC.h */,
+				FC5A85421D70AEC100267B7F /* PlayListWC.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FC5A85431D70AEC100267B7F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FC5A85441D70AEC100267B7F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,9 +332,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FC5A85041D7089C200267B7F /* Build configuration list for PBXNativeTarget "XHPlayerVideo" */;
 			buildPhases = (
+				DC00CB4E2C0D2AA5580976A9 /* [CP] Check Pods Manifest.lock */,
 				FC5A84D61D7089C200267B7F /* Sources */,
 				FC5A84D71D7089C200267B7F /* Frameworks */,
 				FC5A84D81D7089C200267B7F /* Resources */,
+				7C82609992159EA016BE06DA /* [CP] Embed Pods Frameworks */,
+				66305DC9B6ABE341438B757A /* [CP] Copy Pods Resources */,
+				FCDD9EAB1D719C220098C259 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -240,6 +432,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC5A854B1D70B77400267B7F /* background.jpg in Resources */,
 				FC5A84E71D7089C200267B7F /* Assets.xcassets in Resources */,
 				FC5A84EA1D7089C200267B7F /* Main.storyboard in Resources */,
 			);
@@ -261,14 +454,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		66305DC9B6ABE341438B757A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XHPlayerVideo/Pods-XHPlayerVideo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7C82609992159EA016BE06DA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XHPlayerVideo/Pods-XHPlayerVideo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC00CB4E2C0D2AA5580976A9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FC5A84D61D7089C200267B7F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC5A84E51D7089C200267B7F /* ViewController.m in Sources */,
+				FC5A85461D70AEC100267B7F /* PlayerVideoWC.m in Sources */,
 				FC5A84E21D7089C200267B7F /* main.m in Sources */,
 				FC5A84DF1D7089C200267B7F /* AppDelegate.m in Sources */,
+				FC5A85481D70AEC100267B7F /* PlayListWC.m in Sources */,
+				FC5A85451D70AEC100267B7F /* PlayerVideoVC.m in Sources */,
+				FCDD9EA61D71934A0098C259 /* ControllerView.m in Sources */,
+				FC5A85471D70AEC100267B7F /* PlayListVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,7 +567,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -366,7 +611,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -398,9 +643,20 @@
 		};
 		FC5A85051D7089C200267B7F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11B324F5AA03EBDC27F8F80C /* Pods-XHPlayerVideo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/XHPlayerVideo/Librarys",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"\"$(SRCROOT)/XHPlayerVideo/Librarys/include\"",
+				);
 				INFOPLIST_FILE = XHPlayerVideo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xh.XHPlayerVideo;
@@ -410,9 +666,20 @@
 		};
 		FC5A85061D7089C200267B7F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB1A32EA5DFDC2FFA65D77A3 /* Pods-XHPlayerVideo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/XHPlayerVideo/Librarys",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"\"$(SRCROOT)/XHPlayerVideo/Librarys/include\"",
+				);
 				INFOPLIST_FILE = XHPlayerVideo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xh.XHPlayerVideo;
@@ -489,6 +756,7 @@
 				FC5A85061D7089C200267B7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FC5A85071D7089C200267B7F /* Build configuration list for PBXNativeTarget "XHPlayerVideoTests" */ = {
 			isa = XCConfigurationList;
@@ -497,6 +765,7 @@
 				FC5A85091D7089C200267B7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FC5A850A1D7089C200267B7F /* Build configuration list for PBXNativeTarget "XHPlayerVideoUITests" */ = {
 			isa = XCConfigurationList;
@@ -505,6 +774,7 @@
 				FC5A850C1D7089C200267B7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
