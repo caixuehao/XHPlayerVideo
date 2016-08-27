@@ -42,7 +42,10 @@
 }
 #pragma loadActions
 -(void)loadActions{
+    
     [controllerView.playSwitchBtn setAction:@selector(playSwitch:)];
+    [controllerView.nextVideoBtn setAction:@selector(nextVideo:)];
+    
     [controllerView.videoSlider setAction:@selector(videoSliderAction:)];
     [controllerView.soundSwitchBtn setAction:@selector(soundSwitch:)];
     [controllerView.volumeSlider setAction:@selector(volumeSliderAction:)];
@@ -50,15 +53,17 @@
 #pragma BottonActions
 - (void)playSwitch:(id)sender {
     if(player.playing){
-        controllerView.playSwitchBtn.stringValue = @"播放";
+        [controllerView.playSwitchBtn setTitle:@"播放"];
         [player pause];
     }else{
-        controllerView.playSwitchBtn.stringValue = @"暂停";
+        [controllerView.playSwitchBtn setTitle:@"暂停"];
         [player play];
     }
     
 }
-
+- (void)nextVideo:(id)sender{
+    
+}
 - (void)soundSwitch:(id)sender {
     if(player.audio.volume){
         player.audio.volume = 0;

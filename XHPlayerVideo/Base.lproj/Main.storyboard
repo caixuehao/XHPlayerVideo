@@ -665,37 +665,6 @@
             </objects>
             <point key="canvasLocation" x="-252.5" y="178.5"/>
         </scene>
-        <!--Window Controller-->
-        <scene sceneID="CYn-KW-26R">
-            <objects>
-                <windowController id="u6c-qF-49M" customClass="PlayListWC" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="ccI-AM-vUs">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="460" y="476" width="208" height="291"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
-                    </window>
-                    <connections>
-                        <segue destination="dHH-xo-ohf" kind="relationship" relationship="window.shadowedContentViewController" id="Vov-F9-nQB"/>
-                    </connections>
-                </windowController>
-                <customObject id="2Ny-pf-0ED" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="222" y="181.5"/>
-        </scene>
-        <!--Play ListVC-->
-        <scene sceneID="9wF-ZD-3lb">
-            <objects>
-                <viewController id="dHH-xo-ohf" customClass="PlayListVC" sceneMemberID="viewController">
-                    <view key="view" id="dP4-qO-nUz">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="263"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="omm-P8-0ew" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="222" y="625.5"/>
-        </scene>
         <!--Player Video View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
