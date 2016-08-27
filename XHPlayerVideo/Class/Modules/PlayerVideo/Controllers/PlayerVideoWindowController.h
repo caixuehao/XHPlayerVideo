@@ -1,5 +1,5 @@
 //
-//  PlayerVideoVC.h
+//  PlayerVideoWC.h
 //  XHPlayerVideo
 //
 //  Created by C on 16/8/27.
@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface PlayerVideoVC : NSViewController
+@interface PlayerVideoWindowController : NSWindowController
 
 @end

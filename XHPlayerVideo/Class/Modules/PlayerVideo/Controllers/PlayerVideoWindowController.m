@@ -6,13 +6,13 @@
 //  Copyright © 2016年 C. All rights reserved.
 //
 
-#import "PlayerVideoWC.h"
+#import "PlayerVideoWindowController.h"
 
-@interface PlayerVideoWC ()
+@interface PlayerVideoWindowController ()
 
 @end
 
-@implementation PlayerVideoWC
+@implementation PlayerVideoWindowController
 
 - (void)windowDidLoad {
     [super windowDidLoad];
