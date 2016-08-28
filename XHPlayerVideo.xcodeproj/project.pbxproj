@@ -20,6 +20,9 @@
 		FCDD9EA61D71934A0098C259 /* ControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDD9EA51D71934A0098C259 /* ControllerView.m */; };
 		FCDD9EA91D719C220098C259 /* VLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDD9EA71D719C140098C259 /* VLCKit.framework */; };
 		FCDD9EAA1D719C220098C259 /* VLCKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCDD9EA71D719C140098C259 /* VLCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCFE5B7D1D72C07D005DF1A4 /* PlayListWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFE5B7C1D72C07D005DF1A4 /* PlayListWindow.m */; };
+		FCFE5B841D72D926005DF1A4 /* PlayListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFE5B821D72D926005DF1A4 /* PlayListViewController.m */; };
+		FCFE5B851D72D926005DF1A4 /* PlayListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFE5B831D72D926005DF1A4 /* PlayListViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +82,11 @@
 		FCDD9EA41D71934A0098C259 /* ControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControllerView.h; sourceTree = "<group>"; };
 		FCDD9EA51D71934A0098C259 /* ControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControllerView.m; sourceTree = "<group>"; };
 		FCDD9EA71D719C140098C259 /* VLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VLCKit.framework; sourceTree = "<group>"; };
+		FCFE5B7B1D72C07D005DF1A4 /* PlayListWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListWindow.h; sourceTree = "<group>"; };
+		FCFE5B7C1D72C07D005DF1A4 /* PlayListWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListWindow.m; sourceTree = "<group>"; };
+		FCFE5B811D72D926005DF1A4 /* PlayListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListViewController.h; sourceTree = "<group>"; };
+		FCFE5B821D72D926005DF1A4 /* PlayListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListViewController.m; sourceTree = "<group>"; };
+		FCFE5B831D72D926005DF1A4 /* PlayListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayListViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,6 +305,9 @@
 		FC5A853E1D70AEC100267B7F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FCFE5B811D72D926005DF1A4 /* PlayListViewController.h */,
+				FCFE5B821D72D926005DF1A4 /* PlayListViewController.m */,
+				FCFE5B831D72D926005DF1A4 /* PlayListViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -311,6 +322,8 @@
 		FC5A85441D70AEC100267B7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FCFE5B7B1D72C07D005DF1A4 /* PlayListWindow.h */,
+				FCFE5B7C1D72C07D005DF1A4 /* PlayListWindow.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -422,6 +435,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCFE5B851D72D926005DF1A4 /* PlayListViewController.xib in Resources */,
 				FC5A854B1D70B77400267B7F /* background.jpg in Resources */,
 				FC5A84E71D7089C200267B7F /* Assets.xcassets in Resources */,
 				FC5A84EA1D7089C200267B7F /* Main.storyboard in Resources */,
@@ -500,8 +514,10 @@
 				FC5A85461D70AEC100267B7F /* PlayerVideoWindowController.m in Sources */,
 				FC5A84E21D7089C200267B7F /* main.m in Sources */,
 				FC5A84DF1D7089C200267B7F /* AppDelegate.m in Sources */,
+				FCFE5B7D1D72C07D005DF1A4 /* PlayListWindow.m in Sources */,
 				FC5A85451D70AEC100267B7F /* PlayerVideoViewController.m in Sources */,
 				FCDD9EA61D71934A0098C259 /* ControllerView.m in Sources */,
+				FCFE5B841D72D926005DF1A4 /* PlayListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

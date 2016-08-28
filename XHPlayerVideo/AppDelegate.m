@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+#import "PlayerVideoWindowController.h"
 @interface AppDelegate ()
 
 @end
@@ -20,6 +21,17 @@
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
+}
+
+//点击重新打开主窗口
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication
+                    hasVisibleWindows:(BOOL)flag{
+    if (!flag){
+        //主窗口显示
+        [NSApp activateIgnoringOtherApps:NO];
+        [[PlayerVideoWindowController getPlayerVideoWindowController].window makeKeyAndOrderFront:self];
+    }
+    return YES;
 }
 
 @end

@@ -12,6 +12,7 @@
 #import "Macro.h"
 
 #import "ControllerView.h"
+#import "PlayListWindow.h"
 
 @interface PlayerVideoViewController ()<VLCMediaPlayerDelegate>
 
@@ -34,9 +35,9 @@
     [self loadSubViews];
     [self loadActions];
     
-    player = [[VLCMediaPlayer alloc] initWithVideoView:videoPlayView];
-    player.delegate = self;
-    [player setMedia:[VLCMedia mediaWithPath:@"/Users/CXH/Documents/视频/MMD/红菱舞姬巡音LUKA】极乐净土【写实向环境渲染】_MMD·3D_动画_bilibili_哔哩哔哩弹幕视频网_1.flv"]];
+//    player = [[VLCMediaPlayer alloc] initWithVideoView:videoPlayView];
+//    player.delegate = self;
+//    [player setMedia:[VLCMedia mediaWithPath:@"/Users/CXH/Documents/视频/MMD/红菱舞姬巡音LUKA】极乐净土【写实向环境渲染】_MMD·3D_动画_bilibili_哔哩哔哩弹幕视频网_1.flv"]];
   
 
 }
@@ -71,12 +72,7 @@
     
 }
 - (void)nextVideo:(id)sender{
-    NSWindow* window = [[NSWindow alloc] init];
-    [window setContentSize:NSMakeSize(300, 618)];
-    [window setFrameOrigin:NSMakePoint(1000, 0)];
-    [window setStyleMask:NSBorderlessWindowMask];
-    [window setMovableByWindowBackground:YES];
-    [[NSApplication sharedApplication] beginModalSessionForWindow:window];
+    [PlayListWindow show];
 }
 - (void)soundSwitch:(id)sender {
     if(player.audio.volume){
