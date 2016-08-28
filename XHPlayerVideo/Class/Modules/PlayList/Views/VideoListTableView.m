@@ -63,11 +63,6 @@
 {
     VideoModel* video = self.videos[row];
     NSLog(@"%@",video.path);
-    //创建通知并发送
-    NSDictionary* dic = @{@"video":video};
-    //创建通知
-    NSNotification *notification =[NSNotification notificationWithName:PlayVideoNotification object:nil userInfo:dic];
-    //通过通知中心发送通知
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    [video play];
 }
 @end

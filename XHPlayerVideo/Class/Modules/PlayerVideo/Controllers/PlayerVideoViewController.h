@@ -10,6 +10,6 @@
 #import "VideoModel.h"
 @interface PlayerVideoViewController : NSViewController
 
-@property(nonatomic,strong)VideoModel* currentVideo;
+@property(nonatomic,copy)VideoModel* currentVideo;
 
 @end

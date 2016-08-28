@@ -41,9 +41,7 @@
     //创建通知并发送
     VideoModel* video = [[VideoModel alloc] init];
     video.path = filename;
-    NSDictionary* dic = @{@"video":video};
-    NSNotification *notification =[NSNotification notificationWithName:PlayVideoNotification object:nil userInfo:dic];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    [video play];
     
     return YES;
 }

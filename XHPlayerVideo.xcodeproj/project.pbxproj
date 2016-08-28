@@ -29,6 +29,7 @@
 		FCFE5BA91D731D81005DF1A4 /* defaultCover.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFE5BA81D731D81005DF1A4 /* defaultCover.png */; };
 		FCFE5BAC1D731F40005DF1A4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFE5BAB1D731F40005DF1A4 /* AVFoundation.framework */; };
 		FCFE5BAE1D731F7D005DF1A4 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFE5BAD1D731F7D005DF1A4 /* CoreMedia.framework */; };
+		FCFE5BB11D7336C4005DF1A4 /* PlayListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFE5BB01D7336C4005DF1A4 /* PlayListModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,8 @@
 		FCFE5BA81D731D81005DF1A4 /* defaultCover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultCover.png; sourceTree = "<group>"; };
 		FCFE5BAB1D731F40005DF1A4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FCFE5BAD1D731F7D005DF1A4 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		FCFE5BAF1D7336C4005DF1A4 /* PlayListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListModel.h; sourceTree = "<group>"; };
+		FCFE5BB01D7336C4005DF1A4 /* PlayListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -348,6 +351,8 @@
 			children = (
 				FCFE5B9A1D72F9BD005DF1A4 /* VideoModel.h */,
 				FCFE5B9B1D72F9BD005DF1A4 /* VideoModel.m */,
+				FCFE5BAF1D7336C4005DF1A4 /* PlayListModel.h */,
+				FCFE5BB01D7336C4005DF1A4 /* PlayListModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -554,6 +559,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCFE5BB11D7336C4005DF1A4 /* PlayListModel.m in Sources */,
 				FC5A85461D70AEC100267B7F /* PlayerVideoWindowController.m in Sources */,
 				FCFE5BA21D72F9BD005DF1A4 /* VideoCell.m in Sources */,
 				FC5A84E21D7089C200267B7F /* main.m in Sources */,

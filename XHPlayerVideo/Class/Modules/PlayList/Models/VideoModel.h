@@ -8,8 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface VideoModel : NSObject<NSCopying>
+@interface VideoModel : NSObject
 
 @property(nonatomic)NSString* path;
 
+//播放
+-(void)play;
+
+//把所有数据做成一个字典方便保存
+-(NSDictionary*)getData;
+//用本地读取的数据创建对象
+-(instancetype)initWithData:(NSDictionary*)data;
 @end

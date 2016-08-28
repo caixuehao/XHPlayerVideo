@@ -63,6 +63,7 @@
         //    player.adjustFilterEnabled = NO;
     }];
 }
+
 -(void)loadActions{
     
     [controllerView.playSwitchBtn setAction:@selector(playSwitch:)];
