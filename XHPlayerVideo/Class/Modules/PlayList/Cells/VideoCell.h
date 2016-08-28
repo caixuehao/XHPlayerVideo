@@ -1,5 +1,5 @@
 //
-//  PlayListWindow.h
+//  VideoCell.h
 //  XHPlayerVideo
 //
 //  Created by C on 16/8/28.
@@ -7,9 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "VideoModel.h"
 
-@interface PlayListWindow : NSWindow
-+(void)show;
+@interface VideoCell : NSCell
 
-//+(void)hidden;
+@property(nonatomic)VideoModel* video;
+
 @end

@@ -9,5 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @interface PlayerVideoWindowController : NSWindowController
+
 +(NSWindowController*)getPlayerVideoWindowController;
+
 @end

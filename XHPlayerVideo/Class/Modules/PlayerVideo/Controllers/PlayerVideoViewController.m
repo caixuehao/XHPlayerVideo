@@ -14,6 +14,8 @@
 #import "ControllerView.h"
 #import "PlayListWindow.h"
 
+#import "VideoModel.h"
+
 @interface PlayerVideoViewController ()<VLCMediaPlayerDelegate>
 
 @end
@@ -31,17 +33,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-   
+    
+    
     [self loadSubViews];
     [self loadActions];
     
-//    player = [[VLCMediaPlayer alloc] initWithVideoView:videoPlayView];
-//    player.delegate = self;
-//    [player setMedia:[VLCMedia mediaWithPath:@"/Users/CXH/Documents/视频/MMD/红菱舞姬巡音LUKA】极乐净土【写实向环境渲染】_MMD·3D_动画_bilibili_哔哩哔哩弹幕视频网_1.flv"]];
-  
+    //防止启动太卡
+    [self performSelector:@selector(loadPlayer) withObject:nil afterDelay:0.1f];
+    
+}
 
+- (void)viewDidAppear{
+    [super viewDidAppear];
+    [PlayListWindow show];
 }
 #pragma loadActions
+//加载播放器
+-(void)loadPlayer{
+    [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
+        player = [[VLCMediaPlayer alloc] initWithVideoView:videoPlayView];
+        player.delegate = self;
+        //    player.adjustFilterEnabled = NO;
+    }];
+}
 -(void)loadActions{
     
     [controllerView.playSwitchBtn setAction:@selector(playSwitch:)];
@@ -59,7 +73,18 @@
     
     // 添加到View中
     [self.view addTrackingArea:trackingArea];
+    
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playVideo:) name:PlayVideoNotification object:nil];
 }
+#pragma Actions
+
+- (void)playVideo:(NSNotification *)notifiction{
+    VideoModel* video = [notifiction.userInfo objectForKey:@"video"];
+    [player setMedia:[VLCMedia mediaWithPath:video.path]];
+    [player play];
+}
+
 #pragma BottonActions
 - (void)playSwitch:(id)sender {
     if(player.playing){
@@ -72,7 +97,7 @@
     
 }
 - (void)nextVideo:(id)sender{
-    [PlayListWindow show];
+
 }
 - (void)soundSwitch:(id)sender {
     if(player.audio.volume){
