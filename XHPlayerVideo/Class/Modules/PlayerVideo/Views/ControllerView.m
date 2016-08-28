@@ -25,7 +25,7 @@
     // Drawing code here.
     //画圆角
     NSBezierPath* bezierPath = [NSBezierPath bezierPathWithRoundedRect:NSInsetRect(self.bounds,0,0) xRadius:5 yRadius:5];
-    [CColor(0, 0, 0, 0.7) setFill];
+    [CColor(255, 255, 255, 0.7) setFill];
     [bezierPath fill];
 }
 

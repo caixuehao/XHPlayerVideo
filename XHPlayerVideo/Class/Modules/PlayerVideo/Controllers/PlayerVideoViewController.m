@@ -88,11 +88,18 @@
 #pragma Actions
 
 - (void)playVideo:(NSNotification *)notifiction{
-    [player stop];
     self.currentVideo = [notifiction.userInfo objectForKey:@"video"];
+    //防止调用过快 引起打卡死
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(playVideo) object:nil];
+    [self performSelector:@selector(playVideo) withObject:nil afterDelay:0.5f];
+}
+
+- (void)playVideo{
+    [player stop];
     [player setMedia:[VLCMedia mediaWithPath:self.currentVideo.path]];
     [player play];
 }
+
 
 #pragma BottonActions
 - (void)playSwitch:(id)sender {

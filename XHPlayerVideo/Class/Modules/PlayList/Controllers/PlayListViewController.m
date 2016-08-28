@@ -13,6 +13,7 @@
 #import <Masonry.h>
 
 #import "VideoListTableView.h"
+#import "PlayListModel.h"
 
 @interface PlayListViewController ()
 
@@ -47,21 +48,8 @@
 
 
 - (void)loadSubViews{
-    VideoDataArr = [[NSMutableArray alloc] init];
-    NSArray* pathArr = @[@"/Users/CXH/Documents/视频/MMD/极乐净土 【楪祈】.flv",
-                         @"/Users/CXH/Documents/视频/MMD/萌萌哒的樱miku.flv",
-                         @"/Users/CXH/Documents/视频/MMD/AC娘XYZの魔法.flv",
-                         @"/Users/CXH/Documents/视频/MMD/红菱舞姬巡音LUKA极乐净土.flv",
-                         @"/Users/CXH/Documents/视频/MMD/Romance.flv",
-                         @"/Users/CXH/Documents/视频/MMD/Hi-Fi Raver [Tda Idiolect].flv",
-                         @"/Users/CXH/Documents/视频/AMV/第一天~~~！.mp4"];
-    for (int i = 0; i < pathArr.count; i++) {
-        VideoModel* video = [[VideoModel alloc] init];
-        video.path = pathArr[i];
-        [VideoDataArr addObject:video];
-    }
-    
-    
+
+    VideoDataArr = [[PlayListModel share] playList];
     //建立tabelview
     NSScrollView * tableContainer = [[NSScrollView alloc] init];
     videoTableView = ({
@@ -71,7 +59,6 @@
         [self.view addSubview:tableContainer];
         tableView;
     });
-
     
     //layout
     [tableContainer mas_remakeConstraints:^(MASConstraintMaker *make) {

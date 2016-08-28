@@ -8,12 +8,30 @@
 
 #import <Foundation/Foundation.h>
 #import "VideoModel.h"
+typedef NS_ENUM(NSInteger, PlayMode) {
+    PlayMode顺序播放,
+    PlayMode单曲循环,
+    PlayMode随机播放,
+    PlayMode列表循环
+};
 
-@interface PlayListModel : NSObject<NSCoding>
+@interface PlayListModel : NSObject
 
-@property(nonatomic,strong)NSMutableArray* playHistory;
++(instancetype)share;
 
-@property(nonatomic,strong)VideoModel* currentVideo;
+@property(nonatomic,readonly)NSMutableArray<VideoModel*>* playList;
 
-//@property(nonatomic,strong)
+@property(nonatomic,readonly)NSMutableArray<VideoModel*>* playHistory;
+
+
+@property(nonatomic,copy)VideoModel* currentVideo;
+
+@property(nonatomic,readonly)VideoModel* lastVideo;
+
+@property(nonatomic,readonly)VideoModel* nextVideo;
+
+
+@property(nonatomic)PlayMode playmode;
+
+
 @end

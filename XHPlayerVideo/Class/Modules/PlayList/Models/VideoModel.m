@@ -7,7 +7,7 @@
 //
 
 #import "VideoModel.h"
-#import "Macro.h"
+#import "PlayListModel.h"
 
 @implementation VideoModel
 
@@ -17,14 +17,16 @@
     return vm;
 }
 
+
 //播放
 -(void)play{
-    NSDictionary* dic = @{@"video":self};
-    NSNotification *notification =[NSNotification notificationWithName:PlayVideoNotification object:nil userInfo:dic];//创建通知
-    [[NSNotificationCenter defaultCenter] postNotification:notification];//通过通知中心发送通知
+    [[PlayListModel share] setCurrentVideo:self];
 }
 
-
+//判断是否相等
+-(BOOL)isEqualtoVideoModel:(VideoModel*)aVideoModel{
+    return [self.path isEqualToString:aVideoModel.path];
+}
 
 //把所有数据做成一个字典方便保存
 -(NSDictionary*)getData{
