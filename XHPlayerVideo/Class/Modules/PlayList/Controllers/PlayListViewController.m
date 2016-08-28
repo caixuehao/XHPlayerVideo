@@ -53,7 +53,8 @@
                          @"/Users/CXH/Documents/视频/MMD/AC娘XYZの魔法.flv",
                          @"/Users/CXH/Documents/视频/MMD/红菱舞姬巡音LUKA极乐净土.flv",
                          @"/Users/CXH/Documents/视频/MMD/Romance.flv",
-                         @"/Users/CXH/Documents/视频/MMD/Hi-Fi Raver [Tda Idiolect].flv"];
+                         @"/Users/CXH/Documents/视频/MMD/Hi-Fi Raver [Tda Idiolect].flv",
+                         @"/Users/CXH/Documents/视频/AMV/第一天~~~！.mp4"];
     for (int i = 0; i < pathArr.count; i++) {
         VideoModel* video = [[VideoModel alloc] init];
         video.path = pathArr[i];

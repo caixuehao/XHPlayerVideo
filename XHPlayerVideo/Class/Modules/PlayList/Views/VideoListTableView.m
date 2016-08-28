@@ -25,7 +25,7 @@
         NSTableColumn * column1 = [[NSTableColumn alloc] initWithIdentifier:@"col1"];
         
         [column1 setWidth:VideoCellWidth];//行宽
-        column1.headerCell.title = @"工具名称";//行头名称
+        column1.headerCell.title = @"播放列表";//行头名称
         [column1 setDataCell:[[VideoCell alloc] init]];//设置cell类型
         [self addTableColumn:column1];
         [self setDataSource:self];

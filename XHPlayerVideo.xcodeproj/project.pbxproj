@@ -26,6 +26,9 @@
 		FCFE5BA51D72F9BD005DF1A4 /* VideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFE5B9B1D72F9BD005DF1A4 /* VideoModel.m */; };
 		FCFE5BA61D72F9BD005DF1A4 /* VideoListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFE5B9E1D72F9BD005DF1A4 /* VideoListTableView.m */; };
 		FCFE5BA71D72F9BD005DF1A4 /* PlayListWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFE5BA11D72F9BD005DF1A4 /* PlayListWindow.m */; };
+		FCFE5BA91D731D81005DF1A4 /* defaultCover.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFE5BA81D731D81005DF1A4 /* defaultCover.png */; };
+		FCFE5BAC1D731F40005DF1A4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFE5BAB1D731F40005DF1A4 /* AVFoundation.framework */; };
+		FCFE5BAE1D731F7D005DF1A4 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFE5BAD1D731F7D005DF1A4 /* CoreMedia.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +99,9 @@
 		FCFE5B9E1D72F9BD005DF1A4 /* VideoListTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoListTableView.m; sourceTree = "<group>"; };
 		FCFE5BA01D72F9BD005DF1A4 /* PlayListWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListWindow.h; sourceTree = "<group>"; };
 		FCFE5BA11D72F9BD005DF1A4 /* PlayListWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListWindow.m; sourceTree = "<group>"; };
+		FCFE5BA81D731D81005DF1A4 /* defaultCover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultCover.png; sourceTree = "<group>"; };
+		FCFE5BAB1D731F40005DF1A4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		FCFE5BAD1D731F7D005DF1A4 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCFE5BAE1D731F7D005DF1A4 /* CoreMedia.framework in Frameworks */,
+				FCFE5BAC1D731F40005DF1A4 /* AVFoundation.framework in Frameworks */,
 				9DF276ECBEC4FC82FEC4B901 /* libPods-XHPlayerVideo.a in Frameworks */,
 				FCDD9EA91D719C220098C259 /* VLCKit.framework in Frameworks */,
 			);
@@ -128,6 +136,8 @@
 		299757B0AF4FC4298EC2A56A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCFE5BAD1D731F7D005DF1A4 /* CoreMedia.framework */,
+				FCFE5BAB1D731F40005DF1A4 /* AVFoundation.framework */,
 				029B916A20BEB233407D41E3 /* libPods-XHPlayerVideo.a */,
 			);
 			name = Frameworks;
@@ -228,6 +238,7 @@
 		FC5A85101D70A21F00267B7F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FCFE5BA81D731D81005DF1A4 /* defaultCover.png */,
 				FC5A854A1D70B77400267B7F /* background.jpg */,
 			);
 			path = Resources;
@@ -468,6 +479,7 @@
 			files = (
 				FCFE5BA41D72F9BD005DF1A4 /* PlayListViewController.xib in Resources */,
 				FC5A854B1D70B77400267B7F /* background.jpg in Resources */,
+				FCFE5BA91D731D81005DF1A4 /* defaultCover.png in Resources */,
 				FC5A84E71D7089C200267B7F /* Assets.xcassets in Resources */,
 				FC5A84EA1D7089C200267B7F /* Main.storyboard in Resources */,
 			);

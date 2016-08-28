@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface VideoModel : NSObject
+@interface VideoModel : NSObject<NSCopying>
 
 @property(nonatomic)NSString* path;
 

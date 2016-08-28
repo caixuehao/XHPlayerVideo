@@ -14,7 +14,7 @@
 #import "ControllerView.h"
 #import "PlayListWindow.h"
 
-#import "VideoModel.h"
+
 
 @interface PlayerVideoViewController ()<VLCMediaPlayerDelegate>
 
@@ -53,6 +53,13 @@
     [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
         player = [[VLCMediaPlayer alloc] initWithVideoView:videoPlayView];
         player.delegate = self;
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            if (self.currentVideo) {
+                [player stop];
+                [player setMedia:[VLCMedia mediaWithPath:self.currentVideo.path]];
+                [player play];
+            }
+        }];
         //    player.adjustFilterEnabled = NO;
     }];
 }
@@ -80,8 +87,9 @@
 #pragma Actions
 
 - (void)playVideo:(NSNotification *)notifiction{
-    VideoModel* video = [notifiction.userInfo objectForKey:@"video"];
-    [player setMedia:[VLCMedia mediaWithPath:video.path]];
+    [player stop];
+    self.currentVideo = [notifiction.userInfo objectForKey:@"video"];
+    [player setMedia:[VLCMedia mediaWithPath:self.currentVideo.path]];
     [player play];
 }
 

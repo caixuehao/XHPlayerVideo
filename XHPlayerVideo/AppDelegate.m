@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-
+#import "VideoModel.h"
+#import "Macro.h"
 #import "PlayerVideoWindowController.h"
 @interface AppDelegate ()
 
@@ -31,6 +32,19 @@
         [NSApp activateIgnoringOtherApps:NO];
         [[PlayerVideoWindowController getPlayerVideoWindowController].window makeKeyAndOrderFront:self];
     }
+    return YES;
+}
+
+- (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename{
+    NSLog(@"打开文件:%@",filename);
+
+    //创建通知并发送
+    VideoModel* video = [[VideoModel alloc] init];
+    video.path = filename;
+    NSDictionary* dic = @{@"video":video};
+    NSNotification *notification =[NSNotification notificationWithName:PlayVideoNotification object:nil userInfo:dic];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
     return YES;
 }
 

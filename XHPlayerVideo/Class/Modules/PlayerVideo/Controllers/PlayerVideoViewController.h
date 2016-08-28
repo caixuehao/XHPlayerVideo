@@ -7,7 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "VideoModel.h"
 @interface PlayerVideoViewController : NSViewController
+
+@property(nonatomic,strong)VideoModel* currentVideo;
 
 @end
