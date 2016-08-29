@@ -154,7 +154,7 @@
 - (void)maxmize{
 //    [self.view.window setMaxFullScreenContentSize:[NSScreen mainScreen].frame.size];
 //    [self.view.window toggleFullScreen:nil];//全屏
-
+//    self.view.window.styleMask = NSFullScreenWindowMask;
     
 }
 - (void)pause{
