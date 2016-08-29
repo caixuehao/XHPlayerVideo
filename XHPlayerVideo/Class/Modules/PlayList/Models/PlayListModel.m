@@ -30,6 +30,9 @@ static PlayListModel* playListModelShare;
     }
     return self;
 }
+-(void)dealloc{
+    NSLog(@"%s",__FUNCTION__);
+}
 
 -(void)setCurrentVideo:(VideoModel *)currentVideo{
     NSLog(@"%@",[self getPath]);
@@ -57,7 +60,7 @@ static PlayListModel* playListModelShare;
     }
     
     if (isRepeat == NO) {
-        [_playList addObject:videoModel];
+        [_playList insertObject:videoModel atIndex:0];
         [self saveData];
     }
 }
@@ -91,14 +94,22 @@ static PlayListModel* playListModelShare;
 }
 
 -(void)saveData{
-    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
-    
-    NSMutableArray* playlist = [[NSMutableArray alloc] init];
-    for (int i = 0; i < _playList.count; i++) {
-        [playlist addObject:[_playList[i] getData]];
-    }
-    [data setObject:playlist forKey:@"playList"];
-    
-    [data writeToFile:[self getPath] atomically:YES];
+    //防止掉用过快（如滑动音量条时）
+    [[NSOperationQueue mainQueue]  addOperationWithBlock:^{
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(saveDataSelector) object:nil];
+        [self performSelector:@selector(saveDataSelector) withObject:nil afterDelay:0.5f];
+    }];
+}
+
+-(void)saveDataSelector{
+    [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
+        NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+        NSMutableArray* playlist = [[NSMutableArray alloc] init];
+        for (int i = 0; i < _playList.count; i++) {
+            [playlist addObject:[_playList[i] getData]];
+        }
+        [data setObject:playlist forKey:@"playList"];
+        [data writeToFile:[self getPath] atomically:YES];
+    }];
 }
 @end

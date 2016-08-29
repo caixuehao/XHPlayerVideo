@@ -29,7 +29,7 @@ static NSWindowController* playerVideoWindowController;
     playerVideoWindowController = self;
     [self.window setContentSize:NSMakeSize(1000, 618)];
 //    [self.window becomeMainWindow];
-    
+    self.window.minSize = NSMakeSize(485, 273);
     [self.window center];
 }
 

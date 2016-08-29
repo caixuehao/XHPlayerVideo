@@ -20,8 +20,10 @@
 @end
 
 @implementation PlayListViewController{
+    
     VideoListTableView * videoTableView;
     NSMutableArray<VideoModel *>* VideoDataArr;
+    
 }
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -48,7 +50,7 @@
 
 
 - (void)loadSubViews{
-
+   
     VideoDataArr = [[PlayListModel share] playList];
     //建立tabelview
     NSScrollView * tableContainer = [[NSScrollView alloc] init];

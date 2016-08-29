@@ -26,20 +26,25 @@
     
 //    NSImageView* backgroundImage;
     VLCVideoView *videoPlayView;
-    ControllerView *controllerView;
+    //视频视图的约束 填充配合视图
+    NSView* videoPlayViewLeftView;
+    NSView* videoPlayViewTopView;
+    NSView* videoPlayViewRightView;
+    NSView* videoPlayViewBottonView;
     
+    ControllerView *controllerView;
+
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
     
-    
     [self loadSubViews];
     [self loadActions];
     
     //防止启动太卡
-    [self performSelector:@selector(loadPlayer) withObject:nil afterDelay:0.1f];
+    [self performSelector:@selector(loadPlayer) withObject:nil afterDelay:5.1f];
     
 }
 
@@ -95,9 +100,11 @@
 }
 
 - (void)playVideo{
-    [player stop];
-    [player setMedia:[VLCMedia mediaWithPath:self.currentVideo.path]];
-    [player play];
+    if(player){
+        [player stop];
+        [player setMedia:[VLCMedia mediaWithPath:self.currentVideo.path]];
+        [player play];
+    }
 }
 
 
@@ -155,7 +162,9 @@
     NSLog(@"视频状态:%lu",player.state);//这个是player
     
     if (player.state == VLCMediaPlayerStateBuffering) {
-
+        if(player.videoSize.width>0){
+            [self updateLayout];
+        }
     }
     
 }
@@ -163,8 +172,10 @@
 //时间发生变化（大约是1秒3次）
 - (void)mediaPlayerTimeChanged:(NSNotification *)aNotification{
  //intValue单位毫米
-    if (player.remainingTime.intValue == 0) {
-        NSLog(@"播放完成");
+    if (player.time.intValue == 0) {
+            NSLog(@"播放开始");
+    }else if(player.remainingTime.intValue == 0&&player.time.intValue != 0){
+           NSLog(@"播放完成");
     }
     if (controllerView.videoSlider.continuous) {
         controllerView.videoSlider.maxValue = player.time.intValue-player.remainingTime.intValue;
@@ -189,28 +200,51 @@
 -(void)loadSubViews{
     self.view.frame = CGRectMake(0, 0, 1000, 618);
     self.view.wantsLayer = YES;
-    self.view.layer.backgroundColor = CColor(30, 200, 200, 1).CGColor;
+    self.view.layer.backgroundColor = CColor(100, 200, 220, 1).CGColor;
     
-    
+    //视频
     videoPlayView = ({
         VLCVideoView* view = [[VLCVideoView alloc] init];
         view.backColor = CColor(20, 200, 200, 1);
+        view.fillScreen = NO;//不填充变形
         [self.view addSubview:view];
         view;
     });
-    
+
+    //控制器（顺便约束了宽度）
     controllerView = ({
         ControllerView* view = [[ControllerView alloc] init];
         [self.view addSubview:view];
         view;
     });
- 
-
+    //视频视图的约束 填充配合视图
+    videoPlayViewLeftView = ({
+        NSView* view  = [[NSView alloc] init];
+        [self.view addSubview:view];
+        view;
+    });
+    videoPlayViewTopView = ({
+        NSView* view  = [[NSView alloc] init];
+        [self.view addSubview:view];
+        view;
+    });
+   videoPlayViewRightView = ({
+        NSView* view  = [[NSView alloc] init];
+        [self.view addSubview:view];
+        view;
+    });
+    videoPlayViewBottonView = ({
+        NSView* view  = [[NSView alloc] init];
+        [self.view addSubview:view];
+        view;
+    });
     
+  
     //layout
     
     [videoPlayView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.center.equalTo(self.view);
+        make.width.height.equalTo(self.view);
     }];
 
     [controllerView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -220,6 +254,34 @@
         make.height.equalTo(@80);
     }];
     
+    [videoPlayViewLeftView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view);
+    }];
+    [videoPlayViewTopView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view);
+    }];
+    [videoPlayViewRightView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.view);
+    }];
+    [videoPlayViewBottonView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view);
+    }];
+    
 
+}
+
+//视频加载成功时根据视频尺寸 更新约束布局比例
+-(void)updateLayout{
+    
+    [videoPlayView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.height.width.equalTo(self.view).priorityLow();
+        make.left.equalTo(videoPlayViewLeftView.mas_right);
+        make.top.equalTo(videoPlayViewTopView.mas_bottom);
+        make.right.equalTo(videoPlayViewRightView.mas_left);
+        make.bottom.equalTo(videoPlayViewBottonView.mas_top);
+        make.width.equalTo(videoPlayView.mas_height).multipliedBy(player.videoSize.width/player.videoSize.height);
+    }];
+    
 }
 @end
