@@ -28,7 +28,7 @@ static PlayerVideoWindowController* playerVideoWindowController;
     //CGSize size = [NSScreen mainScreen].frame.size;
     //设置初始位置
     playerVideoWindowController = self;
-    [self.window setStyleMask:NSBorderlessWindowMask];//设置无边框
+    [self.window setStyleMask:NSResizableWindowMask];//设置无边框http://blog.csdn.net/leer168/article/details/13021251
     [self.window setReleasedWhenClosed:NO];//设置关闭时不释放
     [self.window setContentSize:NSMakeSize(1000, 618)];
 //    [self.window becomeMainWindow];
