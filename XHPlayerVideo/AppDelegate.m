@@ -29,7 +29,7 @@
                     hasVisibleWindows:(BOOL)flag{
 //    if (!flag){//是否有可见窗口
         //主窗口显示
-        [NSApp activateIgnoringOtherApps:NO];
+//        [NSApp activateIgnoringOtherApps:NO];
         [[PlayerVideoWindowController getPlayerVideoWindowController].window makeKeyAndOrderFront:self];
 //    }
     return YES;

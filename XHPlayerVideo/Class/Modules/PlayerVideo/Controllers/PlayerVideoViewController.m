@@ -125,6 +125,8 @@
 }
 
 - (void)playVideo{
+    //显示窗口
+    [self.view.window makeKeyAndOrderFront:self];
     if(player){
         [player stop];
         [player setMedia:[VLCMedia mediaWithPath:self.currentVideo.path]];
