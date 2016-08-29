@@ -7,13 +7,16 @@
 //
 #import "PlayerVideoViewController.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 #import <VLCKit/VLCKit.h>
 #import <Masonry.h>
 #import "Macro.h"
 
+#import "PlayerVideoWindowController.h"
 #import "ControllerView.h"
 #import "PlayListWindow.h"
-
+#import "PlayerTitleView.h"
 
 
 @interface PlayerVideoViewController ()<VLCMediaPlayerDelegate>
@@ -33,7 +36,7 @@
     NSView* videoPlayViewBottonView;
     
     ControllerView *controllerView;
-
+    PlayerTitleView *playerTitleView;
 }
 
 - (void)viewDidLoad {
@@ -50,7 +53,9 @@
 
 - (void)viewDidAppear{
     [super viewDidAppear];
+    //加载播放列表 窗口
     [PlayListWindow show];
+
 }
 #pragma loadActions
 //加载播放器
@@ -71,6 +76,23 @@
 
 -(void)loadActions{
     
+    //头部控制器事件
+    playerTitleView.closeBtn.target = self;
+    playerTitleView.minmizeBtn.target = self;
+    playerTitleView.maximizeBtn.target = self;
+    
+    [playerTitleView.closeBtn setAction:@selector(close)];
+    [playerTitleView.minmizeBtn setAction:@selector(minmize)];
+    [playerTitleView.maximizeBtn setAction:@selector(maxmize)];
+    
+    //底部主控制器事件
+    controllerView.playSwitchBtn.target = self;
+    controllerView.nextVideoBtn.target = self;
+    
+    controllerView.videoSlider.target = self;
+    controllerView.soundSwitchBtn.target = self;
+    controllerView.volumeSlider.target = self;
+    
     [controllerView.playSwitchBtn setAction:@selector(playSwitch:)];
     [controllerView.nextVideoBtn setAction:@selector(nextVideo:)];
     
@@ -89,8 +111,11 @@
     
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playVideo:) name:PlayVideoNotification object:nil];
+    
+    
 }
 #pragma Actions
+
 
 - (void)playVideo:(NSNotification *)notifiction{
     self.currentVideo = [notifiction.userInfo objectForKey:@"video"];
@@ -108,7 +133,34 @@
 }
 
 
+
 #pragma BottonActions
+- (void)close{
+    [self pause];
+//    [self.view.window performClose:nil];
+    [self.view.window close];
+}
+- (void)minmize{
+    [self pause];
+//    [self.view.window.childWindows enumerateObjectsUsingBlock:^(__kindof NSWindow * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        [self.view.window removeChildWindow:obj];
+//    }];
+//    [self.view.window performMiniaturize:nil];//最小化
+    [self.view.window miniaturize:nil];
+
+}
+- (void)maxmize{
+//    [self.view.window setMaxFullScreenContentSize:[NSScreen mainScreen].frame.size];
+//    [self.view.window toggleFullScreen:nil];//全屏
+
+    
+}
+- (void)pause{
+    if(player.playing){
+        [controllerView.playSwitchBtn setTitle:@"播放"];
+        [player pause];
+    }
+}
 - (void)playSwitch:(id)sender {
     if(player.playing){
         [controllerView.playSwitchBtn setTitle:@"播放"];
@@ -133,12 +185,28 @@
 #pragma mouseActions
 // 鼠标进入监视区
 - (void)mouseEntered:(NSEvent *)theEvent{
+    [playerTitleView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.equalTo(self.view);
+        make.height.mas_equalTo(20);
+    }];
     controllerView.alphaValue = 1;
 }
 // 鼠标推出监视区
 - (void)mouseExited:(NSEvent *)theEvent{
     controllerView.alphaValue = 0;
+    [playerTitleView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.equalTo(self.view);
+        make.height.mas_equalTo(0);
+    }];
 }
+//鼠标拖动
+- (void)mouseDragged:(NSEvent *)theEvent{
+    NSPoint point = self.view.window.frame.origin;
+    point.x += theEvent.deltaX;
+    point.y -= theEvent.deltaY;
+    [self.view.window setFrameOrigin:point];
+}
+
 #pragma SliderActions
 
 - (void)videoSliderAction:(id)sender {
@@ -202,11 +270,19 @@
     self.view.wantsLayer = YES;
     self.view.layer.backgroundColor = CColor(100, 200, 220, 1).CGColor;
     
+   
     //视频
     videoPlayView = ({
         VLCVideoView* view = [[VLCVideoView alloc] init];
         view.backColor = CColor(20, 200, 200, 1);
         view.fillScreen = NO;//不填充变形
+        [self.view addSubview:view];
+        view;
+    });
+    
+    //头部
+    playerTitleView = ({
+        PlayerTitleView* view = [[PlayerTitleView alloc] init];
         [self.view addSubview:view];
         view;
     });
@@ -245,6 +321,11 @@
     [videoPlayView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
         make.width.height.equalTo(self.view);
+    }];
+    
+    [playerTitleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.equalTo(self.view);
+        make.height.mas_equalTo(20);
     }];
 
     [controllerView mas_remakeConstraints:^(MASConstraintMaker *make) {

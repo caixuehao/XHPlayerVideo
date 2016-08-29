@@ -12,16 +12,20 @@
 #import "Macro.h"
 #import <Masonry.h>
 
+#import "PlayListTitleView.h"
 #import "VideoListTableView.h"
+
 #import "PlayListModel.h"
+
+
 
 @interface PlayListViewController ()
 
 @end
 
 @implementation PlayListViewController{
-    
-    VideoListTableView * videoTableView;
+    PlayListTitleView* playlistTitleView;
+    VideoListTableView* videoTableView;
     NSMutableArray<VideoModel *>* VideoDataArr;
     
 }
@@ -29,7 +33,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         CGRect playerVideoFrame = [PlayerVideoWindowController getPlayerVideoWindowController].window.frame;
-        self.view.frame = NSMakeRect(0, 0,VideoCellWidth, playerVideoFrame.size.height-20);
+        self.view.frame = NSMakeRect(0, 0,VideoCellWidth, playerVideoFrame.size.height);
     }
     return self;
 }
@@ -44,14 +48,24 @@
 }
 
 - (void)loadActions{
-  
+    playlistTitleView.hideBtn.target = self;
+    [playlistTitleView.hideBtn setAction:@selector(hide)];
 }
-
-
+#pragma Actions
+- (void)hide{
+     [[PlayerVideoWindowController getPlayerVideoWindowController].window removeChildWindow:self.view.window];
+}
 
 - (void)loadSubViews{
    
     VideoDataArr = [[PlayListModel share] playList];
+    //组成头部
+    playlistTitleView = ({
+        PlayListTitleView* view = [[PlayListTitleView alloc] init];
+        [self.view addSubview:view];
+        view;
+    });
+    
     //建立tabelview
     NSScrollView * tableContainer = [[NSScrollView alloc] init];
     videoTableView = ({
@@ -63,10 +77,15 @@
     });
     
     //layout
+    [playlistTitleView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.view);
+        make.height.mas_equalTo(20);
+    }];
+    
+    
     [tableContainer mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.view);
-        make.width.mas_equalTo(self.view);
-        make.height.mas_equalTo(self.view);
+        make.top.equalTo(playlistTitleView.mas_bottom);
+        make.bottom.left.right.equalTo(self.view);
     }];
 }
 @end

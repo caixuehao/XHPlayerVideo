@@ -24,14 +24,14 @@
     // Insert code here to tear down your application
 }
 
-//点击重新打开主窗口
+//点击Dock重新打开主窗口
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication
                     hasVisibleWindows:(BOOL)flag{
-    if (!flag){
+//    if (!flag){//是否有可见窗口
         //主窗口显示
         [NSApp activateIgnoringOtherApps:NO];
         [[PlayerVideoWindowController getPlayerVideoWindowController].window makeKeyAndOrderFront:self];
-    }
+//    }
     return YES;
 }
 

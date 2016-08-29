@@ -10,41 +10,37 @@
 #import "PlayListViewController.h"
 #import "PlayerVideoWindowController.h"
 
+static PlayListWindow* sharePlayListWindow;
 @implementation PlayListWindow
 
-+(void)show{
-    
-    PlayListWindow* window = [[PlayListWindow alloc] init];
 
-    [[PlayerVideoWindowController getPlayerVideoWindowController].window addChildWindow:window ordered:NSWindowAbove];
-   
++(void)show{
+    if (sharePlayListWindow == nil) {
+        sharePlayListWindow= [[PlayListWindow alloc] init];
+        [[PlayerVideoWindowController getPlayerVideoWindowController].window addChildWindow:sharePlayListWindow ordered:NSWindowBelow];
+    }
 }
 
-
+-(void)dealloc{
+    NSLog(@"%s",__FUNCTION__);
+}
 
 -(instancetype)init{
     self = [super init];
     if (self) {
         CGRect playerVideoFrame = [PlayerVideoWindowController getPlayerVideoWindowController].window.frame;        
-        [self setStyleMask:NSTitledWindowMask|NSMiniaturizableWindowMask];
-        [[self standardWindowButton:NSWindowCloseButton] setHidden:YES];
-        [[self standardWindowButton:NSWindowZoomButton] setHidden:YES];
+        [self setStyleMask:NSBorderlessWindowMask];//设置无边框
+//        [[self standardWindowButton:NSWindowCloseButton] setHidden:YES];//隐藏按钮
+//        [[self standardWindowButton:NSWindowZoomButton] setHidden:YES];
         [self setMovableByWindowBackground:YES];
-        
-        [self setFrameOrigin:NSMakePoint(playerVideoFrame.origin.x+playerVideoFrame.size.width+10, playerVideoFrame.origin.y)];
+        [self setFrameOrigin:NSMakePoint(playerVideoFrame.origin.x+playerVideoFrame.size.width, playerVideoFrame.origin.y)];
         
         PlayListViewController* playlist = [[PlayListViewController alloc] initWithNibName:@"PlayListViewController" bundle:[NSBundle mainBundle]];
         [self setContentViewController:playlist];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeWindow:) name:NSWindowWillCloseNotification object:self];
-        self.title = @"1234";
     }
     return self;
 }
-#pragma NSWindowDelegate--
 
 
--(void)closeWindow:(id)sender{
-
-}
 @end

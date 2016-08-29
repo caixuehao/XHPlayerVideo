@@ -11,14 +11,15 @@
 @interface PlayerVideoWindowController ()
 
 @end
-static NSWindowController* playerVideoWindowController;
+static PlayerVideoWindowController* playerVideoWindowController;
 @implementation PlayerVideoWindowController
 
-+(NSWindowController*)getPlayerVideoWindowController{
++(PlayerVideoWindowController*)getPlayerVideoWindowController{
     return playerVideoWindowController;
 }
 
 -(void)dealloc{
+    NSLog(@"%s",__FUNCTION__);
     playerVideoWindowController = nil;
 }
 - (void)windowDidLoad {
@@ -27,10 +28,14 @@ static NSWindowController* playerVideoWindowController;
     //CGSize size = [NSScreen mainScreen].frame.size;
     //设置初始位置
     playerVideoWindowController = self;
+    [self.window setStyleMask:NSBorderlessWindowMask];//设置无边框
+    [self.window setReleasedWhenClosed:NO];//设置关闭时不释放
     [self.window setContentSize:NSMakeSize(1000, 618)];
 //    [self.window becomeMainWindow];
-    self.window.minSize = NSMakeSize(485, 273);
+    [self.window setMovableByWindowBackground:YES];
+     self.window.minSize = NSMakeSize(485, 273);
     [self.window center];
+    
 }
 
 @end

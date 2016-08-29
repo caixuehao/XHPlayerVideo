@@ -10,6 +10,6 @@
 
 @interface PlayerVideoWindowController : NSWindowController
 
-+(NSWindowController*)getPlayerVideoWindowController;
++(PlayerVideoWindowController*)getPlayerVideoWindowController;
 
 @end
