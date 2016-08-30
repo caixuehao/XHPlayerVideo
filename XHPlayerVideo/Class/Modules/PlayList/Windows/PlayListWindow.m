@@ -21,6 +21,7 @@ static PlayListWindow* sharePlayListWindow;
     }
 }
 
+
 -(void)dealloc{
     NSLog(@"%s",__FUNCTION__);
 }

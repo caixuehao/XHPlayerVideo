@@ -10,6 +10,8 @@
 
 @interface PlayerTitleView : NSView
 
+
+
 @property(nonatomic)NSButton* closeBtn;
 
 @property(nonatomic)NSButton* minmizeBtn;

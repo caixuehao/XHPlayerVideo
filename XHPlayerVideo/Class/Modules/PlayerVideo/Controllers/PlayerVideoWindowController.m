@@ -5,8 +5,10 @@
 //  Created by C on 16/8/27.
 //  Copyright © 2016年 C. All rights reserved.
 //
+#import <Masonry.h>
 
 #import "PlayerVideoWindowController.h"
+
 
 @interface PlayerVideoWindowController ()<NSWindowDelegate>
 
@@ -31,28 +33,14 @@ static PlayerVideoWindowController* playerVideoWindowController;
 - (void)windowDidLoad {
     [super windowDidLoad];
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-    //CGSize size = [NSScreen mainScreen].frame.size;
-    //设置初始位置
 
     self.window.delegate = self;
-    self.window.titlebarAppearsTransparent = YES; // 标题栏透明，重要
-  
-    //NSFullSizeContentViewWindowMask 这个是什么原理不清楚//设置无边框http://blog.csdn.net/leer168/article/details/13021251
-    [self.window setStyleMask:NSResizableWindowMask|NSTitledWindowMask|NSFullSizeContentViewWindowMask|NSClosableWindowMask];
-
-    [[self.window standardWindowButton:NSWindowZoomButton] setHidden:YES];
-    [[self.window standardWindowButton:NSWindowCloseButton] setHidden:YES];
-    [[self.window standardWindowButton:NSWindowMiniaturizeButton] setHidden:YES];
     
-    self.window.acceptsMouseMovedEvents = YES;
-    [self.window setReleasedWhenClosed:NO];//设置关闭时不释放
-    [self.window setContentSize:NSMakeSize(1000, 618)];
-//    [self.window becomeMainWindow];
-    [self.window setMovableByWindowBackground:YES];
-     self.window.minSize = NSMakeSize(485, 273);
-    [self.window center];
+    [self loadSubViews];
+    [self loadActions];
+   
     
-    //
+}
 
 }
 

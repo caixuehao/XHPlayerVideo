@@ -11,7 +11,9 @@
 #import "Macro.h"
 #import <Masonry.h>
 
-@implementation PlayerTitleView
+@implementation PlayerTitleView{
+   
+}
 
 
 - (instancetype)init{
@@ -34,28 +36,27 @@
 //loadSubView
 - (void)loadSubView{
      _closeBtn = ({
+//        NSButton* btn = [[NSButton alloc] init];
         NSButton* btn = [NSWindow standardWindowButton:NSWindowCloseButton forStyleMask:0];
-//         NSButton* btn = [[NSButton alloc] init];
-         [self addSubview:btn];
+        [self addSubview:btn];
         btn;
     });
     
     _minmizeBtn = ({
-        NSButton* btn =  [NSWindow standardWindowButton:NSWindowMiniaturizeButton forStyleMask:0];
 //        NSButton* btn = [[NSButton alloc] init];
+        NSButton* btn =  [NSWindow standardWindowButton:NSWindowMiniaturizeButton forStyleMask:0];
         [self addSubview:btn];
         btn;
     });
     
     _maximizeBtn = ({
-        NSButton* btn = [NSWindow standardWindowButton:NSWindowZoomButton forStyleMask:0];
 //        NSButton* btn = [[NSButton alloc] init];
+        NSButton* btn = [NSWindow standardWindowButton:NSWindowZoomButton forStyleMask:0];
         [self addSubview:btn];
         btn;
     });
     
     //layout
-    
     [_closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(10);
         make.centerY.equalTo(self).offset(0);

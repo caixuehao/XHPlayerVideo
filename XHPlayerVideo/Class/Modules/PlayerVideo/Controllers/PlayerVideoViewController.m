@@ -18,7 +18,6 @@
 #import "PlayListWindow.h"
 #import "PlayerTitleView.h"
 
-
 @interface PlayerVideoViewController ()<VLCMediaPlayerDelegate>
 
 @end
@@ -35,15 +34,17 @@
     NSView* videoPlayViewRightView;
     NSView* videoPlayViewBottonView;
     
-    ControllerView *controllerView;
     PlayerTitleView *playerTitleView;
-    
+    ControllerView *controllerView;
+ 
     NSTrackingArea *trackingArea;
+    NSInteger unresponsiveTime;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
+    unresponsiveTime = 4;
     
     [self loadSubViews];
     [self loadActions];
@@ -56,7 +57,7 @@
 - (void)viewDidAppear{
     [super viewDidAppear];
     //加载播放列表 窗口
-//    [PlayListWindow show];
+    [PlayListWindow show];
 
 }
 #pragma loadActions
@@ -78,14 +79,14 @@
 
 -(void)loadActions{
     
-    //头部控制器事件
+    //标题按钮
     playerTitleView.closeBtn.target = self;
     playerTitleView.minmizeBtn.target = self;
     playerTitleView.maximizeBtn.target = self;
     
     [playerTitleView.closeBtn setAction:@selector(close)];
     [playerTitleView.minmizeBtn setAction:@selector(minmize)];
-    [playerTitleView.maximizeBtn setAction:@selector(maxmize:)];
+    [playerTitleView.maximizeBtn setAction:@selector(maxmize)];
     
     //底部主控制器事件
     controllerView.playSwitchBtn.target = self;
@@ -117,6 +118,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playVideo:) name:PlayVideoNotification object:nil];
     //窗口大小改变通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResize:) name:NSWindowDidResizeNotification object:nil];
+    
+    //启动定时器
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
 
 }
 #pragma Actions
@@ -157,31 +161,45 @@
     // 添加到View中
     [self.view addTrackingArea:trackingArea];
 }
-#pragma BottonActions
+
+//定时器
+-(void)timerAction{
+
+    switch (unresponsiveTime) {
+        case 0:
+            [self onlyDisplayVideoView];
+            break;
+        case 4:
+            [self dispplayAllView];
+            --unresponsiveTime;
+            break;
+        default:
+            --unresponsiveTime;
+            break;
+    }
+    
+}
+#pragma Actions
+
+#pragma TitleBottonActions
 //关闭窗口（其实是隐藏）
 - (void)close{
     [self pause];
-//    [self.view.window performClose:nil];
     [self.view.window close];
+//    [self.view.window performClose:nil];
+
 }
-//最小化窗口
+//最小化
 - (void)minmize{
     [self pause];
-//    [self.view.window.childWindows enumerateObjectsUsingBlock:^(__kindof NSWindow * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        [self.view.window removeChildWindow:obj];
-//    }];
-//    [self.view.window performMiniaturize:nil];//最小化
     [self.view.window miniaturize:nil];
-
+//    [self.view.window performMiniaturize:nil];//最小化
 }
-//全屏窗口
-- (void)maxmize:(NSButton*)sender{
-//    [self.view.window setMaxFullScreenContentSize:[NSScreen mainScreen].frame.size];
+//全屏
+- (void)maxmize{
     [self.view.window toggleFullScreen:nil];//全屏
-//    self.view.window.styleMask = NSFullScreenWindowMask;
-//    [sender setState:0];
 }
-
+#pragma ControllerBottonActions
 
 - (void)pause{
     if(player.playing){
@@ -200,7 +218,7 @@
     
 }
 - (void)nextVideo:(id)sender{
-    [playerTitleView.maximizeBtn setState:0];
+   
 }
 - (void)soundSwitch:(id)sender {
     if(player.audio.volume){
@@ -211,23 +229,16 @@
 }
 
 #pragma mouseActions
-// 鼠标进入监视区
+//鼠标进入监视区
 - (void)mouseEntered:(NSEvent *)theEvent{
-    [playerTitleView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.equalTo(self.view);
-        make.height.mas_equalTo(20);
-    }];
-    controllerView.alphaValue = 1;
-    
+    [self onlyDisplayVideoView];
 }
-// 鼠标推出监视区
+
+//鼠标推出监视区
 - (void)mouseExited:(NSEvent *)theEvent{
-    controllerView.alphaValue = 0;
-    [playerTitleView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.equalTo(self.view);
-        make.height.mas_equalTo(0);
-    }];
+    [self dispplayAllView];
 }
+
 //鼠标拖动
 - (void)mouseDragged:(NSEvent *)theEvent{
     NSPoint point = self.view.window.frame.origin;
@@ -237,8 +248,10 @@
 }
 //鼠标移动
 - (void)mouseMoved:(NSEvent *)theEvent{
-    
+    unresponsiveTime = 4;
 }
+
+
 #pragma SliderActions
 
 - (void)videoSliderAction:(id)sender {
@@ -255,6 +268,9 @@
 - (void)volumeSliderAction:(id)sender {
      player.audio.volume = controllerView.volumeSlider.intValue;
 }
+
+
+
 
 #pragma VLCMediaPlayerDelegate
 //视频状态
@@ -296,17 +312,29 @@
 - (void)mediaPlayerTitleChanged:(NSNotification *)aNotification{
     NSLog(@"-------------");
 }
+
+
+
+
+
+
+
 #pragma loadSubViews
 -(void)loadSubViews{
     self.view.frame = CGRectMake(0, 0, 1000, 618);
     self.view.wantsLayer = YES;
     self.view.layer.backgroundColor = CColor(100, 200, 220, 1).CGColor;
-
-   
+    //背景图片
+//    NSImageView* backImage =({
+//        NSImageView* iv = [[NSImageView alloc] init];
+//        iv.image = [NSImage imageNamed:@"background.jpg"];
+//        [self.view addSubview:iv];
+//        iv;
+//    });
     //视频
     videoPlayView = ({
         VLCVideoView* view = [[VLCVideoView alloc] init];
-        view.backColor = CColor(20, 200, 200, 1);
+        //view.backColor = CColor(20, 200, 200, 1);
         view.fillScreen = NO;//不填充变形
         [self.view addSubview:view];
         view;
@@ -318,6 +346,8 @@
         [self.view addSubview:view];
         view;
     });
+    
+
 
     //控制器（顺便约束了宽度）
     controllerView = ({
@@ -349,11 +379,15 @@
     
   
     //layout
+    //背景图片
+//    [backImage mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(self.view);
+//    }];
     
-    [videoPlayView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.view);
-        make.width.height.equalTo(self.view);
-    }];
+//    [videoPlayView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.center.equalTo(self.view);
+//        make.width.height.equalTo(self.view);
+//    }];
     
     [playerTitleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self.view);
@@ -383,6 +417,36 @@
 
 }
 
+
+//显示全部
+- (void)dispplayAllView{
+    if (controllerView.alphaValue == 1) return;
+    
+    [playerTitleView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.equalTo(self.view);
+        make.height.mas_equalTo(20);
+    }];
+    controllerView.alphaValue = 1;
+    [NSCursor unhide];
+}
+
+//仅显示视频view
+- (void)onlyDisplayVideoView{
+     if (controllerView.alphaValue == 0) return;
+    
+    [playerTitleView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.equalTo(self.view);
+        make.height.mas_equalTo(0);
+    }];
+    controllerView.alphaValue = 0;
+    
+    //判断是否是全屏（看看是否隐藏鼠标）
+    NSSize size1 = self.view.frame.size;
+    NSSize size2 = [NSScreen mainScreen].frame.size;
+    if(size1.width==size2.width&&size1.height==size2.height){
+        [NSCursor hide];
+    }
+}
 //视频加载成功时根据视频尺寸 更新约束布局比例
 -(void)updateLayout{
     

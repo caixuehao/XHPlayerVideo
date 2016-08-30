@@ -10,6 +10,12 @@
 
 @interface PlayListWindow : NSWindow
 
+@property(nonatomic)BOOL isHide;
+
+//+(instancetype)share;
+
 +(void)show;
+
+//+(void)hide;
 
 @end
