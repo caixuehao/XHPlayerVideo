@@ -17,7 +17,7 @@ static PlayListWindow* sharePlayListWindow;
 +(void)show{
     if (sharePlayListWindow == nil) {
         sharePlayListWindow= [[PlayListWindow alloc] init];
-        [[PlayerVideoWindowController getPlayerVideoWindowController].window addChildWindow:sharePlayListWindow ordered:NSWindowBelow];
+        [[PlayerVideoWindowController getPlayerVideoWindowController].window addChildWindow:sharePlayListWindow ordered:NSWindowAbove];
     }
 }
 

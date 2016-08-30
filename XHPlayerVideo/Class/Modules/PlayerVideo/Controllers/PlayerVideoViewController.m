@@ -37,6 +37,8 @@
     
     ControllerView *controllerView;
     PlayerTitleView *playerTitleView;
+    
+    NSTrackingArea *trackingArea;
 }
 
 - (void)viewDidLoad {
@@ -54,7 +56,7 @@
 - (void)viewDidAppear{
     [super viewDidAppear];
     //加载播放列表 窗口
-    [PlayListWindow show];
+//    [PlayListWindow show];
 
 }
 #pragma loadActions
@@ -83,7 +85,7 @@
     
     [playerTitleView.closeBtn setAction:@selector(close)];
     [playerTitleView.minmizeBtn setAction:@selector(minmize)];
-    [playerTitleView.maximizeBtn setAction:@selector(maxmize)];
+    [playerTitleView.maximizeBtn setAction:@selector(maxmize:)];
     
     //底部主控制器事件
     controllerView.playSwitchBtn.target = self;
@@ -101,22 +103,25 @@
     [controllerView.volumeSlider setAction:@selector(volumeSliderAction:)];
     
     // 创建监视区
-    NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:self.view.bounds options:
+    trackingArea = [[NSTrackingArea alloc] initWithRect:self.view.bounds options:
                                     NSTrackingMouseMoved |
                                     NSTrackingMouseEnteredAndExited |
                                     NSTrackingActiveAlways owner:self userInfo:nil];
     
+    
     // 添加到View中
     [self.view addTrackingArea:trackingArea];
-    
+
     //注册通知
+    //播放视频通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playVideo:) name:PlayVideoNotification object:nil];
-    
-    
+    //窗口大小改变通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResize:) name:NSWindowDidResizeNotification object:nil];
+
 }
 #pragma Actions
 
-
+//播放视频
 - (void)playVideo:(NSNotification *)notifiction{
     self.currentVideo = [notifiction.userInfo objectForKey:@"video"];
     //防止调用过快 引起打卡死
@@ -133,15 +138,33 @@
         [player play];
     }
 }
-
-
-
+//窗口大小改变
+- (void)windowDidResize:(id)sender{
+    //防止调用过快 引起打卡死
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(updateTrackingArea) object:nil];
+    [self performSelector:@selector(updateTrackingArea) withObject:nil afterDelay:0.5f];
+    
+}
+- (void)updateTrackingArea{
+    //移除以前的
+    [self.view removeTrackingArea:trackingArea];
+    // 创建监视区
+    trackingArea = [[NSTrackingArea alloc] initWithRect:self.view.bounds options:
+                    NSTrackingMouseMoved |
+                    NSTrackingMouseEnteredAndExited |
+                    NSTrackingActiveAlways owner:self userInfo:nil];
+    
+    // 添加到View中
+    [self.view addTrackingArea:trackingArea];
+}
 #pragma BottonActions
+//关闭窗口（其实是隐藏）
 - (void)close{
     [self pause];
 //    [self.view.window performClose:nil];
     [self.view.window close];
 }
+//最小化窗口
 - (void)minmize{
     [self pause];
 //    [self.view.window.childWindows enumerateObjectsUsingBlock:^(__kindof NSWindow * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -151,12 +174,15 @@
     [self.view.window miniaturize:nil];
 
 }
-- (void)maxmize{
+//全屏窗口
+- (void)maxmize:(NSButton*)sender{
 //    [self.view.window setMaxFullScreenContentSize:[NSScreen mainScreen].frame.size];
-//    [self.view.window toggleFullScreen:nil];//全屏
+    [self.view.window toggleFullScreen:nil];//全屏
 //    self.view.window.styleMask = NSFullScreenWindowMask;
-    
+//    [sender setState:0];
 }
+
+
 - (void)pause{
     if(player.playing){
         [controllerView.playSwitchBtn setTitle:@"播放"];
@@ -174,7 +200,7 @@
     
 }
 - (void)nextVideo:(id)sender{
-
+    [playerTitleView.maximizeBtn setState:0];
 }
 - (void)soundSwitch:(id)sender {
     if(player.audio.volume){
@@ -192,6 +218,7 @@
         make.height.mas_equalTo(20);
     }];
     controllerView.alphaValue = 1;
+    
 }
 // 鼠标推出监视区
 - (void)mouseExited:(NSEvent *)theEvent{
@@ -208,7 +235,10 @@
     point.y -= theEvent.deltaY;
     [self.view.window setFrameOrigin:point];
 }
-
+//鼠标移动
+- (void)mouseMoved:(NSEvent *)theEvent{
+    
+}
 #pragma SliderActions
 
 - (void)videoSliderAction:(id)sender {
@@ -271,7 +301,7 @@
     self.view.frame = CGRectMake(0, 0, 1000, 618);
     self.view.wantsLayer = YES;
     self.view.layer.backgroundColor = CColor(100, 200, 220, 1).CGColor;
-    
+
    
     //视频
     videoPlayView = ({

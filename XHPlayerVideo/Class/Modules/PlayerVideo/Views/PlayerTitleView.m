@@ -34,22 +34,22 @@
 //loadSubView
 - (void)loadSubView{
      _closeBtn = ({
-        NSButton* btn = [[NSButton alloc] init];
-        [btn setTitle:@"❌"];
-        [self addSubview:btn];
+        NSButton* btn = [NSWindow standardWindowButton:NSWindowCloseButton forStyleMask:0];
+//         NSButton* btn = [[NSButton alloc] init];
+         [self addSubview:btn];
         btn;
     });
     
     _minmizeBtn = ({
-        NSButton* btn = [[NSButton alloc] init];
-        [btn setTitle:@"-"];
+        NSButton* btn =  [NSWindow standardWindowButton:NSWindowMiniaturizeButton forStyleMask:0];
+//        NSButton* btn = [[NSButton alloc] init];
         [self addSubview:btn];
         btn;
     });
     
     _maximizeBtn = ({
-        NSButton* btn = [[NSButton alloc] init];
-        [btn setTitle:@"➕"];
+        NSButton* btn = [NSWindow standardWindowButton:NSWindowZoomButton forStyleMask:0];
+//        NSButton* btn = [[NSButton alloc] init];
         [self addSubview:btn];
         btn;
     });
@@ -57,21 +57,21 @@
     //layout
     
     [_closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self).offset(20);
+        make.left.equalTo(self).offset(10);
         make.centerY.equalTo(self).offset(0);
-        make.size.mas_equalTo(NSMakeSize(10, 10));
+        make.size.mas_equalTo(NSMakeSize(15, 15));
     }];
     
     [_minmizeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_closeBtn.mas_right).offset(10);
         make.centerY.equalTo(self).offset(0);
-        make.size.mas_equalTo(NSMakeSize(10, 10));
+        make.size.mas_equalTo(NSMakeSize(15, 15));
     }];
     
     [_maximizeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_minmizeBtn.mas_right).offset(10);
         make.centerY.equalTo(self).offset(0);
-        make.size.mas_equalTo(NSMakeSize(10, 10));
+        make.size.mas_equalTo(NSMakeSize(15, 15));
     }];
 }
 @end
