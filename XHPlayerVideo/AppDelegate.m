@@ -39,8 +39,7 @@
     NSLog(@"打开文件:%@",filename);
 
     //创建通知并发送
-    VideoModel* video = [[VideoModel alloc] init];
-    video.path = filename;
+    VideoModel* video = [[VideoModel alloc] initWithPath:filename];
     [video play];
     
     return YES;

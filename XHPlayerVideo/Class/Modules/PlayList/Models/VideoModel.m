@@ -9,13 +9,48 @@
 #import "VideoModel.h"
 #import "PlayListModel.h"
 
+#import <CommonCrypto/CommonDigest.h>
+
+@interface VideoModel()
+
+@end
+
 @implementation VideoModel
 
 -(instancetype)copyWithZone:(NSZone *)zone{
-    VideoModel* vm = [[VideoModel alloc] init];
-    vm.path = self.path;
+    VideoModel* vm = [[VideoModel alloc] initWithData:[self getData]];
     return vm;
 }
+
+//用路径初始化一个视频对象
+-(instancetype)initWithPath:(NSString*)path{
+    self = [super init];
+    if (self) {
+        _path = path;
+        _media = [VLCMedia mediaWithPath:self.path];
+        _thumbnailPath = @"";
+    }
+    return self;
+}
+
+//用本地读取的数据创建对象
+-(instancetype)initWithData:(NSDictionary*)data{
+    self = [super init];
+    if (self) {
+        _path = [data objectForKey:@"path"];
+        _media = [VLCMedia mediaWithPath:self.path];
+        _thumbnailPath = [data objectForKey:@"thumbnailPath"];
+    }
+    return self;
+}
+//把所有数据做成一个字典方便保存
+-(NSDictionary*)getData{
+    
+    return @{@"path":_path,
+             @"thumbnailPath":_thumbnailPath};
+}
+
+
 
 
 //播放
@@ -25,19 +60,46 @@
 
 //判断是否相等
 -(BOOL)isEqualtoVideoModel:(VideoModel*)aVideoModel{
-    return [self.path isEqualToString:aVideoModel.path];
+    return [_path isEqualToString:aVideoModel.path];
 }
 
-//把所有数据做成一个字典方便保存
--(NSDictionary*)getData{
-    return @{@"path":self.path};
+
+//保存图片
+-(void)SaveThumbnail:(NSImage*)thumbnail{
+    
+    
+    NSData *imageData = [thumbnail TIFFRepresentation];
+    NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
+    [imageRep setSize:thumbnail.size];
+    imageData = [imageRep representationUsingType:NSPNGFileType properties:@{}];
+    
+    [[NSFileManager defaultManager] createDirectoryAtPath:[[self getThumbnailShouldSavePath] stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil];
+    [imageData writeToFile:[self getThumbnailShouldSavePath] atomically:YES];
+ 
+    _thumbnailPath = [self getThumbnailShouldSavePath];
+    [[PlayListModel share] saveData];
 }
-//用本地读取的数据创建对象
--(instancetype)initWithData:(NSDictionary*)data{
-    self = [super init];
-    if (self) {
-        self.path = [data objectForKey:@"path"];
-    }
-    return self;
+
+//随便算一下文件名字
+-(NSString*)getThumbnailShouldSavePath{
+    NSString *path = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES)[0];
+    path = [path stringByAppendingPathComponent:@"XHPlayerVideo"];
+    path = [path stringByAppendingPathComponent:@"thumbnail"];
+    path = [path stringByAppendingPathComponent:[self md5:self.path]];
+    path = [path stringByAppendingString:@".png"];
+    return path;
+}
+
+- (NSString *)md5:(NSString *)str
+{
+    const char *original_str = [str UTF8String];
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    
+    CC_MD5(original_str, (CC_LONG)strlen(original_str), result);
+    
+    NSMutableString *hash = [NSMutableString string];
+    for (int i = 0; i < 16; i++)
+        [hash appendFormat:@"%02X", result[i]];
+    return [hash lowercaseString];
 }
 @end

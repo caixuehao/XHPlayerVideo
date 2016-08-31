@@ -33,5 +33,6 @@ typedef NS_ENUM(NSInteger, PlayMode) {
 
 @property(nonatomic)PlayMode playmode;
 
+-(void)saveData;
 
 @end

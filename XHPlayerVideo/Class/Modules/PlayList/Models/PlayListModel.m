@@ -8,11 +8,14 @@
 
 #import "PlayListModel.h"
 
-#import <VLCKit/VLCKit.h>
+
 #import "Macro.h"
+
 static PlayListModel* playListModelShare;
 
+@interface PlayListModel ()
 
+@end
 @implementation PlayListModel{
     
 }
@@ -53,6 +56,8 @@ static PlayListModel* playListModelShare;
 
 
 -(void)addVideoModel:(VideoModel*)videoModel{
+    if(videoModel==nil)return;
+    
     if (_playList == nil)_playList = [[NSMutableArray alloc] init];
     BOOL isRepeat = NO;
     for (int i = 0; i < _playList.count; i++) {
@@ -67,6 +72,9 @@ static PlayListModel* playListModelShare;
 }
 
 
+
+
+#pragma FileReadWrite
 
 -(NSString*)getPath{
     //百度QQ的用户信息都放在这里所以我参考了一下
@@ -94,23 +102,27 @@ static PlayListModel* playListModelShare;
     }
 }
 
+
+
+
+
 -(void)saveData{
     //防止掉用过快（如滑动音量条时）
-    [[NSOperationQueue mainQueue]  addOperationWithBlock:^{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(saveDataSelector) object:nil];
         [self performSelector:@selector(saveDataSelector) withObject:nil afterDelay:0.5f];
     }];
 }
 
 -(void)saveDataSelector{
-    [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
-        NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
-        NSMutableArray* playlist = [[NSMutableArray alloc] init];
-        for (int i = 0; i < _playList.count; i++) {
-            [playlist addObject:[_playList[i] getData]];
-        }
-        [data setObject:playlist forKey:@"playList"];
-        [data writeToFile:[self getPath] atomically:YES];
-    }];
+    
+    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+    NSMutableArray* playlist = [[NSMutableArray alloc] init];
+    for (int i = 0; i < _playList.count; i++) {
+        [playlist addObject:[_playList[i] getData]];
+    }
+    [data setObject:playlist forKey:@"playList"];
+    [data writeToFile:[self getPath] atomically:YES];
+    
 }
 @end

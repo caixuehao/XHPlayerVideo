@@ -12,4 +12,6 @@
 
 @property(nonatomic)NSButton* hideBtn;
 
+@property(nonatomic)NSButton* playModeBtn;
+
 @end

@@ -68,7 +68,7 @@
         player.delegate = self;
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             if (self.currentVideo) {
-                [player setMedia:[VLCMedia mediaWithPath:self.currentVideo.path]];
+                [player setMedia:self.currentVideo.media];
                 [player play];
             }
         }];
@@ -136,9 +136,9 @@
 
 - (void)playVideo{
     [self.view.window makeKeyAndOrderFront:self];//显示窗口
-    if(player.media.state != VLCMediaStateBuffering){//防止在缓冲时被释放（不知道这样写有没有问题）
+    if(player.media.state != VLCMediaStateBuffering&&player){//防止在缓冲时被释放（不知道这样写有没有问题）
         [player stop];
-        [player setMedia:[VLCMedia mediaWithPath:self.currentVideo.path]];
+        [player setMedia:self.currentVideo.media];
         [player play];// 不能在这里调用？
     }
 }
@@ -243,12 +243,13 @@
 #pragma mouseActions
 //鼠标进入监视区
 - (void)mouseEntered:(NSEvent *)theEvent{
-    [self onlyDisplayVideoView];
+    unresponsiveTime = 4;
+    [self dispplayAllView];
 }
 
 //鼠标推出监视区
 - (void)mouseExited:(NSEvent *)theEvent{
-    [self dispplayAllView];
+    //[self onlyDisplayVideoView];
 }
 
 //鼠标拖动
@@ -343,12 +344,12 @@
     self.view.wantsLayer = YES;
     self.view.layer.backgroundColor = CColor(100, 200, 220, 1).CGColor;
     //背景图片
-//    NSImageView* backImage =({
-//        NSImageView* iv = [[NSImageView alloc] init];
-//        iv.image = [NSImage imageNamed:@"background.jpg"];
-//        [self.view addSubview:iv];
-//        iv;
-//    });
+    NSImageView* backImage =({
+        NSImageView* iv = [[NSImageView alloc] init];
+        iv.image = [NSImage imageNamed:@"background.jpg"];
+        [self.view addSubview:iv];
+        iv;
+    });
     //视频
     videoPlayView = ({
         VLCVideoView* view = [[VLCVideoView alloc] init];
@@ -398,9 +399,10 @@
   
     //layout
     //背景图片
-//    [backImage mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.equalTo(self.view);
-//    }];
+    [backImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.size.equalTo(self.view).priorityLow();
+    }];
     
 //    [videoPlayView mas_remakeConstraints:^(MASConstraintMaker *make) {
 //        make.center.equalTo(self.view);

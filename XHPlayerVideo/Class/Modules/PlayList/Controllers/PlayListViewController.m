@@ -12,6 +12,8 @@
 
 #import "Macro.h"
 #import <Masonry.h>
+#import <VLCKit/VLCKit.h>
+#import <CommonCrypto/CommonDigest.h>
 
 #import "PlayListTitleView.h"
 #import "VideoListTableView.h"
@@ -20,7 +22,7 @@
 
 
 
-@interface PlayListViewController ()
+@interface PlayListViewController ()<VLCMediaThumbnailerDelegate>
 
 @end
 
@@ -28,6 +30,8 @@
     PlayListTitleView* playlistTitleView;
     VideoListTableView* videoTableView;
     NSMutableArray<VideoModel *>* VideoDataArr;
+    
+    NSInteger currentQueryRow;
     
 }
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
@@ -40,13 +44,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-
+    currentQueryRow = -1;
     
      VideoDataArr = [[PlayListModel share] playList];
     
     [self loadSubViews];
     [self loadActions];
-    
+    [self loadThumbnail];
 
 }
 
@@ -54,6 +58,22 @@
     playlistTitleView.hideBtn.target = self;
     [playlistTitleView.hideBtn setAction:@selector(hide)];
 }
+
+//加载封面图片
+-(void)loadThumbnail{
+    if(++currentQueryRow == VideoDataArr.count) return;
+    
+    if (VideoDataArr[currentQueryRow].thumbnailPath.length) {
+        [self loadThumbnail];
+    }else{
+        VLCMediaThumbnailer * mt = [VLCMediaThumbnailer thumbnailerWithMedia:VideoDataArr[currentQueryRow].media andDelegate:self];
+        mt.thumbnailHeight = VideoCellHeight;
+        mt.thumbnailWidth = VideoCellWidth;
+        mt.snapshotPosition = 0.2;//视频帧位置
+        [mt fetchThumbnail];
+    }
+}
+
 #pragma Actions
 - (void)hide{
     [PlayListWindow display];
@@ -96,4 +116,24 @@
         make.bottom.left.right.equalTo(self.view);
     }];
 }
+
+#pragma VLCMediaThumbnailerDelegate
+- (void)mediaThumbnailerDidTimeOut:(VLCMediaThumbnailer *)mediaThumbnailer{
+    //获取失败
+    [self loadThumbnail];
+}
+- (void)mediaThumbnailer:(VLCMediaThumbnailer *)mediaThumbnailer didFinishThumbnail:(CGImageRef)thumbnail{
+    //获取成功
+    
+    //保存图片
+    NSImage* image  = [[NSImage alloc] initWithCGImage:thumbnail size:NSMakeSize(VideoCellWidth, VideoCellHeight)];
+    [VideoDataArr[currentQueryRow] SaveThumbnail:image];
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [videoTableView reloadData];
+        [self loadThumbnail];
+    }];
+    
+}
+
 @end
