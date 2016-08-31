@@ -19,7 +19,7 @@
 #import "PlayerTitleView.h"
 
 @interface PlayerVideoViewController ()<VLCMediaPlayerDelegate>
-
+@property(nonatomic,weak)VLCMedia* media;
 @end
 
 @implementation PlayerVideoViewController{
@@ -57,7 +57,7 @@
 - (void)viewDidAppear{
     [super viewDidAppear];
     //加载播放列表 窗口
-    [PlayListWindow show];
+     [PlayListWindow display];
 
 }
 #pragma loadActions
@@ -68,7 +68,6 @@
         player.delegate = self;
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             if (self.currentVideo) {
-                [player stop];
                 [player setMedia:[VLCMedia mediaWithPath:self.currentVideo.path]];
                 [player play];
             }
@@ -83,10 +82,12 @@
     playerTitleView.closeBtn.target = self;
     playerTitleView.minmizeBtn.target = self;
     playerTitleView.maximizeBtn.target = self;
+    playerTitleView.displayPlayListBtn.target = self;
     
     [playerTitleView.closeBtn setAction:@selector(close)];
     [playerTitleView.minmizeBtn setAction:@selector(minmize)];
     [playerTitleView.maximizeBtn setAction:@selector(maxmize)];
+    [playerTitleView.displayPlayListBtn setAction:@selector(displayPlayList)];
     
     //底部主控制器事件
     controllerView.playSwitchBtn.target = self;
@@ -134,12 +135,11 @@
 }
 
 - (void)playVideo{
-    //显示窗口
-    [self.view.window makeKeyAndOrderFront:self];
-    if(player){
+    [self.view.window makeKeyAndOrderFront:self];//显示窗口
+    if(player.media.state != VLCMediaStateBuffering){//防止在缓冲时被释放（不知道这样写有没有问题）
         [player stop];
         [player setMedia:[VLCMedia mediaWithPath:self.currentVideo.path]];
-        [player play];
+        [player play];// 不能在这里调用？
     }
 }
 //窗口大小改变
@@ -199,15 +199,23 @@
 - (void)maxmize{
     [self.view.window toggleFullScreen:nil];//全屏
 }
+
+//显示（隐藏播放列表）
+- (void)displayPlayList{
+    unresponsiveTime = 4;
+    [PlayListWindow display];
+}
 #pragma ControllerBottonActions
 
 - (void)pause{
+    unresponsiveTime = 4;
     if(player.playing){
         [controllerView.playSwitchBtn setTitle:@"播放"];
         [player pause];
     }
 }
 - (void)playSwitch:(id)sender {
+    unresponsiveTime = 4;
     if(player.playing){
         [controllerView.playSwitchBtn setTitle:@"播放"];
         [player pause];
@@ -218,9 +226,13 @@
     
 }
 - (void)nextVideo:(id)sender{
-   
+    unresponsiveTime = 4;
+//    [player stop];
+//    NSLog(@"%lu",player.media.subitems.count);
+//    NSLog(@"%p",_media);
 }
 - (void)soundSwitch:(id)sender {
+    unresponsiveTime = 4;
     if(player.audio.volume){
         player.audio.volume = 0;
     }else{
@@ -250,7 +262,14 @@
 - (void)mouseMoved:(NSEvent *)theEvent{
     unresponsiveTime = 4;
 }
-
+//鼠标按下
+- (void)mouseDown:(NSEvent *)theEvent{
+    unresponsiveTime = 4;
+}
+//鼠标松开
+- (void)mouseUp:(NSEvent *)theEvent{
+    unresponsiveTime = 4;
+}
 
 #pragma SliderActions
 
@@ -276,7 +295,6 @@
 //视频状态
 - (void)mediaPlayerStateChanged:(NSNotification *)aNotification{
     NSLog(@"视频状态:%lu",player.state);//这个是player
-    
     if (player.state == VLCMediaPlayerStateBuffering) {
         if(player.videoSize.width>0){
             [self updateLayout];

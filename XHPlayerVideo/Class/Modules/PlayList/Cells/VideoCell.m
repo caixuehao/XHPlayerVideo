@@ -42,8 +42,8 @@
     [CColor(255, 255, 255, 0.7) setFill];
     [bezierPath fill];
     //画图
-    NSImage* coverImage = [self getCoverImage];
-    [coverImage drawInRect:NSInsetRect(cellFrame,0,2)];
+//    NSImage* coverImage = [self getCoverImage];
+//    [coverImage drawInRect:NSInsetRect(cellFrame,0,2)];
     //渐变
     NSGradient* gradient = [[NSGradient alloc] initWithStartingColor:CColor(0, 0, 0, 1) endingColor:CColor(0, 0, 0, 0.2)];
     NSBezierPath* bezierPath2 = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y+VideoCellHeight-20, 300, 19) xRadius:0 yRadius:0];

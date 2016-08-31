@@ -10,11 +10,12 @@
 
 @interface PlayListWindow : NSWindow
 
-@property(nonatomic)BOOL isHide;
+@property(nonatomic)BOOL isDisplay;
 
-//+(instancetype)share;
++(instancetype)share;
 
-+(void)show;
+//显示 或者 关闭取相反的状态
++(void)display;
 
 //+(void)hide;
 

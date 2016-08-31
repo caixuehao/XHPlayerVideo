@@ -56,6 +56,13 @@
         btn;
     });
     
+    _displayPlayListBtn = ({
+        NSButton* btn = [[NSButton alloc] init];
+        [btn setTitle:@"播放列表"];
+        [self addSubview:btn];
+        btn;
+    });
+    
     //layout
     [_closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(10);
@@ -73,6 +80,12 @@
         make.left.equalTo(_minmizeBtn.mas_right).offset(10);
         make.centerY.equalTo(self).offset(0);
         make.size.mas_equalTo(NSMakeSize(15, 15));
+    }];
+    
+    [_displayPlayListBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self).offset(-10);
+        make.centerY.equalTo(self).offset(0);
+        make.size.mas_equalTo(NSMakeSize(60, 15));
     }];
 }
 @end

@@ -8,6 +8,7 @@
 
 #import "PlayListViewController.h"
 #import "PlayerVideoWindowController.h"
+#import "PlayListWindow.h"
 
 #import "Macro.h"
 #import <Masonry.h>
@@ -32,19 +33,21 @@
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        CGRect playerVideoFrame = [PlayerVideoWindowController getPlayerVideoWindowController].window.frame;
-        self.view.frame = NSMakeRect(0, 0,VideoCellWidth, playerVideoFrame.size.height);
+
     }
     return self;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    [self.view setWantsLayer:YES];
-    [self.view.layer setBackgroundColor:CColor(200, 10, 150, 1).CGColor];
+
+    
+     VideoDataArr = [[PlayListModel share] playList];
     
     [self loadSubViews];
     [self loadActions];
+    
+
 }
 
 - (void)loadActions{
@@ -53,12 +56,17 @@
 }
 #pragma Actions
 - (void)hide{
-     [[PlayerVideoWindowController getPlayerVideoWindowController].window removeChildWindow:self.view.window];
+    [PlayListWindow display];
 }
 
 - (void)loadSubViews{
+    
+    [self.view setWantsLayer:YES];
+    [self.view.layer setBackgroundColor:CColor(200, 10, 150, 1).CGColor];
+    CGRect playerVideoFrame = [PlayerVideoWindowController getPlayerVideoWindowController].window.frame;
+    self.view.frame = NSMakeRect(0, 0,VideoCellWidth+20, playerVideoFrame.size.height);
+    
    
-    VideoDataArr = [[PlayListModel share] playList];
     //组成头部
     playlistTitleView = ({
         PlayListTitleView* view = [[PlayListTitleView alloc] init];
@@ -71,7 +79,7 @@
     videoTableView = ({
         VideoListTableView * tableView = [[VideoListTableView alloc] initWithArray:VideoDataArr];
         [tableContainer setDocumentView:tableView];
-        //    [tableContainer setHasVerticalScroller:YES];
+        [tableContainer setHasVerticalScroller:YES];
         [self.view addSubview:tableContainer];
         tableView;
     });

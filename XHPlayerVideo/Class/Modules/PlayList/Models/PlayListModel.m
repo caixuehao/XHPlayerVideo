@@ -8,6 +8,7 @@
 
 #import "PlayListModel.h"
 
+#import <VLCKit/VLCKit.h>
 #import "Macro.h"
 static PlayListModel* playListModelShare;
 

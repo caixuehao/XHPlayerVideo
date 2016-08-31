@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+//#import <VLCKit/VLCKit.h>
 
 @interface VideoModel : NSObject
 
 @property(nonatomic)NSString* path;
-
+//@property(nonatomic,weak)VLCMedia* media;
 //播放
 -(void)play;
 
