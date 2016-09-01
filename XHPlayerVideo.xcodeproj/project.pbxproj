@@ -306,11 +306,11 @@
 		FC5A85361D70AEC100267B7F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FC5A85391D70AEC100267B7F /* PlayerVideoWindowController.h */,
-				FC5A853A1D70AEC100267B7F /* PlayerVideoWindowController.m */,
 				FC75086E1D781A3D000130BC /* PlayerVideoViewController.h */,
 				FC75086F1D781A3D000130BC /* PlayerVideoViewController.m */,
 				FC7508701D781A3D000130BC /* PlayerVideoViewController.xib */,
+				FC5A85391D70AEC100267B7F /* PlayerVideoWindowController.h */,
+				FC5A853A1D70AEC100267B7F /* PlayerVideoWindowController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

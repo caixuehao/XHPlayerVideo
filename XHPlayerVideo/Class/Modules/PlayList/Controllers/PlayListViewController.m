@@ -29,8 +29,8 @@
 @implementation PlayListViewController{
     PlayListTitleView* playlistTitleView;
     VideoListTableView* videoTableView;
-    NSMutableArray<VideoModel *>* VideoDataArr;
-    
+   
+    PlayListModel* playListModel;
 }
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,8 +42,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    
-    VideoDataArr = [[PlayListModel share] playList];
+    playListModel = [PlayListModel share];
+    ;
     
     [self loadSubViews];
     [self loadActions];
@@ -51,14 +51,84 @@
 }
 
 - (void)loadActions{
-    [[PlayListModel share] setDelegate:self];
+    [playListModel setDelegate:self];
     
     playlistTitleView.hideBtn.target = self;
     playlistTitleView.playModeBtn.target = self;
     
     [playlistTitleView.hideBtn setAction:@selector(hide)];
     [playlistTitleView.playModeBtn setAction:@selector(changePlayMode)];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playLastVideo) name:PlayLastVideoNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playNextVideo) name:PlayNextVideoNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playEnd) name:PLayEndNotification object:nil];
 }
+
+#pragma NSNotification
+
+-(void)playLastVideo{
+    if(playListModel.playList.count == 0)return;
+    if(playListModel.playList.count == 1){
+        [playListModel setCurrentVideo:[playListModel.playList firstObject]];
+        return;
+    }
+    
+    NSInteger row = [playListModel.playList indexOfObject:playListModel.currentVideo];
+    if (row == NSNotFound) return;
+    switch (playListModel.playMode) {
+        case PlayModeListCycle:
+        case PlayModeSingleCycle:
+        case PlayModeSequential:
+            if(row == 0){
+                [playListModel setCurrentVideo:[playListModel.playList lastObject]];
+            }else{
+                [playListModel setCurrentVideo:playListModel.playList[row-1]];
+            }
+            break;
+        case PlayModeRandom:
+            [playListModel setCurrentVideo:playListModel.playList[arc4random()%playListModel.playList.count]];
+            break;
+        default:
+            break;
+    }
+}
+-(void)playNextVideo{
+    if(playListModel.playList.count == 0)return;
+    if(playListModel.playList.count == 1){
+        [playListModel setCurrentVideo:[playListModel.playList firstObject]];
+        return;
+    }
+    
+    NSInteger row = [playListModel.playList indexOfObject:playListModel.currentVideo];
+    if (row == NSNotFound) return;
+    switch (playListModel.playMode) {
+        case PlayModeListCycle:
+        case PlayModeSingleCycle:
+        case PlayModeSequential:
+            if(row+1 == playListModel.playList.count){
+                [playListModel setCurrentVideo:[playListModel.playList firstObject]];
+            }else{
+                [playListModel setCurrentVideo:playListModel.playList[row+1]];
+            }
+            break;
+        case PlayModeRandom:
+            [playListModel setCurrentVideo:playListModel.playList[arc4random()%playListModel.playList.count]];
+            break;
+        default:
+            break;
+    }
+}
+
+-(void)playEnd{
+    NSInteger row = [playListModel.playList indexOfObject:playListModel.currentVideo];
+    if (playListModel.playMode == PlayModeSequential&&row+1 == playListModel.playList.count) {
+        return;
+    }else if(playListModel.playMode == PlayModeSingleCycle){
+        [playListModel setCurrentVideo:playListModel.currentVideo];return;
+    }
+    [self playNextVideo];
+}
+
 
 #pragma PlayListUpdateDataDelegate
 -(void)playlistUpdateData:(PlayListModel *)model{
@@ -66,15 +136,16 @@
     [videoTableView reloadData];
 }
 
+
 #pragma Actions
 - (void)hide{
     [self.view.window close];
 }
 - (void)changePlayMode{
-    if ([PlayListModel share].playmode == 3) {
-        [PlayListModel share].playmode = 0;
+    if (playListModel.playMode == 3) {
+        playListModel.playMode = 0;
     }else{
-        ++([PlayListModel share].playmode);
+        ++(playListModel.playMode);
     }
     [playlistTitleView updatePlayModeBtnState];
 }
@@ -97,7 +168,7 @@
     //建立tabelview
     NSScrollView * tableContainer = [[NSScrollView alloc] init];
     videoTableView = ({
-        VideoListTableView * tableView = [[VideoListTableView alloc] initWithArray:VideoDataArr];
+        VideoListTableView * tableView = [[VideoListTableView alloc] initWithArray:playListModel.playList];
         [tableContainer setDocumentView:tableView];
         [tableContainer setHasVerticalScroller:YES];
         [self.view addSubview:tableContainer];

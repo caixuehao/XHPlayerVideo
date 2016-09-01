@@ -19,6 +19,7 @@
 @property(nonatomic)NSButton* maximizeBtn;
 
 
+
 @property(nonatomic)NSButton* displayPlayListBtn;
 
 @end

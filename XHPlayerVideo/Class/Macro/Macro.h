@@ -26,5 +26,6 @@
 
 #define PlayNextVideoNotification @"PlayNextVideoNotification" //播放下一个视频
 #define PlayLastVideoNotification @"PlayLastVideoNotification" //播放上一个视频
+#define PLayEndNotification @"PLayEndNotification"  //播放结束
 
 #endif /* Macro_h */

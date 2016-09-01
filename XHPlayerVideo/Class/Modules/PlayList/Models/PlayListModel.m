@@ -44,51 +44,33 @@ static PlayListModel* playListModelShare;
     NSLog(@"%@",[self getPath]);
     if(currentVideo)SendNotification(PlayVideoNotification, @{@"video":currentVideo});
     
-    if ([_currentVideo isEqualtoVideoModel:currentVideo]) {
-        if([_playList indexOfObject:currentVideo] == NSNotFound){
-            [self addVideoModel:currentVideo];
+    NSUInteger index = [_playList indexOfObject:currentVideo];
+    if(index == NSNotFound){
+        BOOL isRepeat = NO;
+        for (int i = 0; i < _playList.count; i++) {
+            if ([_playList[i] isEqualtoVideoModel:currentVideo]){
+                _currentVideo = _playList[i];
+                isRepeat = YES; break;
+            }
         }
+        if (isRepeat == NO) {
+            [self addVideoModel:currentVideo];
+            _currentVideo = currentVideo;
+        }
+    }else{
         _currentVideo = currentVideo;
-        [self updateData];
     }
-}
-
--(void)setPlaymode:(PlayMode)playmode{
-    _playmode = playmode;
     [self updateData];
-}
-
-
-
-
-
-
-
-
-
-
-
-//更新播放顺序
--(void)updatePlayOrder{
-    int row = [_playList indexOfObject:_currentVideo];
-    switch (_playmode) {
-        case PlayMode列表循环:
-            
-            break;
-        case PlayMode单曲循环
-            :
-            break;
-        case PlayMode随机播放:
-            
-            break;
-        case PlayMode顺序播放:
-            
-            break;
-        default:
-            break;
-    }
     
 }
+
+-(void)setPlayMode:(PlayMode)playmode{
+    _playMode = playmode;
+}
+
+
+
+
 
 
 
@@ -99,8 +81,9 @@ static PlayListModel* playListModelShare;
     if (_playList == nil)_playList = [[NSMutableArray alloc] init];
     BOOL isRepeat = NO;
     for (int i = 0; i < _playList.count; i++) {
-        if ([_playList[i] isEqualtoVideoModel:videoModel])
-            isRepeat = YES;
+        if ([_playList[i] isEqualtoVideoModel:videoModel]){
+            isRepeat = YES;break;
+        }
     }
     
     if (isRepeat == NO) {
@@ -133,7 +116,7 @@ static PlayListModel* playListModelShare;
         for (int i = 0; i < playlist.count;i++) {
             [_playList addObject:[[VideoModel alloc] initWithData:playlist[i]]];
         }
-        
+        _playMode = [[data objectForKey:@"playMode"] integerValue];
     }else{
         BOOL bo = [[NSFileManager defaultManager] createDirectoryAtPath:[[self getPath] stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil];
         if (!bo) NSLog(@"文件夹创建失败！");
@@ -167,6 +150,7 @@ static PlayListModel* playListModelShare;
             [playlist addObject:[_playList[i] getData]];
         }
         [data setObject:playlist forKey:@"playList"];
+        [data setObject:@(_playMode) forKey:@"playMode"];
         [data writeToFile:[self getPath] atomically:YES];
     }];
 }

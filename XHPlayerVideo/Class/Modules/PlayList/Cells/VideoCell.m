@@ -89,7 +89,9 @@
 #pragma LoadThumbnailDelegate
 
 -(void)thumbnailLoaded:(NSImage *)thumbnail{
-    if (thumbnail) coverImageView.image = thumbnail;
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+         if (thumbnail) coverImageView.image = thumbnail;
+    }];
 }
 
 @end

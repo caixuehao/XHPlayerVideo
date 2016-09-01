@@ -56,6 +56,8 @@
         btn;
     });
     
+    
+    
     _displayPlayListBtn = ({
         NSButton* btn = [[NSButton alloc] init];
         [btn setTitle:@"播放列表"];

@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "VideoModel.h"
 typedef NS_ENUM(NSInteger, PlayMode) {
-    PlayMode顺序播放,
-    PlayMode单曲循环,
-    PlayMode随机播放,
-    PlayMode列表循环
+    PlayModeListCycle,//顺序播放
+    PlayModeSingleCycle,//单曲循环
+    PlayModeRandom,//随机播放
+    PlayModeSequential//顺序播放
 };
 @protocol PlayListUpdateDataDelegate;
 
@@ -27,11 +27,8 @@ typedef NS_ENUM(NSInteger, PlayMode) {
 
 
 @property(nonatomic)VideoModel* currentVideo;
-@property(nonatomic,weak,readonly)VideoModel* lastVideo;
-@property(nonatomic,weak,readonly)VideoModel* nextVideo;
 
-
-@property(nonatomic)PlayMode playmode;
+@property(nonatomic)PlayMode playMode;
 
 @end
 

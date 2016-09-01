@@ -103,6 +103,7 @@
     
     [controllerView.playSwitchBtn setAction:@selector(playSwitch:)];
     [controllerView.nextVideoBtn setAction:@selector(nextVideo:)];
+    [controllerView.lastVideoBtn setAction:@selector(lastVideo:)];
     
     [controllerView.videoSlider setAction:@selector(videoSliderAction:)];
     [controllerView.soundSwitchBtn setAction:@selector(soundSwitch:)];
@@ -140,11 +141,12 @@
 
 - (void)playVideo{
     [self.view.window makeKeyAndOrderFront:self];//显示窗口
-    if(player.media.state != VLCMediaStateBuffering&&player){//防止在缓冲时被释放（不知道这样写有没有问题）
+    //if(player.media.state != VLCMediaStateBuffering&&player)//防止在缓冲时被释放（不知道这样写有没有问题）
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [player stop];
         [player setMedia:self.currentVideo.media];
         [player play];// 不能在这里调用？
-    }
+    }];
 }
 //窗口大小改变
 - (void)windowDidResize:(id)sender{
@@ -234,9 +236,18 @@
     }
     
 }
+
+- (void)lastVideo:(id)sender{
+    unresponsiveTime = 4;
+    SendNotification(PlayLastVideoNotification, nil);
+}
+
 - (void)nextVideo:(id)sender{
     unresponsiveTime = 4;
+    SendNotification(PlayNextVideoNotification, nil);
 }
+
+
 - (void)soundSwitch:(id)sender {
     unresponsiveTime = 4;
     if(player.audio.volume){
@@ -289,6 +300,7 @@
 
 #pragma SliderActions
 - (void)videoSliderAction:(id)sender {
+    
     //不得不说想出这个方法的人真机智。原作者http://www.cnblogs.com/walkingZero/p/3920509.html
     if(controllerView.videoSlider.continuous){
         //开始移动
@@ -296,9 +308,14 @@
     }else{
         //移动结束
         controllerView.videoSlider.continuous = !controllerView.videoSlider.continuous;
-        player.position = controllerView.videoSlider.intValue/controllerView.videoSlider.maxValue;
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            NSLog(@"%i,%f",controllerView.videoSlider.intValue,controllerView.videoSlider.maxValue);
+            player.position = controllerView.videoSlider.intValue/controllerView.videoSlider.maxValue;
+        }];
     }
 }
+
+
 - (void)volumeSliderAction:(id)sender {
      player.audio.volume = controllerView.volumeSlider.intValue;
 }
@@ -314,9 +331,15 @@
 //视频状态
 - (void)mediaPlayerStateChanged:(NSNotification *)aNotification{
     NSLog(@"视频状态:%lu",player.state);//这个是player
+    
     if (player.state == VLCMediaPlayerStateBuffering) {
         if(player.videoSize.width>0){
             [self updateLayout];
+        }
+    } else if(player.state == VLCMediaPlayerStatePaused){
+         NSLog(@"%i",player.remainingTime.intValue);
+        if (player.remainingTime.intValue > -100) {//妈的这种判断方法感觉很坑啊
+            SendNotification(PLayEndNotification, nil);
         }
     }
     
@@ -327,8 +350,6 @@
  //intValue单位毫米
     if (player.time.intValue == 0) {
             NSLog(@"播放开始");
-    }else if(player.remainingTime.intValue == 0&&player.time.intValue != 0){
-           NSLog(@"播放完成");
     }
     if (controllerView.videoSlider.continuous) {
         controllerView.videoSlider.maxValue = player.time.intValue-player.remainingTime.intValue;
@@ -342,16 +363,6 @@
     }
         
 }
-
-- (void)mediaPlayerChapterChanged:(NSNotification *)aNotification{
-    NSLog(@"++++++++++++++");
-}
-- (void)mediaPlayerTitleChanged:(NSNotification *)aNotification{
-    NSLog(@"-------------");
-}
-
-
-
 
 
 

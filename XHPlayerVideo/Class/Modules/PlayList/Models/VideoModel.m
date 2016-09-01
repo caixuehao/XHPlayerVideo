@@ -58,7 +58,7 @@
 
 //加载缩略图
 -(void)loadThumnbnail:(id<LoadThumbnailDelegate>)delegate{
-  
+
     //确保只进来一次
     if (_delegate == nil) {
         VLCMediaThumbnailer * mt = [VLCMediaThumbnailer thumbnailerWithMedia:self.media andDelegate:self];

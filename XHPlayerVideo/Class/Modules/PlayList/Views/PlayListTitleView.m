@@ -18,7 +18,7 @@
     self = [super init];
     if (self) {
         [self loadSubView];
-         
+        [self updatePlayModeBtnState];
     }
     return self;
 }
@@ -67,11 +67,11 @@
 }
 
 -(void)updatePlayModeBtnState{
-    switch ([PlayListModel share].playmode) {
-        case PlayMode列表循环: [_playModeBtn setTitle:@"列表循环"];break;
-        case PlayMode单曲循环: [_playModeBtn setTitle:@"单曲循环"];break;
-        case PlayMode随机播放: [_playModeBtn setTitle:@"随机播放"];break;
-        case PlayMode顺序播放: [_playModeBtn setTitle:@"顺序播放"];break;
+    switch ([PlayListModel share].playMode) {
+        case PlayModeListCycle: [_playModeBtn setTitle:@"列表循环"];break;
+        case PlayModeSingleCycle: [_playModeBtn setTitle:@"单曲循环"];break;
+        case PlayModeRandom: [_playModeBtn setTitle:@"随机播放"];break;
+        case  PlayModeSequential: [_playModeBtn setTitle:@"顺序播放"];break;
         default:
             break;
     }
