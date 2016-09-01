@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9DF276ECBEC4FC82FEC4B901 /* libPods-XHPlayerVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 029B916A20BEB233407D41E3 /* libPods-XHPlayerVideo.a */; };
+		FC40F64E1D78A3EA00CD092D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = FC40F64D1D78A3EA00CD092D /* README.md */; };
 		FC5A84DF1D7089C200267B7F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A84DE1D7089C200267B7F /* AppDelegate.m */; };
 		FC5A84E21D7089C200267B7F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A84E11D7089C200267B7F /* main.m */; };
 		FC5A84E71D7089C200267B7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC5A84E61D7089C200267B7F /* Assets.xcassets */; };
@@ -72,6 +73,7 @@
 		029B916A20BEB233407D41E3 /* libPods-XHPlayerVideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XHPlayerVideo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11B324F5AA03EBDC27F8F80C /* Pods-XHPlayerVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XHPlayerVideo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XHPlayerVideo/Pods-XHPlayerVideo.debug.xcconfig"; sourceTree = "<group>"; };
 		EB1A32EA5DFDC2FFA65D77A3 /* Pods-XHPlayerVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XHPlayerVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-XHPlayerVideo/Pods-XHPlayerVideo.release.xcconfig"; sourceTree = "<group>"; };
+		FC40F64D1D78A3EA00CD092D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		FC5A84DA1D7089C200267B7F /* XHPlayerVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XHPlayerVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5A84DD1D7089C200267B7F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC5A84DE1D7089C200267B7F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 		FC5A84DC1D7089C200267B7F /* XHPlayerVideo */ = {
 			isa = PBXGroup;
 			children = (
+				FC40F64D1D78A3EA00CD092D /* README.md */,
 				FC5A850E1D70A21F00267B7F /* Class */,
 				FC5A850F1D70A21F00267B7F /* Librarys */,
 				FC5A85101D70A21F00267B7F /* Resources */,
@@ -594,6 +597,7 @@
 				FC5A84DF1D7089C200267B7F /* AppDelegate.m in Sources */,
 				FCDD9EA61D71934A0098C259 /* ControllerView.m in Sources */,
 				FCFE5BA71D72F9BD005DF1A4 /* PlayListWindow.m in Sources */,
+				FC40F64E1D78A3EA00CD092D /* README.md in Sources */,
 				FCFE5BA61D72F9BD005DF1A4 /* VideoListTableView.m in Sources */,
 				FC7508711D781A3D000130BC /* PlayerVideoViewController.m in Sources */,
 			);
