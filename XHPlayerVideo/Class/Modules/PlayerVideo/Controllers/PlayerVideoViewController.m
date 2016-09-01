@@ -152,7 +152,7 @@
 - (void)windowDidResize:(id)sender{
     //防止调用过快 引起打卡死
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(updateTrackingArea) object:nil];
-    [self performSelector:@selector(updateTrackingArea) withObject:nil afterDelay:0.5f];
+    [self performSelector:@selector(updateTrackingArea) withObject:nil afterDelay:0.1f];
     
 }
 - (void)updateTrackingArea{
