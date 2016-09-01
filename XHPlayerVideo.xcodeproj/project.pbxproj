@@ -11,16 +11,17 @@
 		FC5A84DF1D7089C200267B7F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A84DE1D7089C200267B7F /* AppDelegate.m */; };
 		FC5A84E21D7089C200267B7F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A84E11D7089C200267B7F /* main.m */; };
 		FC5A84E71D7089C200267B7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC5A84E61D7089C200267B7F /* Assets.xcassets */; };
-		FC5A84EA1D7089C200267B7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC5A84E81D7089C200267B7F /* Main.storyboard */; };
 		FC5A84F51D7089C200267B7F /* XHPlayerVideoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A84F41D7089C200267B7F /* XHPlayerVideoTests.m */; };
 		FC5A85001D7089C200267B7F /* XHPlayerVideoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A84FF1D7089C200267B7F /* XHPlayerVideoUITests.m */; };
-		FC5A85451D70AEC100267B7F /* PlayerVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A85381D70AEC100267B7F /* PlayerVideoViewController.m */; };
 		FC5A85461D70AEC100267B7F /* PlayerVideoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A853A1D70AEC100267B7F /* PlayerVideoWindowController.m */; };
 		FC5A854B1D70B77400267B7F /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC5A854A1D70B77400267B7F /* background.jpg */; };
 		FC5E94001D770554008F3872 /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5E93FF1D770554008F3872 /* VideoCell.m */; };
 		FC7508661D77CA9C000130BC /* PlayListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7508651D77CA9C000130BC /* PlayListViewController.xib */; };
 		FC75086A1D77CBCD000130BC /* PlayListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7508691D77CBCD000130BC /* PlayListViewController.m */; };
 		FC75086D1D77CCC7000130BC /* PlayListWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC75086C1D77CCC7000130BC /* PlayListWindowController.m */; };
+		FC7508711D781A3D000130BC /* PlayerVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC75086F1D781A3D000130BC /* PlayerVideoViewController.m */; };
+		FC7508721D781A3D000130BC /* PlayerVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7508701D781A3D000130BC /* PlayerVideoViewController.xib */; };
+		FC7508751D781C4B000130BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC7508731D781C4B000130BC /* Main.storyboard */; };
 		FCD575B51D7469C500B181C0 /* PlayListTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD575B41D7469C500B181C0 /* PlayListTitleView.m */; };
 		FCD575B81D747D0E00B181C0 /* PlayerTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD575B71D747D0E00B181C0 /* PlayerTitleView.m */; };
 		FCD575BA1D749E0900B181C0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD575B91D749E0900B181C0 /* QuartzCore.framework */; };
@@ -76,7 +77,6 @@
 		FC5A84DE1D7089C200267B7F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FC5A84E11D7089C200267B7F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FC5A84E61D7089C200267B7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FC5A84E91D7089C200267B7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC5A84EB1D7089C200267B7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC5A84F01D7089C200267B7F /* XHPlayerVideoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XHPlayerVideoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5A84F41D7089C200267B7F /* XHPlayerVideoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHPlayerVideoTests.m; sourceTree = "<group>"; };
@@ -84,8 +84,6 @@
 		FC5A84FB1D7089C200267B7F /* XHPlayerVideoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XHPlayerVideoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5A84FF1D7089C200267B7F /* XHPlayerVideoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHPlayerVideoUITests.m; sourceTree = "<group>"; };
 		FC5A85011D7089C200267B7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC5A85371D70AEC100267B7F /* PlayerVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerVideoViewController.h; sourceTree = "<group>"; };
-		FC5A85381D70AEC100267B7F /* PlayerVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerVideoViewController.m; sourceTree = "<group>"; };
 		FC5A85391D70AEC100267B7F /* PlayerVideoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerVideoWindowController.h; sourceTree = "<group>"; };
 		FC5A853A1D70AEC100267B7F /* PlayerVideoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerVideoWindowController.m; sourceTree = "<group>"; };
 		FC5A85491D70B38000267B7F /* Macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
@@ -97,6 +95,10 @@
 		FC7508691D77CBCD000130BC /* PlayListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListViewController.m; sourceTree = "<group>"; };
 		FC75086B1D77CCC7000130BC /* PlayListWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListWindowController.h; sourceTree = "<group>"; };
 		FC75086C1D77CCC7000130BC /* PlayListWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListWindowController.m; sourceTree = "<group>"; };
+		FC75086E1D781A3D000130BC /* PlayerVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerVideoViewController.h; sourceTree = "<group>"; };
+		FC75086F1D781A3D000130BC /* PlayerVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerVideoViewController.m; sourceTree = "<group>"; };
+		FC7508701D781A3D000130BC /* PlayerVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerVideoViewController.xib; sourceTree = "<group>"; };
+		FC7508741D781C4B000130BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FCD575B31D7469C500B181C0 /* PlayListTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListTitleView.h; sourceTree = "<group>"; };
 		FCD575B41D7469C500B181C0 /* PlayListTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListTitleView.m; sourceTree = "<group>"; };
 		FCD575B61D747D0E00B181C0 /* PlayerTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTitleView.h; sourceTree = "<group>"; };
@@ -198,8 +200,8 @@
 				FC5A85101D70A21F00267B7F /* Resources */,
 				FC5A84DD1D7089C200267B7F /* AppDelegate.h */,
 				FC5A84DE1D7089C200267B7F /* AppDelegate.m */,
+				FC7508731D781C4B000130BC /* Main.storyboard */,
 				FC5A84E61D7089C200267B7F /* Assets.xcassets */,
-				FC5A84E81D7089C200267B7F /* Main.storyboard */,
 				FC5A84EB1D7089C200267B7F /* Info.plist */,
 				FC5A84E01D7089C200267B7F /* Supporting Files */,
 			);
@@ -304,10 +306,11 @@
 		FC5A85361D70AEC100267B7F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FC5A85371D70AEC100267B7F /* PlayerVideoViewController.h */,
-				FC5A85381D70AEC100267B7F /* PlayerVideoViewController.m */,
 				FC5A85391D70AEC100267B7F /* PlayerVideoWindowController.h */,
 				FC5A853A1D70AEC100267B7F /* PlayerVideoWindowController.m */,
+				FC75086E1D781A3D000130BC /* PlayerVideoViewController.h */,
+				FC75086F1D781A3D000130BC /* PlayerVideoViewController.m */,
+				FC7508701D781A3D000130BC /* PlayerVideoViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -503,9 +506,10 @@
 			files = (
 				FC5A854B1D70B77400267B7F /* background.jpg in Resources */,
 				FCFE5BA91D731D81005DF1A4 /* defaultCover.png in Resources */,
+				FC7508721D781A3D000130BC /* PlayerVideoViewController.xib in Resources */,
+				FC7508751D781C4B000130BC /* Main.storyboard in Resources */,
 				FC7508661D77CA9C000130BC /* PlayListViewController.xib in Resources */,
 				FC5A84E71D7089C200267B7F /* Assets.xcassets in Resources */,
-				FC5A84EA1D7089C200267B7F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,10 +592,10 @@
 				FCD575B51D7469C500B181C0 /* PlayListTitleView.m in Sources */,
 				FCD575B81D747D0E00B181C0 /* PlayerTitleView.m in Sources */,
 				FC5A84DF1D7089C200267B7F /* AppDelegate.m in Sources */,
-				FC5A85451D70AEC100267B7F /* PlayerVideoViewController.m in Sources */,
 				FCDD9EA61D71934A0098C259 /* ControllerView.m in Sources */,
 				FCFE5BA71D72F9BD005DF1A4 /* PlayListWindow.m in Sources */,
 				FCFE5BA61D72F9BD005DF1A4 /* VideoListTableView.m in Sources */,
+				FC7508711D781A3D000130BC /* PlayerVideoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,10 +631,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FC5A84E81D7089C200267B7F /* Main.storyboard */ = {
+		FC7508731D781C4B000130BC /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				FC5A84E91D7089C200267B7F /* Base */,
+				FC7508741D781C4B000130BC /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -737,6 +741,7 @@
 				);
 				INFOPLIST_FILE = XHPlayerVideo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = xh.XHPlayerVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -760,6 +765,7 @@
 				);
 				INFOPLIST_FILE = XHPlayerVideo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = xh.XHPlayerVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

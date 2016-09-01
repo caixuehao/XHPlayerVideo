@@ -10,17 +10,19 @@
 #import "VideoModel.h"
 #import "Macro.h"
 #import "PlayerVideoWindowController.h"
-#import "PlayListWindowController.h"
+
 
 @interface AppDelegate ()
-@property(nonatomic)PlayListWindowController* playListWindowController;
+
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
-    
+//    PlayerVideoWindowController* playerVideo = [[PlayerVideoWindowController alloc] init];
+//    [playerVideo showWindow:self];
+//    [playerVideo.window makeKeyAndOrderFront:nil];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

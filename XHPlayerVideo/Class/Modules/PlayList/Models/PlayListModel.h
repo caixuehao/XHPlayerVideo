@@ -14,21 +14,29 @@ typedef NS_ENUM(NSInteger, PlayMode) {
     PlayMode随机播放,
     PlayMode列表循环
 };
+@protocol PlayListUpdateDataDelegate;
 
 @interface PlayListModel : NSObject
 
 +(instancetype)share;
+-(void)updateData;
+
+@property(nonatomic,weak)id<PlayListUpdateDataDelegate>delegate;
 
 @property(nonatomic,readonly)NSMutableArray<VideoModel*>* playList;
-@property(nonatomic,readonly)NSMutableArray<VideoModel*>* playHistory;
 
 
-@property(nonatomic,copy)VideoModel* currentVideo;
-@property(nonatomic,readonly)VideoModel* lastVideo;
-@property(nonatomic,readonly)VideoModel* nextVideo;
+@property(nonatomic)VideoModel* currentVideo;
+@property(nonatomic,weak,readonly)VideoModel* lastVideo;
+@property(nonatomic,weak,readonly)VideoModel* nextVideo;
 
 
 @property(nonatomic)PlayMode playmode;
--(void)saveData;
 
+@end
+
+//数据刷新时调用
+@protocol PlayListUpdateDataDelegate
+@optional
+-(void)playlistUpdateData:(PlayListModel*)model;
 @end

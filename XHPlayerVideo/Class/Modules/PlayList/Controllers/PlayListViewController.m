@@ -22,7 +22,7 @@
 
 
 
-@interface PlayListViewController ()
+@interface PlayListViewController ()<PlayListUpdateDataDelegate>
 
 @end
 
@@ -51,15 +51,32 @@
 }
 
 - (void)loadActions{
+    [[PlayListModel share] setDelegate:self];
+    
     playlistTitleView.hideBtn.target = self;
+    playlistTitleView.playModeBtn.target = self;
+    
     [playlistTitleView.hideBtn setAction:@selector(hide)];
+    [playlistTitleView.playModeBtn setAction:@selector(changePlayMode)];
 }
 
-
+#pragma PlayListUpdateDataDelegate
+-(void)playlistUpdateData:(PlayListModel *)model{
+    videoTableView.videos = model.playList;
+    [videoTableView reloadData];
+}
 
 #pragma Actions
 - (void)hide{
     [self.view.window close];
+}
+- (void)changePlayMode{
+    if ([PlayListModel share].playmode == 3) {
+        [PlayListModel share].playmode = 0;
+    }else{
+        ++([PlayListModel share].playmode);
+    }
+    [playlistTitleView updatePlayModeBtnState];
 }
 
 - (void)loadSubViews{
@@ -99,6 +116,7 @@
         make.bottom.left.right.equalTo(self.view);
     }];
 }
+
 
 
 

@@ -91,10 +91,10 @@
 }
 - (void)mediaThumbnailer:(VLCMediaThumbnailer *)mediaThumbnailer didFinishThumbnail:(CGImageRef)thumbnail{
     //获取成功
-    //保存图片
+    if(thumbnail == nil) return;
+    
     NSImage* image  = [[NSImage alloc] initWithCGImage:thumbnail size:NSMakeSize(VideoCellWidth, VideoCellHeight)];
     [self SaveThumbnail:image];
-    
     if(_delegate)[_delegate thumbnailLoaded:image];
     
 }
@@ -127,7 +127,7 @@
     [imageData writeToFile:[self getThumbnailShouldSavePath] atomically:YES];
  
     _thumbnailPath = [self getThumbnailShouldSavePath];
-    [[PlayListModel share] saveData];
+    [[PlayListModel share] updateData];
 }
 
 //随便算一下文件名字

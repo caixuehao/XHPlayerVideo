@@ -14,7 +14,7 @@
 static PlayListModel* playListModelShare;
 
 @interface PlayListModel ()
-
+@property(nonatomic,readonly)NSMutableArray<VideoModel*>* playHistory;//
 @end
 @implementation PlayListModel{
     
@@ -30,6 +30,7 @@ static PlayListModel* playListModelShare;
 -(instancetype)init{
     self = [super init];
     if (self) {
+        _playHistory = [[NSMutableArray alloc] init];
         [self loadData];
     }
     return self;
@@ -38,21 +39,60 @@ static PlayListModel* playListModelShare;
     NSLog(@"%s",__FUNCTION__);
 }
 
+//设置当前应该播放的视频
 -(void)setCurrentVideo:(VideoModel *)currentVideo{
     NSLog(@"%@",[self getPath]);
-    _currentVideo = currentVideo;
+    if(currentVideo)SendNotification(PlayVideoNotification, @{@"video":currentVideo});
     
-    [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
-        [self addVideoModel:currentVideo];
-    }];
+    if ([_currentVideo isEqualtoVideoModel:currentVideo]) {
+        if([_playList indexOfObject:currentVideo] == NSNotFound){
+            [self addVideoModel:currentVideo];
+        }
+        _currentVideo = currentVideo;
+        [self updateData];
+    }
+}
 
-    SendNotification(PlayVideoNotification, @{@"video":self.currentVideo});
-   
+-(void)setPlaymode:(PlayMode)playmode{
+    _playmode = playmode;
+    [self updateData];
 }
 
 
 
 
+
+
+
+
+
+
+
+//更新播放顺序
+-(void)updatePlayOrder{
+    int row = [_playList indexOfObject:_currentVideo];
+    switch (_playmode) {
+        case PlayMode列表循环:
+            
+            break;
+        case PlayMode单曲循环
+            :
+            break;
+        case PlayMode随机播放:
+            
+            break;
+        case PlayMode顺序播放:
+            
+            break;
+        default:
+            break;
+    }
+    
+}
+
+
+
+//增
 -(void)addVideoModel:(VideoModel*)videoModel{
     if(videoModel==nil)return;
     
@@ -65,7 +105,7 @@ static PlayListModel* playListModelShare;
     
     if (isRepeat == NO) {
         [_playList insertObject:videoModel atIndex:0];
-        [self saveData];
+        [self updateData];
     }
 }
 
@@ -104,15 +144,22 @@ static PlayListModel* playListModelShare;
 
 
 
--(void)saveData{
+-(void)updateData{
     //防止掉用过快（如滑动音量条时）
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(saveDataSelector) object:nil];
-        [self performSelector:@selector(saveDataSelector) withObject:nil afterDelay:0.5f];
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(updateDataSelector) object:nil];
+        [self performSelector:@selector(updateDataSelector) withObject:nil afterDelay:0.5f];
     }];
 }
 
--(void)saveDataSelector{
+-(void)updateDataSelector{
+    [self saveData];
+    if (_delegate) {
+        [_delegate playlistUpdateData:self];
+    }
+}
+
+-(void)saveData{
     [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
         NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
         NSMutableArray* playlist = [[NSMutableArray alloc] init];

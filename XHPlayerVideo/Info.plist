@@ -4,83 +4,85 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>3g2</string>
+				<string>3gp2</string>
+			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
 			<key>CFBundleTypeName</key>
 			<string>3g2</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.3gpp2</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>3g2</string>
-				<string>3gp2</string>
-			</array>
 		</dict>
 		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>3gp</string>
+				<string>3gpp</string>
+			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
 			<key>CFBundleTypeName</key>
 			<string>3gp</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.3gpp</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>3gp</string>
-				<string>3gpp</string>
-			</array>
 		</dict>
 		<dict>
-			<key>CFBundleTypeIconFile</key>
-			<string>audio.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>aac</string>
-			<key>LSHandlerRank</key>
-			<string>Alternate</string>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>aac</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>audio.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>aac</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>ac3</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>ac3</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>audio.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>ac3</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>aiff</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>audio.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>aiff</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
@@ -88,1077 +90,1075 @@
 				<string>public.aiff-audio</string>
 				<string>public.aifc-audio</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>aiff</string>
-			</array>
 		</dict>
 		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>aif</string>
+			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>audio.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
 			<key>CFBundleTypeName</key>
 			<string>aif</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.aiff-audio</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>aif</string>
-			</array>
 		</dict>
 		<dict>
-			<key>CFBundleTypeIconFile</key>
-			<string>audio.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>amr</string>
-			<key>LSHandlerRank</key>
-			<string>Alternate</string>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>amr</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>video.icns</string>
+			<string>audio.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>amr</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>amv</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>amv</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>amv</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>asf</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>video.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>asf</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.microsoft.advanced-​systems-format</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>asf</string>
-			</array>
 		</dict>
 		<dict>
-			<key>CFBundleTypeIconFile</key>
-			<string>audio.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>ape</string>
-			<key>LSHandlerRank</key>
-			<string>Alternate</string>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>ape</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>audio.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>ape</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>au</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>audio.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>au</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.ulaw-audio</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>au</string>
-			</array>
 		</dict>
 		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>avi</string>
+			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
 			<key>CFBundleTypeName</key>
 			<string>avi</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.avi</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>avi</string>
-			</array>
 		</dict>
 		<dict>
-			<key>CFBundleTypeIconFile</key>
-			<string>video.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>bik</string>
-			<key>LSHandlerRank</key>
-			<string>Alternate</string>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>bik</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>bik</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>csf</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>csf</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>csf</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>dat</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>dat</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>dat</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>divx</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>divx</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>audio.icns</string>
+			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>divx</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>dss</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>dss</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>audio.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>dss</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>dts</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>dts</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>video.icns</string>
+			<string>audio.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>dts</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>dv</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>dv</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>dv</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>evo</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>evo</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>evo</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>f4v</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>f4v</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>audio.icns</string>
+			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>f4v</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>flac</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>flac</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>video.icns</string>
+			<string>audio.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>flac</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>flic</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>flic</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>flic</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>flv</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>flv</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>flv</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>hlv</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>hlv</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>hlv</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>ivm</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>ivm</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>audio.icns</string>
+			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>ivm</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>m1a</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>m1a</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>video.icns</string>
+			<string>audio.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>m1a</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>m1v</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>m1v</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>audio.icns</string>
+			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>m1v</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>m2a</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>m2a</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>video.icns</string>
+			<string>audio.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>m2a</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>m2p</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>m2p</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>m2p</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>m2t</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>m2t</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>m2t</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>m2ts</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>m2ts</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>m2ts</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>m2v</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>m2v</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>m2v</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>mpv2</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>mpv2</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>mpv2</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>mp2v</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>mp2v</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>audio.icns</string>
+			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>mp2v</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>m4a</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>audio.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>m4a</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.mpeg-4-audio</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>m4a</string>
-			</array>
 		</dict>
 		<dict>
-			<key>CFBundleTypeIconFile</key>
-			<string>video.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>m4v</string>
-			<key>LSHandlerRank</key>
-			<string>Alternate</string>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>m4v</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>m4v</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>mkv</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>mkv</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>mkv</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>mod</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>mod</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>mod</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>mov</string>
+				<string>qt</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>video.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>mov</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.apple.quicktime-movie</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>mov</string>
-				<string>qt</string>
-			</array>
 		</dict>
 		<dict>
-			<key>CFBundleTypeIconFile</key>
-			<string>audio.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>mp2</string>
-			<key>LSHandlerRank</key>
-			<string>Alternate</string>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>mp2</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>audio.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>mp2</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>mp3</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>audio.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>mp3</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.mp3</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>mp3</string>
-			</array>
 		</dict>
 		<dict>
-			<key>CFBundleTypeIconFile</key>
-			<string>audio.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>mpa</string>
-			<key>LSHandlerRank</key>
-			<string>Alternate</string>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>mpa</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>video.icns</string>
+			<string>audio.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>mpa</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>mp4</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>video.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>mp4</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.mpeg-4</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>mp4</string>
-			</array>
 		</dict>
 		<dict>
-			<key>CFBundleTypeIconFile</key>
-			<string>video.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>mpeg4</string>
-			<key>LSHandlerRank</key>
-			<string>Alternate</string>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>mpeg4</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>mpeg4</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>mpe</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>mpe</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>mpe</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>mpeg</string>
+				<string>mpg</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>video.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>mpeg</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.mpeg</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>mpeg</string>
-				<string>mpg</string>
-			</array>
 		</dict>
 		<dict>
-			<key>CFBundleTypeIconFile</key>
-			<string>video.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>mts</string>
-			<key>LSHandlerRank</key>
-			<string>Alternate</string>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>mts</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>mts</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>nsv</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>nsv</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>nsv</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>ogm</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>ogm</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>audio.icns</string>
+			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>ogm</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>ogg</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>ogg</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>video.icns</string>
+			<string>audio.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>ogg</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>pmp</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>pmp</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>pmp</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>pva</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>pva</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>audio.icns</string>
+			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>pva</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>ra</string>
+				<string>ram</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>audio.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>ram</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.real.realaudio</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>ra</string>
-				<string>ram</string>
-			</array>
 		</dict>
 		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>rm</string>
+			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
 			<key>CFBundleTypeName</key>
 			<string>rm</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.real.realmedia</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>rm</string>
-			</array>
 		</dict>
 		<dict>
-			<key>CFBundleTypeIconFile</key>
-			<string>video.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>rmvb</string>
-			<key>LSHandlerRank</key>
-			<string>Alternate</string>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>rmvb</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>rmvb</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>smk</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>smk</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>smk</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>swf</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>swf</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>swf</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>ts</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>ts</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>audio.icns</string>
+			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>ts</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>tak</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>tak</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>audio.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>tak</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>tta</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>tta</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>video.icns</string>
+			<string>audio.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>tta</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>tod</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>tod</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>tod</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>vob</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>vob</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>vob</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>vp6</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>vp6</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>audio.icns</string>
+			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>vp6</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>wav</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>audio.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>wav</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.microsoft.waveform-​audio</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>wav</string>
-			</array>
 		</dict>
 		<dict>
-			<key>CFBundleTypeIconFile</key>
-			<string>video.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>webm</string>
-			<key>LSHandlerRank</key>
-			<string>Alternate</string>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>webm</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>audio.icns</string>
+			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>webm</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>wma</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>audio.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>wma</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.microsoft.windows-​media-wma</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>wma</string>
-			</array>
 		</dict>
 		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>wm</string>
+			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
 			<key>CFBundleTypeName</key>
 			<string>wm</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.microsoft.windows-​media-wm</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>wm</string>
-			</array>
 		</dict>
 		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>wmp</string>
+			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
 			<key>CFBundleTypeName</key>
 			<string>wmp</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.microsoft.windows-​media-wmp</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>wmp</string>
-			</array>
 		</dict>
 		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>wmv</string>
+			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
 			<key>CFBundleTypeName</key>
 			<string>wmv</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.microsoft.windows-​media-wmv</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>wmv</string>
-			</array>
 		</dict>
 		<dict>
-			<key>CFBundleTypeIconFile</key>
-			<string>video.icns</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>wv</string>
-			<key>LSHandlerRank</key>
-			<string>Alternate</string>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>wv</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>wv</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>xlmv</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>xlmv</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string></string>
+			<string>video.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>xlmv</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>srt</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>srt</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string></string>
+			<key>CFBundleTypeName</key>
+			<string>srt</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>ass</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>ass</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string></string>
+			<key>CFBundleTypeName</key>
+			<string>ass</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleTypeName</key>
-			<string>ssa</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>ssa</string>
 			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>smpl.icns</string>
+			<string></string>
+			<key>CFBundleTypeName</key>
+			<string>ssa</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>smpl</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>smpl.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>smpl</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.baofeng.stormplayer.smpl</string>
 			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>smpl</string>
-			</array>
 		</dict>
 	</array>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>

@@ -8,7 +8,7 @@
 #import <Masonry.h>
 
 #import "PlayerVideoWindowController.h"
-
+#import "PlayerVideoViewController.h"
 
 
 @interface PlayerVideoWindowController ()<NSWindowDelegate>
@@ -16,24 +16,36 @@
 @end
 static PlayerVideoWindowController* playerVideoWindowController;
 @implementation PlayerVideoWindowController{
-   
+    PlayerVideoViewController* playerVideoVC;
 }
 
 +(PlayerVideoWindowController*)getPlayerVideoWindowController{
     return playerVideoWindowController;
 }
 
+
+//-(instancetype)init{
+//    self = [super initWithWindow:[[NSWindow alloc] init]];
+//    if (self) {
+//        playerVideoVC = [[PlayerVideoViewController alloc] initWithNibName:@"PlayerVideoViewController" bundle:[NSBundle mainBundle]];
+//        [self.window setContentViewController:playerVideoVC];
+//    }
+//    return self;
+//}
+
 -(void)dealloc{
     NSLog(@"%s",__FUNCTION__);
     playerVideoWindowController = nil;
 }
--(void)awakeFromNib
-{
-    
-}
+
+
 - (void)windowDidLoad {
     [super windowDidLoad];
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    playerVideoVC = [[PlayerVideoViewController alloc] initWithNibName:@"PlayerVideoViewController" bundle:[NSBundle mainBundle]];
+    [self.window setContentViewController:playerVideoVC];
+    
+    
     playerVideoWindowController = self;
     [self loadSubViews];
     [self loadActions];
