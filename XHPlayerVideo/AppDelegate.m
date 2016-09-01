@@ -10,14 +10,17 @@
 #import "VideoModel.h"
 #import "Macro.h"
 #import "PlayerVideoWindowController.h"
-@interface AppDelegate ()
+#import "PlayListWindowController.h"
 
+@interface AppDelegate ()
+@property(nonatomic)PlayListWindowController* playListWindowController;
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
+    
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -32,6 +35,8 @@
 //        [NSApp activateIgnoringOtherApps:NO];
         [[PlayerVideoWindowController getPlayerVideoWindowController].window makeKeyAndOrderFront:self];
 //    }
+
+    
     return YES;
 }
 

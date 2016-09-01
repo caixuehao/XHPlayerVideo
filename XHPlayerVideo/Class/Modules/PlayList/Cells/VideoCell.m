@@ -9,7 +9,7 @@
 #import "VideoCell.h"
 #import "Macro.h"
 
-@interface VideoCell()
+@interface VideoCell()<LoadThumbnailDelegate>
 
 @end
 
@@ -47,6 +47,10 @@
     return self;
 }
 
+- (void)dealloc{
+//    NSLog(@"%s",__FUNCTION__);
+}
+
 - (id)copyWithZone:(NSZone *)zone
 {
     VideoCell *cellCopy = [[VideoCell alloc] init];
@@ -55,13 +59,6 @@
     return cellCopy;
 }
 
-- (void)setVideo:(VideoModel *)video{
-    _video = video;
-    titlelabel.stringValue = [video.path lastPathComponent];
-    if (video.thumbnailPath.length) {
-        coverImageView.image = [[NSImage alloc] initWithContentsOfFile:video.thumbnailPath];
-    }
-}
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     //画圆角
@@ -72,7 +69,27 @@
 //    NSGradient* gradient = [[NSGradient alloc] initWithStartingColor:CColor(0, 0, 0, 1) endingColor:CColor(0, 0, 0, 0.3)];
 //    NSBezierPath* bezierPath2 = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(0, 2, 300, 39) xRadius:3 yRadius:3];
 //    [gradient drawInBezierPath:bezierPath2 angle:90];
-    // Drawing code here.
+
+}
+
+
+
+
+
+- (void)setVideo:(VideoModel *)video{
+    _video = video;
+    titlelabel.stringValue = [video.path lastPathComponent];
+    if (video.thumbnailPath.length) {
+        coverImageView.image = [[NSImage alloc] initWithContentsOfFile:video.thumbnailPath];
+    }else{
+        [self.video loadThumnbnail:self];
+    }
+}
+
+#pragma LoadThumbnailDelegate
+
+-(void)thumbnailLoaded:(NSImage *)thumbnail{
+    if (thumbnail) coverImageView.image = thumbnail;
 }
 
 @end

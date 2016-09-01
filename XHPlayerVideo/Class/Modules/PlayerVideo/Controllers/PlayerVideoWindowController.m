@@ -37,8 +37,6 @@ static PlayerVideoWindowController* playerVideoWindowController;
     playerVideoWindowController = self;
     [self loadSubViews];
     [self loadActions];
-   
-    
 }
 
 -(void)loadActions{

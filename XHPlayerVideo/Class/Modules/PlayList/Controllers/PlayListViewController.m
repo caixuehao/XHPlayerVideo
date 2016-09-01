@@ -7,12 +7,12 @@
 //
 
 #import "PlayListViewController.h"
-#import "PlayerVideoWindowController.h"
+//#import "PlayerVideoWindowController.h"
 #import "PlayListWindow.h"
 
 #import "Macro.h"
 #import <Masonry.h>
-#import <VLCKit/VLCKit.h>
+
 #import <CommonCrypto/CommonDigest.h>
 
 #import "PlayListTitleView.h"
@@ -22,7 +22,7 @@
 
 
 
-@interface PlayListViewController ()<VLCMediaThumbnailerDelegate>
+@interface PlayListViewController ()
 
 @end
 
@@ -31,27 +31,23 @@
     VideoListTableView* videoTableView;
     NSMutableArray<VideoModel *>* VideoDataArr;
     
-    NSInteger currentQueryRow;
-    
 }
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-
+        
     }
     return self;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    currentQueryRow = -1;
     
-     VideoDataArr = [[PlayListModel share] playList];
+    VideoDataArr = [[PlayListModel share] playList];
     
     [self loadSubViews];
     [self loadActions];
-    [self loadThumbnail];
-
+    
 }
 
 - (void)loadActions{
@@ -59,34 +55,21 @@
     [playlistTitleView.hideBtn setAction:@selector(hide)];
 }
 
-//加载封面图片
--(void)loadThumbnail{
-    if(++currentQueryRow == VideoDataArr.count) return;
-    
-    if (VideoDataArr[currentQueryRow].thumbnailPath.length) {
-        [self loadThumbnail];
-    }else{
-        VLCMediaThumbnailer * mt = [VLCMediaThumbnailer thumbnailerWithMedia:VideoDataArr[currentQueryRow].media andDelegate:self];
-        mt.thumbnailHeight = VideoCellHeight;
-        mt.thumbnailWidth = VideoCellWidth;
-        mt.snapshotPosition = 0.2;//视频帧位置
-        [mt fetchThumbnail];
-    }
-}
+
 
 #pragma Actions
 - (void)hide{
-    [PlayListWindow display];
+    [self.view.window close];
 }
 
 - (void)loadSubViews{
     
     [self.view setWantsLayer:YES];
     [self.view.layer setBackgroundColor:CColor(200, 10, 150, 1).CGColor];
-    CGRect playerVideoFrame = [PlayerVideoWindowController getPlayerVideoWindowController].window.frame;
-    self.view.frame = NSMakeRect(0, 0,VideoCellWidth+20, playerVideoFrame.size.height);
+//    CGRect playerVideoFrame = [PlayerVideoWindowController getPlayerVideoWindowController].window.frame;
+//    self.view.frame = NSMakeRect(0, 0,VideoCellWidth+20, playerVideoFrame.size.height);
     
-   
+    
     //组成头部
     playlistTitleView = ({
         PlayListTitleView* view = [[PlayListTitleView alloc] init];
@@ -117,23 +100,6 @@
     }];
 }
 
-#pragma VLCMediaThumbnailerDelegate
-- (void)mediaThumbnailerDidTimeOut:(VLCMediaThumbnailer *)mediaThumbnailer{
-    //获取失败
-    [self loadThumbnail];
-}
-- (void)mediaThumbnailer:(VLCMediaThumbnailer *)mediaThumbnailer didFinishThumbnail:(CGImageRef)thumbnail{
-    //获取成功
-    
-    //保存图片
-    NSImage* image  = [[NSImage alloc] initWithCGImage:thumbnail size:NSMakeSize(VideoCellWidth, VideoCellHeight)];
-    [VideoDataArr[currentQueryRow] SaveThumbnail:image];
-    
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [videoTableView reloadData];
-        [self loadThumbnail];
-    }];
-    
-}
+
 
 @end

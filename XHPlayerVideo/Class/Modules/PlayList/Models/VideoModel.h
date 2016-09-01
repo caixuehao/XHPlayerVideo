@@ -9,11 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <VLCKit/VLCKit.h>
 
+@protocol LoadThumbnailDelegate;
+
+
 @interface VideoModel : NSObject
 
 @property(nonatomic,readonly)NSString* path;
 @property(nonatomic,readonly)VLCMedia* media;
 @property(nonatomic,readonly)NSString* thumbnailPath;
+
+@property(nonatomic,weak,readonly)id<LoadThumbnailDelegate> delegate;
 
 
 //用本地读取的数据创建对象
@@ -31,6 +36,15 @@
 //判断是否相等
 -(BOOL)isEqualtoVideoModel:(VideoModel*)aVideoModel;
 
-//存放略缩图 随便根据路径md5算一下
--(void)SaveThumbnail:(NSImage*)thumbnail;
+
+//加载缩略图
+-(void)loadThumnbnail:(id<LoadThumbnailDelegate>)delegate;
+
+@end
+
+@protocol LoadThumbnailDelegate
+@required
+
+-(void)thumbnailLoaded:(NSImage*)thumbnail;
+
 @end

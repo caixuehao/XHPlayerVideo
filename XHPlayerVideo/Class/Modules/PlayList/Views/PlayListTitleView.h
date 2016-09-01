@@ -14,4 +14,6 @@
 
 @property(nonatomic)NSButton* playModeBtn;
 
+-(void)updatePlayModeBtnState;
+
 @end

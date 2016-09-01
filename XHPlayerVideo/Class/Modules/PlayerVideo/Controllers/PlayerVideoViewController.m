@@ -15,7 +15,7 @@
 
 #import "PlayerVideoWindowController.h"
 #import "ControllerView.h"
-#import "PlayListWindow.h"
+#import "PlayListWindowController.h"
 #import "PlayerTitleView.h"
 
 @interface PlayerVideoViewController ()<VLCMediaPlayerDelegate>
@@ -39,6 +39,8 @@
  
     NSTrackingArea *trackingArea;
     NSInteger unresponsiveTime;
+    
+    PlayListWindowController* playListWindowController;
 }
 
 - (void)viewDidLoad {
@@ -49,17 +51,19 @@
     [self loadSubViews];
     [self loadActions];
     
-    //防止启动太卡
-    [self performSelector:@selector(loadPlayer) withObject:nil afterDelay:5.1f];
+    //加载播放列表窗口
+    playListWindowController = [[PlayListWindowController alloc] init];
+   
+    //加载播放器防止启动太卡
+    [self performSelector:@selector(loadPlayer) withObject:nil afterDelay:0.5f];
     
 }
 
 - (void)viewDidAppear{
     [super viewDidAppear];
-    //加载播放列表 窗口
-     [PlayListWindow display];
-
+    [playListWindowController displayWindow:self.view.window.frame];
 }
+
 #pragma loadActions
 //加载播放器
 -(void)loadPlayer{
@@ -203,8 +207,13 @@
 //显示（隐藏播放列表）
 - (void)displayPlayList{
     unresponsiveTime = 4;
-    [PlayListWindow display];
+   [playListWindowController displaySwitch:self.view.window.frame];
 }
+
+
+
+
+
 #pragma ControllerBottonActions
 
 - (void)pause{
@@ -227,9 +236,6 @@
 }
 - (void)nextVideo:(id)sender{
     unresponsiveTime = 4;
-//    [player stop];
-//    NSLog(@"%lu",player.media.subitems.count);
-//    NSLog(@"%p",_media);
 }
 - (void)soundSwitch:(id)sender {
     unresponsiveTime = 4;
@@ -239,6 +245,11 @@
         player.audio.volume = controllerView.volumeSlider.intValue;
     }
 }
+
+
+
+
+
 
 #pragma mouseActions
 //鼠标进入监视区
@@ -272,8 +283,11 @@
     unresponsiveTime = 4;
 }
 
-#pragma SliderActions
 
+
+
+
+#pragma SliderActions
 - (void)videoSliderAction:(id)sender {
     //不得不说想出这个方法的人真机智。原作者http://www.cnblogs.com/walkingZero/p/3920509.html
     if(controllerView.videoSlider.continuous){
@@ -288,6 +302,10 @@
 - (void)volumeSliderAction:(id)sender {
      player.audio.volume = controllerView.volumeSlider.intValue;
 }
+
+
+
+
 
 
 
@@ -331,6 +349,9 @@
 - (void)mediaPlayerTitleChanged:(NSNotification *)aNotification{
     NSLog(@"-------------");
 }
+
+
+
 
 
 

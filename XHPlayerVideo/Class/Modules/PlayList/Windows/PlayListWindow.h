@@ -12,11 +12,4 @@
 
 @property(nonatomic)BOOL isDisplay;
 
-+(instancetype)share;
-
-//显示 或者 关闭取相反的状态
-+(void)display;
-
-//+(void)hide;
-
 @end

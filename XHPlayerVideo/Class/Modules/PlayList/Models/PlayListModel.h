@@ -20,19 +20,15 @@ typedef NS_ENUM(NSInteger, PlayMode) {
 +(instancetype)share;
 
 @property(nonatomic,readonly)NSMutableArray<VideoModel*>* playList;
-
 @property(nonatomic,readonly)NSMutableArray<VideoModel*>* playHistory;
 
 
 @property(nonatomic,copy)VideoModel* currentVideo;
-
 @property(nonatomic,readonly)VideoModel* lastVideo;
-
 @property(nonatomic,readonly)VideoModel* nextVideo;
 
 
 @property(nonatomic)PlayMode playmode;
-
 -(void)saveData;
 
 @end

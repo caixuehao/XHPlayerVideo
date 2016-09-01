@@ -9,33 +9,11 @@
 
 #import "PlayListWindow.h"
 #import "PlayListViewController.h"
-#import "PlayerVideoWindowController.h"
+//#import "PlayerVideoWindowController.h"
 
 
 static PlayListWindow* sharePlayListWindow;
 @implementation PlayListWindow
-
-+(instancetype)share{
-    if (sharePlayListWindow == nil) {
-        sharePlayListWindow= [[PlayListWindow alloc] init];
-    }
-    return sharePlayListWindow;
-}
-+(void)display{
-    if ([PlayListWindow share].isDisplay){
-        [[PlayListWindow share] close];
-         [PlayListWindow share].isDisplay = NO;
-    }else {
-        [[PlayListWindow share] makeKeyAndOrderFront:nil];
-        [PlayListWindow share].isDisplay = YES;
-        //控制是否跟随
-        // [[PlayerVideoWindowController getPlayerVideoWindowController].window addChildWindow:sharePlayListWindow ordered:NSWindowAbove];
-        
-        CGRect playerVideoFrame = [PlayerVideoWindowController getPlayerVideoWindowController].window.frame;
-        [[PlayListWindow share] setFrameOrigin:NSMakePoint(playerVideoFrame.origin.x+playerVideoFrame.size.width, playerVideoFrame.origin.y)];
-    }
-}
-
 
 -(void)dealloc{
     NSLog(@"%s",__FUNCTION__);
@@ -50,7 +28,7 @@ static PlayListWindow* sharePlayListWindow;
         self.titlebarAppearsTransparent = YES; // 标题栏透明
         [self setStyleMask:NSResizableWindowMask|NSTitledWindowMask|NSFullSizeContentViewWindowMask];
         [self setMovableByWindowBackground:YES];
-        
+       
        
         [[self standardWindowButton:NSWindowZoomButton] setHidden:YES];
         [[self standardWindowButton:NSWindowCloseButton] setHidden:YES];
@@ -61,6 +39,7 @@ static PlayListWindow* sharePlayListWindow;
         
         [self setMaxSize:NSMakeSize(VideoCellWidth+20, SSize.height)];
         [self setMinSize:NSMakeSize(VideoCellWidth+20, VideoCellHeight+40)];
+        
     }
     return self;
 }

@@ -18,14 +18,15 @@
 		FC5A85461D70AEC100267B7F /* PlayerVideoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5A853A1D70AEC100267B7F /* PlayerVideoWindowController.m */; };
 		FC5A854B1D70B77400267B7F /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC5A854A1D70B77400267B7F /* background.jpg */; };
 		FC5E94001D770554008F3872 /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5E93FF1D770554008F3872 /* VideoCell.m */; };
+		FC7508661D77CA9C000130BC /* PlayListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7508651D77CA9C000130BC /* PlayListViewController.xib */; };
+		FC75086A1D77CBCD000130BC /* PlayListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7508691D77CBCD000130BC /* PlayListViewController.m */; };
+		FC75086D1D77CCC7000130BC /* PlayListWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC75086C1D77CCC7000130BC /* PlayListWindowController.m */; };
 		FCD575B51D7469C500B181C0 /* PlayListTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD575B41D7469C500B181C0 /* PlayListTitleView.m */; };
 		FCD575B81D747D0E00B181C0 /* PlayerTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD575B71D747D0E00B181C0 /* PlayerTitleView.m */; };
 		FCD575BA1D749E0900B181C0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD575B91D749E0900B181C0 /* QuartzCore.framework */; };
 		FCDD9EA61D71934A0098C259 /* ControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDD9EA51D71934A0098C259 /* ControllerView.m */; };
 		FCDD9EA91D719C220098C259 /* VLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDD9EA71D719C140098C259 /* VLCKit.framework */; };
 		FCDD9EAA1D719C220098C259 /* VLCKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCDD9EA71D719C140098C259 /* VLCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FCFE5BA31D72F9BD005DF1A4 /* PlayListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFE5B971D72F9BD005DF1A4 /* PlayListViewController.m */; };
-		FCFE5BA41D72F9BD005DF1A4 /* PlayListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFE5B981D72F9BD005DF1A4 /* PlayListViewController.xib */; };
 		FCFE5BA51D72F9BD005DF1A4 /* VideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFE5B9B1D72F9BD005DF1A4 /* VideoModel.m */; };
 		FCFE5BA61D72F9BD005DF1A4 /* VideoListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFE5B9E1D72F9BD005DF1A4 /* VideoListTableView.m */; };
 		FCFE5BA71D72F9BD005DF1A4 /* PlayListWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFE5BA11D72F9BD005DF1A4 /* PlayListWindow.m */; };
@@ -91,6 +92,11 @@
 		FC5A854A1D70B77400267B7F /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
 		FC5E93FE1D770554008F3872 /* VideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCell.h; sourceTree = "<group>"; };
 		FC5E93FF1D770554008F3872 /* VideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCell.m; sourceTree = "<group>"; };
+		FC7508651D77CA9C000130BC /* PlayListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayListViewController.xib; sourceTree = "<group>"; };
+		FC7508681D77CBCD000130BC /* PlayListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListViewController.h; sourceTree = "<group>"; };
+		FC7508691D77CBCD000130BC /* PlayListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListViewController.m; sourceTree = "<group>"; };
+		FC75086B1D77CCC7000130BC /* PlayListWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListWindowController.h; sourceTree = "<group>"; };
+		FC75086C1D77CCC7000130BC /* PlayListWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListWindowController.m; sourceTree = "<group>"; };
 		FCD575B31D7469C500B181C0 /* PlayListTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListTitleView.h; sourceTree = "<group>"; };
 		FCD575B41D7469C500B181C0 /* PlayListTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListTitleView.m; sourceTree = "<group>"; };
 		FCD575B61D747D0E00B181C0 /* PlayerTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTitleView.h; sourceTree = "<group>"; };
@@ -99,9 +105,6 @@
 		FCDD9EA41D71934A0098C259 /* ControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControllerView.h; sourceTree = "<group>"; };
 		FCDD9EA51D71934A0098C259 /* ControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControllerView.m; sourceTree = "<group>"; };
 		FCDD9EA71D719C140098C259 /* VLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VLCKit.framework; sourceTree = "<group>"; };
-		FCFE5B961D72F9BD005DF1A4 /* PlayListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListViewController.h; sourceTree = "<group>"; };
-		FCFE5B971D72F9BD005DF1A4 /* PlayListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListViewController.m; sourceTree = "<group>"; };
-		FCFE5B981D72F9BD005DF1A4 /* PlayListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayListViewController.xib; sourceTree = "<group>"; };
 		FCFE5B9A1D72F9BD005DF1A4 /* VideoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoModel.h; sourceTree = "<group>"; };
 		FCFE5B9B1D72F9BD005DF1A4 /* VideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoModel.m; sourceTree = "<group>"; };
 		FCFE5B9D1D72F9BD005DF1A4 /* VideoListTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoListTableView.h; sourceTree = "<group>"; };
@@ -351,9 +354,11 @@
 		FCFE5B951D72F9BD005DF1A4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FCFE5B961D72F9BD005DF1A4 /* PlayListViewController.h */,
-				FCFE5B971D72F9BD005DF1A4 /* PlayListViewController.m */,
-				FCFE5B981D72F9BD005DF1A4 /* PlayListViewController.xib */,
+				FC7508651D77CA9C000130BC /* PlayListViewController.xib */,
+				FC7508681D77CBCD000130BC /* PlayListViewController.h */,
+				FC7508691D77CBCD000130BC /* PlayListViewController.m */,
+				FC75086B1D77CCC7000130BC /* PlayListWindowController.h */,
+				FC75086C1D77CCC7000130BC /* PlayListWindowController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -496,9 +501,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCFE5BA41D72F9BD005DF1A4 /* PlayListViewController.xib in Resources */,
 				FC5A854B1D70B77400267B7F /* background.jpg in Resources */,
 				FCFE5BA91D731D81005DF1A4 /* defaultCover.png in Resources */,
+				FC7508661D77CA9C000130BC /* PlayListViewController.xib in Resources */,
 				FC5A84E71D7089C200267B7F /* Assets.xcassets in Resources */,
 				FC5A84EA1D7089C200267B7F /* Main.storyboard in Resources */,
 			);
@@ -574,10 +579,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC5E94001D770554008F3872 /* VideoCell.m in Sources */,
+				FC75086D1D77CCC7000130BC /* PlayListWindowController.m in Sources */,
 				FCFE5BB11D7336C4005DF1A4 /* PlayListModel.m in Sources */,
 				FC5A85461D70AEC100267B7F /* PlayerVideoWindowController.m in Sources */,
 				FC5A84E21D7089C200267B7F /* main.m in Sources */,
 				FCFE5BA51D72F9BD005DF1A4 /* VideoModel.m in Sources */,
+				FC75086A1D77CBCD000130BC /* PlayListViewController.m in Sources */,
 				FCD575B51D7469C500B181C0 /* PlayListTitleView.m in Sources */,
 				FCD575B81D747D0E00B181C0 /* PlayerTitleView.m in Sources */,
 				FC5A84DF1D7089C200267B7F /* AppDelegate.m in Sources */,
@@ -585,7 +592,6 @@
 				FCDD9EA61D71934A0098C259 /* ControllerView.m in Sources */,
 				FCFE5BA71D72F9BD005DF1A4 /* PlayListWindow.m in Sources */,
 				FCFE5BA61D72F9BD005DF1A4 /* VideoListTableView.m in Sources */,
-				FCFE5BA31D72F9BD005DF1A4 /* PlayListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

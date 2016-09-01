@@ -9,9 +9,13 @@
 #import "VideoModel.h"
 #import "PlayListModel.h"
 
-#import <CommonCrypto/CommonDigest.h>
+#import "Macro.h"
 
-@interface VideoModel()
+#import <CommonCrypto/CommonDigest.h>
+#import <VLCKit/VLCKit.h>
+
+
+@interface VideoModel()<VLCMediaThumbnailerDelegate>
 
 @end
 
@@ -43,6 +47,7 @@
     }
     return self;
 }
+
 //把所有数据做成一个字典方便保存
 -(NSDictionary*)getData{
     
@@ -51,7 +56,19 @@
 }
 
 
-
+//加载缩略图
+-(void)loadThumnbnail:(id<LoadThumbnailDelegate>)delegate{
+  
+    //确保只进来一次
+    if (_delegate == nil) {
+        VLCMediaThumbnailer * mt = [VLCMediaThumbnailer thumbnailerWithMedia:self.media andDelegate:self];
+        mt.thumbnailHeight = VideoCellHeight;
+        mt.thumbnailWidth = VideoCellWidth;
+        mt.snapshotPosition = 0.2;//视频帧位置
+        [mt fetchThumbnail];
+    }
+    _delegate = delegate;
+}
 
 //播放
 -(void)play{
@@ -62,6 +79,39 @@
 -(BOOL)isEqualtoVideoModel:(VideoModel*)aVideoModel{
     return [_path isEqualToString:aVideoModel.path];
 }
+
+
+
+
+
+#pragma VLCMediaThumbnailerDelegate
+- (void)mediaThumbnailerDidTimeOut:(VLCMediaThumbnailer *)mediaThumbnailer{
+    //获取失败
+    if(_delegate)[_delegate thumbnailLoaded:nil];
+}
+- (void)mediaThumbnailer:(VLCMediaThumbnailer *)mediaThumbnailer didFinishThumbnail:(CGImageRef)thumbnail{
+    //获取成功
+    //保存图片
+    NSImage* image  = [[NSImage alloc] initWithCGImage:thumbnail size:NSMakeSize(VideoCellWidth, VideoCellHeight)];
+    [self SaveThumbnail:image];
+    
+    if(_delegate)[_delegate thumbnailLoaded:image];
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //保存图片

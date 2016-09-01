@@ -46,10 +46,8 @@ static PlayListModel* playListModelShare;
         [self addVideoModel:currentVideo];
     }];
 
-    
-    NSDictionary* dic = @{@"video":self.currentVideo};
-    NSNotification *notification =[NSNotification notificationWithName:PlayVideoNotification object:nil userInfo:dic];//创建通知
-    [[NSNotificationCenter defaultCenter] postNotification:notification];//通过通知中心发送通知
+    SendNotification(PlayVideoNotification, @{@"video":self.currentVideo});
+   
 }
 
 
@@ -115,14 +113,14 @@ static PlayListModel* playListModelShare;
 }
 
 -(void)saveDataSelector{
-    
-    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
-    NSMutableArray* playlist = [[NSMutableArray alloc] init];
-    for (int i = 0; i < _playList.count; i++) {
-        [playlist addObject:[_playList[i] getData]];
-    }
-    [data setObject:playlist forKey:@"playList"];
-    [data writeToFile:[self getPath] atomically:YES];
-    
+    [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
+        NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+        NSMutableArray* playlist = [[NSMutableArray alloc] init];
+        for (int i = 0; i < _playList.count; i++) {
+            [playlist addObject:[_playList[i] getData]];
+        }
+        [data setObject:playlist forKey:@"playList"];
+        [data writeToFile:[self getPath] atomically:YES];
+    }];
 }
 @end
