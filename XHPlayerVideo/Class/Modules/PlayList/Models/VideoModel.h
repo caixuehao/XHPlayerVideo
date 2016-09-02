@@ -35,7 +35,8 @@
 
 //判断是否相等
 -(BOOL)isEqualtoVideoModel:(VideoModel*)aVideoModel;
-
+//判断是否是正在正在播放的视频
+-(BOOL)isCurrentVideo;
 
 //加载缩略图
 -(void)loadThumnbnail:(id<LoadThumbnailDelegate>)delegate;

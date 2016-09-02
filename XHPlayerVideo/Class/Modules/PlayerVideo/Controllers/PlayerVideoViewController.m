@@ -55,6 +55,9 @@
     [self loadSubViews];
     [self loadActions];
     
+    controllerView.volumeSlider.intValue = (short)[[NSUserDefaults standardUserDefaults] integerForKey:@"videoVolune"];
+    if (controllerView.volumeSlider.intValue == 0)  controllerView.volumeSlider.intValue = 50;
+    
     //加载播放列表窗口
     playListWindowController = [[PlayListWindowController alloc] init];
    
@@ -294,6 +297,7 @@
         player.audio.volume = 0;
     }else{
         player.audio.volume = controllerView.volumeSlider.intValue;
+        [[NSUserDefaults standardUserDefaults] setObject:@(player.audio.volume)forKey:@"videoVolune"];
     }
 }
 
@@ -517,10 +521,11 @@
     unresponsiveTime = 4 ;
     
     if (controllerView.alphaValue == 1) return;
-    [playerTitleView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.equalTo(self.view);
-        make.height.mas_equalTo(20);
-    }];
+//    [playerTitleView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.left.top.right.equalTo(self.view);
+//        make.height.mas_equalTo(20);
+//    }];
+    playerTitleView.alphaValue = 1;
     controllerView.alphaValue = 1;
     [NSCursor unhide];
 }
@@ -529,10 +534,11 @@
 - (void)onlyDisplayVideoView{
      if (controllerView.alphaValue == 0) return;
     
-    [playerTitleView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.equalTo(self.view);
-        make.height.mas_equalTo(0);
-    }];
+//    [playerTitleView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.left.top.right.equalTo(self.view);
+//        make.height.mas_equalTo(0);
+//    }];
+    playerTitleView.alphaValue = 0;
     controllerView.alphaValue = 0;
     
     //判断是否是全屏（看看是否隐藏鼠标）

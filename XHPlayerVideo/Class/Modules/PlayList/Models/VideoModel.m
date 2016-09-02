@@ -79,7 +79,10 @@
 -(BOOL)isEqualtoVideoModel:(VideoModel*)aVideoModel{
     return [_path isEqualToString:aVideoModel.path];
 }
-
+//判断是否是正在正在播放的视频
+-(BOOL)isCurrentVideo{
+    return [_path isEqualToString:[PlayListModel share].currentVideo.path];
+}
 
 
 
