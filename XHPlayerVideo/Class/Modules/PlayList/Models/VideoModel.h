@@ -18,7 +18,7 @@
 @property(nonatomic,readonly)VLCMedia* media;
 @property(nonatomic,readonly)NSString* thumbnailPath;
 
-@property(nonatomic,weak,readonly)id<LoadThumbnailDelegate> delegate;
+@property(atomic,weak,readonly)id<LoadThumbnailDelegate> delegate;
 
 
 //用本地读取的数据创建对象

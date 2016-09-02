@@ -35,14 +35,15 @@
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
+        playListModel = [PlayListModel share];
+         [playListModel setDelegate:self];
     }
     return self;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    playListModel = [PlayListModel share];
+ 
     ;
     
     [self loadSubViews];
@@ -51,7 +52,7 @@
 }
 
 - (void)loadActions{
-    [playListModel setDelegate:self];
+   
     
     playlistTitleView.hideBtn.target = self;
     playlistTitleView.playModeBtn.target = self;

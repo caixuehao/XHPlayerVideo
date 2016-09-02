@@ -19,16 +19,18 @@ typedef NS_ENUM(NSInteger, PlayMode) {
 @interface PlayListModel : NSObject
 
 +(instancetype)share;
+//当改变了需要保存的数据时调用（额，因为老是崩溃我就不退出时保存了。）
 -(void)updateData;
+
 
 @property(nonatomic,weak)id<PlayListUpdateDataDelegate>delegate;
 
 @property(nonatomic,readonly)NSMutableArray<VideoModel*>* playList;
 
 
-@property(nonatomic)VideoModel* currentVideo;
+@property(nonatomic)VideoModel* currentVideo;//正在播放的视频
 
-@property(nonatomic)PlayMode playMode;
+@property(nonatomic)PlayMode playMode;//播放模式
 
 @end
 

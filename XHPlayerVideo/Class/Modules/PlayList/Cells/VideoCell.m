@@ -91,6 +91,7 @@
     if (video.thumbnailPath.length) {
         coverImageView.image = [[NSImage alloc] initWithContentsOfFile:video.thumbnailPath];
     }else{
+         NSLog(@"开始加载封面");
         [self.video loadThumnbnail:self];
     }
   
@@ -99,6 +100,7 @@
 #pragma LoadThumbnailDelegate
 
 -(void)thumbnailLoaded:(NSImage *)thumbnail{
+    NSLog(@"加载成功");
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
          if (thumbnail) coverImageView.image = thumbnail;
     }];

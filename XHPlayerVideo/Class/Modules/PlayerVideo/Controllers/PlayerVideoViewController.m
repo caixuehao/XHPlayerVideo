@@ -375,9 +375,10 @@
 - (void)mediaPlayerStateChanged:(NSNotification *)aNotification{
     NSLog(@"视频状态:%lu hasVideoOut：%@  willPlay:%@ position:%f seekable:%@ canPause:%@" ,player.state,player.hasVideoOut?@"YES":@"NO",player.willPlay?@"YES":@"NO",player.position,player.seekable?@"YES":@"NO",player.canPause?@"YES":@"NO");//这个是player
     NSLog(@"%d  %d",player.media.length.intValue,player.remainingTime.intValue);
+    NSLog(@"audio:%p media:%p media.mediaType:%lu length:%d state:%lu",player.audio,player.media,player.media.mediaType,player.media.length.intValue,player.media.state);
     if(player.state == VLCMediaPlayerStatePaused){
         //剩余时间不靠谱(这样判断也不知道有没有问题)
-        if (player.position == 1.0||controllerView.videoSlider.intValue/controllerView.videoSlider.maxValue == 1.0||player.remainingTime.intValue>-200) {
+        if (player.position == 1.0||controllerView.videoSlider.intValue/controllerView.videoSlider.maxValue == 1.0||player.remainingTime.intValue>-1000) {
             NSLog(@"播放结束");
             SendNotification(PLayEndNotification, nil);
         }
@@ -391,10 +392,11 @@
 - (void)mediaPlayerTimeChanged:(NSNotification *)aNotification{
  //intValue单位毫米
     if (isFirstPlay == YES) {
-//    if (player.time.intValue == 0) {
-         NSLog(@"播放开始");
-         [self playStartUpdateUI];
-        isFirstPlay = NO;
+        if (player.videoSize.height&&player.videoSize.width) {//判断一下有时候会传两个空值
+            NSLog(@"播放开始");
+            [self playStartUpdateUI];
+            isFirstPlay = NO;
+        }
     }
     if (controllerView.videoSlider.continuous) {
         controllerView.videoSlider.maxValue = player.time.intValue-player.remainingTime.intValue;
@@ -551,6 +553,8 @@
 //视频加载成功时根据视频尺寸 更新约束布局比例
 -(void)playStartUpdateUI{
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        NSLog(@"当前视频宽高:%f,%f",player.videoSize.height,player.videoSize.width);
+        
         [videoPlayView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self.view);
             make.height.width.equalTo(self.view).priorityLow();
@@ -560,6 +564,7 @@
             make.bottom.equalTo(videoPlayViewBottonView.mas_top);
             make.width.equalTo(videoPlayView.mas_height).multipliedBy(player.videoSize.width/player.videoSize.height);
         }];
+
     }];
 }
 //改变视频时刷新UI

@@ -14,6 +14,10 @@
 #import <CommonCrypto/CommonDigest.h>
 #import <VLCKit/VLCKit.h>
 
+//获取缩略图太卡了只能这样了
+static NSMutableArray<VideoModel*> *currentThumbnailLoadingArr;
+static int currentThumbnailLoadingCount = 0;
+
 
 @interface VideoModel()<VLCMediaThumbnailerDelegate>
 
@@ -58,16 +62,26 @@
 
 //加载缩略图
 -(void)loadThumnbnail:(id<LoadThumbnailDelegate>)delegate{
-
-    //确保只进来一次
+    if (currentThumbnailLoadingArr == nil) currentThumbnailLoadingArr = [[NSMutableArray alloc] init];
+    if([currentThumbnailLoadingArr indexOfObject:self] == NSNotFound)[currentThumbnailLoadingArr addObject:self];
+    
+    //一个对象只加载一次
     if (_delegate == nil) {
-        VLCMediaThumbnailer * mt = [VLCMediaThumbnailer thumbnailerWithMedia:self.media andDelegate:self];
-        mt.thumbnailHeight = VideoCellHeight;
-        mt.thumbnailWidth = VideoCellWidth;
-        mt.snapshotPosition = 0.2;//视频帧位置
-        [mt fetchThumbnail];
+        if (currentThumbnailLoadingCount == 0) {
+            currentThumbnailLoadingCount = 1;
+            [self performSelector:@selector(loadThumnbnail) withObject:self afterDelay:0.5];
+        }
     }
     _delegate = delegate;
+}
+
+-(void)loadThumnbnail{
+    //这里注意，必须重新新建VLCMedia一个放进去。要不VLCMediaThumbnailer会把它释放掉，如果当前的视频正在播放肯定GG了。
+    VLCMediaThumbnailer * mt = [VLCMediaThumbnailer thumbnailerWithMedia:[VLCMedia mediaWithPath:_path] andDelegate:self];
+    mt.thumbnailHeight = VideoCellHeight;
+    mt.thumbnailWidth = VideoCellWidth;
+    mt.snapshotPosition = 0.1;//视频帧位置
+    [mt fetchThumbnail];
 }
 
 //播放
@@ -90,14 +104,24 @@
 #pragma VLCMediaThumbnailerDelegate
 - (void)mediaThumbnailerDidTimeOut:(VLCMediaThumbnailer *)mediaThumbnailer{
     //获取失败
+    currentThumbnailLoadingCount = 0;
+    [currentThumbnailLoadingArr removeObject:self];
+    [[currentThumbnailLoadingArr firstObject] loadThumnbnail:[currentThumbnailLoadingArr firstObject].delegate];
+    
     if(_delegate)[_delegate thumbnailLoaded:nil];
 }
 - (void)mediaThumbnailer:(VLCMediaThumbnailer *)mediaThumbnailer didFinishThumbnail:(CGImageRef)thumbnail{
     //获取成功
+    currentThumbnailLoadingCount = 0;
+    [currentThumbnailLoadingArr removeObject:self];
+    [[currentThumbnailLoadingArr firstObject] loadThumnbnail:[currentThumbnailLoadingArr firstObject].delegate];
+    
     if(thumbnail == nil) return;
     
+    NSLog(@"获取成功:%@",[self.path lastPathComponent]);
     NSImage* image  = [[NSImage alloc] initWithCGImage:thumbnail size:NSMakeSize(VideoCellWidth, VideoCellHeight)];
-    [self SaveThumbnail:image];
+    if(image)[self SaveThumbnail:image];
+    NSLog(@"图片存放成功");
     if(_delegate)[_delegate thumbnailLoaded:image];
     
 }
