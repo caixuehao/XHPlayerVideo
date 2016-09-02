@@ -9,6 +9,8 @@
 #import "ControllerView.h"
 #import <Masonry.h>
 #import "Macro.h"
+
+
 @implementation ControllerView{
     
 }
@@ -32,6 +34,38 @@
 
 -(void)loadSubviews{
     
+    self.turnDownRateBtn = ({
+        NSButton* btn = [[NSButton alloc] init];
+        [btn setTitle:@"减速"];
+        [self addSubview:btn];
+        btn;
+    });
+    
+    self.currentRateLabel = ({
+        NSTextField* tf = [[NSTextField alloc] init];
+        [tf setBezeled:NO];
+        [tf setDrawsBackground:NO];
+        [tf setEditable:NO];
+        [tf setSelectable:NO];
+        tf.alignment = NSCenterTextAlignment;
+        tf.stringValue = @"×1.0";
+        [self addSubview:tf];
+        tf;
+    });
+    
+    self.turnOnRateBtn = ({
+        NSButton* btn = [[NSButton alloc] init];
+        [btn setTitle:@"加速"];
+        [self addSubview:btn];
+        btn;
+    });
+    
+    NSView* view1 = [[NSView alloc] init];//填充view
+    [self addSubview:view1];
+    
+    
+    
+    
     self.lastVideoBtn = ({
         NSButton* btn = [[NSButton alloc] init];
         [btn setTitle:@"上一个"];
@@ -51,7 +85,7 @@
         btn;
     });
     
-    NSView* view2 = [[NSView alloc] init];
+    NSView* view2 = [[NSView alloc] init];//填充view
     [self addSubview:view2];
     
     self.soundSwitchBtn = ({
@@ -78,7 +112,10 @@
     });
     self.videoCurrentTimeLabel = ({
         NSTextField* tf = [[NSTextField alloc] init];
+        [tf setBezeled:NO];
+        [tf setDrawsBackground:NO];
         [tf setEditable:NO];
+        [tf setSelectable:NO];
         tf.stringValue = @"00:00:00";
         [self addSubview:tf];
         tf;
@@ -86,15 +123,45 @@
 
     self.videoTotalTimeLabel = ({
         NSTextField* tf = [[NSTextField alloc] init];
+        [tf setBezeled:NO];
+        [tf setDrawsBackground:NO];
         [tf setEditable:NO];
-        tf.backgroundColor = [NSColor clearColor];
-        tf.layer.backgroundColor = [NSColor clearColor].CGColor;
+        [tf setSelectable:NO];
         tf.stringValue = @"/00:00:00";
         [self addSubview:tf];
         tf;
     });
 
     //layout
+    [self.turnDownRateBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).offset(10);
+        make.top.equalTo(self).offset(10);
+        make.size.mas_equalTo(NSMakeSize(30, 25));
+    }];
+    
+    [self.currentRateLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.turnDownRateBtn.mas_right).offset(10);
+        make.top.equalTo(self).offset(15);
+        make.size.mas_equalTo(NSMakeSize(30, 15));
+    }];
+    
+    [self.turnOnRateBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.currentRateLabel.mas_right).offset(10);
+        make.top.equalTo(self).offset(10);
+        make.size.mas_equalTo(NSMakeSize(30, 25));
+    }];
+    
+    
+    
+    
+    [view1 mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.turnOnRateBtn.mas_right);
+        make.right.equalTo(self.lastVideoBtn.mas_left).offset(-10);
+    }];
+    
+    
+    
+    
     
     [self.lastVideoBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(5);
@@ -115,10 +182,15 @@
     }];
     
     
+    
+    
     [view2 mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nextVideoBtn.mas_right);
         make.right.equalTo(self.soundSwitchBtn.mas_left).offset(-10);
     }];
+    
+    
+    
     
     
     [self.soundSwitchBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -146,12 +218,12 @@
     [self.videoCurrentTimeLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.videoTotalTimeLabel.mas_left).offset(-0);
         make.bottom.equalTo(self).offset(-5);
-        make.size.mas_equalTo(NSMakeSize(70, 20));
+        make.size.mas_equalTo(NSMakeSize(55, 20));
     }];
     [self.videoTotalTimeLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).offset(-10);
         make.bottom.equalTo(self).offset(-5);
-        make.size.mas_equalTo(NSMakeSize(70, 20));
+        make.size.mas_equalTo(NSMakeSize(60, 20));
     }];
 }
 @end

@@ -42,7 +42,7 @@ static PlayListModel* playListModelShare;
 //设置当前应该播放的视频
 -(void)setCurrentVideo:(VideoModel *)currentVideo{
     NSLog(@"%@",[self getPath]);
-    if(currentVideo)SendNotification(PlayVideoNotification, @{@"video":currentVideo});
+    
     
     NSUInteger index = [_playList indexOfObject:currentVideo];
     if(index == NSNotFound){
@@ -62,6 +62,7 @@ static PlayListModel* playListModelShare;
     }
     [self updateData];
     
+    if(currentVideo)SendNotification(PlayVideoNotification, @{@"video":_currentVideo});
 }
 
 -(void)setPlayMode:(PlayMode)playmode{

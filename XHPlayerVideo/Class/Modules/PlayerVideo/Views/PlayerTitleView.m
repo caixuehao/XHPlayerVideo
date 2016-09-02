@@ -57,6 +57,14 @@
     });
     
     
+    _titleLabel =({
+        NSLabel* label = [[NSLabel alloc] init];
+        label.textAlignment = NSCenterTextAlignment;
+        label.backgroundColor = [NSColor clearColor];
+        label.preferredMaxLayoutWidth = 20;
+        [self addSubview:label];
+        label;
+    });
     
     _displayPlayListBtn = ({
         NSButton* btn = [[NSButton alloc] init];
@@ -82,6 +90,13 @@
         make.left.equalTo(_minmizeBtn.mas_right).offset(10);
         make.centerY.equalTo(self).offset(0);
         make.size.mas_equalTo(NSMakeSize(15, 15));
+    }];
+    
+    [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_maximizeBtn.mas_right).offset(10);
+        make.centerY.equalTo(self).offset(0);
+        make.height.equalTo(self.mas_height).offset(-4);
+        make.right.equalTo(_displayPlayListBtn.mas_left).offset(-10);
     }];
     
     [_displayPlayListBtn mas_makeConstraints:^(MASConstraintMaker *make) {

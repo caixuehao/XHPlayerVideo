@@ -39,14 +39,18 @@
  
     NSTrackingArea *trackingArea;
     NSInteger unresponsiveTime;
+    NSTimer* hideTimer;
     
     PlayListWindowController* playListWindowController;
+    
+    BOOL isFirstPlay;//实在没办法用了这么陋的办法
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    unresponsiveTime = 4;
+    [self dispplayAllView];
+    isFirstPlay = YES;
     
     [self loadSubViews];
     [self loadActions];
@@ -55,7 +59,7 @@
     playListWindowController = [[PlayListWindowController alloc] init];
    
     //加载播放器防止启动太卡
-    [self performSelector:@selector(loadPlayer) withObject:nil afterDelay:0.5f];
+    [self performSelector:@selector(loadPlayer) withObject:nil afterDelay:0.2f];
     
 }
 
@@ -74,6 +78,7 @@
             if (self.currentVideo) {
                 [player setMedia:self.currentVideo.media];
                 [player play];
+                isFirstPlay = YES;
             }
         }];
         //    player.adjustFilterEnabled = NO;
@@ -94,12 +99,19 @@
     [playerTitleView.displayPlayListBtn setAction:@selector(displayPlayList)];
     
     //底部主控制器事件
+    controllerView.turnDownRateBtn.target = self;
+    controllerView.turnOnRateBtn.target = self;
+    
+    controllerView.lastVideoBtn.target = self;
     controllerView.playSwitchBtn.target = self;
     controllerView.nextVideoBtn.target = self;
     
     controllerView.videoSlider.target = self;
     controllerView.soundSwitchBtn.target = self;
     controllerView.volumeSlider.target = self;
+    
+    [controllerView.turnDownRateBtn setAction:@selector(turnDownRate)];
+    [controllerView.turnOnRateBtn setAction:@selector(turnOnRate)];
     
     [controllerView.playSwitchBtn setAction:@selector(playSwitch:)];
     [controllerView.nextVideoBtn setAction:@selector(nextVideo:)];
@@ -126,7 +138,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResize:) name:NSWindowDidResizeNotification object:nil];
     
     //启动定时器
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+    hideTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
 
 }
 #pragma Actions
@@ -134,6 +146,8 @@
 //播放视频
 - (void)playVideo:(NSNotification *)notifiction{
     self.currentVideo = [notifiction.userInfo objectForKey:@"video"];
+    
+    
     //防止调用过快 引起打卡死
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(playVideo) object:nil];
     [self performSelector:@selector(playVideo) withObject:nil afterDelay:0.5f];
@@ -141,11 +155,15 @@
 
 - (void)playVideo{
     [self.view.window makeKeyAndOrderFront:self];//显示窗口
+    [self ChangeVideoUpdateUI];
     //if(player.media.state != VLCMediaStateBuffering&&player)//防止在缓冲时被释放（不知道这样写有没有问题）
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [player stop];
-        [player setMedia:self.currentVideo.media];
-        [player play];// 不能在这里调用？
+        //[player stop];
+        if (player) {
+            [player setMedia:self.currentVideo.media];
+            [player play];// 不能在这里调用？
+        }
+        isFirstPlay = YES;
     }];
 }
 //窗口大小改变
@@ -170,18 +188,9 @@
 
 //定时器
 -(void)timerAction{
-
-    switch (unresponsiveTime) {
-        case 0:
-            [self onlyDisplayVideoView];
-            break;
-        case 4:
-            [self dispplayAllView];
-            --unresponsiveTime;
-            break;
-        default:
-            --unresponsiveTime;
-            break;
+    if (unresponsiveTime<0) return;
+    if(unresponsiveTime-- == 0){
+        [self onlyDisplayVideoView];
     }
     
 }
@@ -208,7 +217,7 @@
 
 //显示（隐藏播放列表）
 - (void)displayPlayList{
-    unresponsiveTime = 4;
+    [self dispplayAllView];
    [playListWindowController displaySwitch:self.view.window.frame];
 }
 
@@ -218,15 +227,46 @@
 
 #pragma ControllerBottonActions
 
+- (void)turnDownRate{
+    [self dispplayAllView];
+    if(player.playing){
+        //防卡死
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(turnDownRateSelector) object:nil];
+        [self performSelector:@selector(turnDownRateSelector) withObject:nil afterDelay:0.1f];
+    }
+}
+-(void)turnDownRateSelector{
+    float rate = player.rate - 0.1;
+    if (rate<0.1)return;
+    player.rate = rate;
+    controllerView.currentRateLabel.stringValue = [NSString stringWithFormat:@"×%.1f",player.rate];
+}
+
+- (void)turnOnRate{
+    [self dispplayAllView];
+    if(player.playing){
+        //防卡死
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(turnOnRateSelector) object:nil];
+        [self performSelector:@selector(turnOnRateSelector) withObject:nil afterDelay:0.1f];
+    }
+}
+
+-(void)turnOnRateSelector{
+    float rate = player.rate + 0.1;
+    if (rate>4)return;
+    player.rate = rate;
+    controllerView.currentRateLabel.stringValue = [NSString stringWithFormat:@"×%.1f",player.rate];
+}
+
 - (void)pause{
-    unresponsiveTime = 4;
+    [self dispplayAllView];
     if(player.playing){
         [controllerView.playSwitchBtn setTitle:@"播放"];
         [player pause];
     }
 }
 - (void)playSwitch:(id)sender {
-    unresponsiveTime = 4;
+    [self dispplayAllView];
     if(player.playing){
         [controllerView.playSwitchBtn setTitle:@"播放"];
         [player pause];
@@ -238,18 +278,18 @@
 }
 
 - (void)lastVideo:(id)sender{
-    unresponsiveTime = 4;
+    [self dispplayAllView];
     SendNotification(PlayLastVideoNotification, nil);
 }
 
 - (void)nextVideo:(id)sender{
-    unresponsiveTime = 4;
+    [self dispplayAllView];
     SendNotification(PlayNextVideoNotification, nil);
 }
 
 
 - (void)soundSwitch:(id)sender {
-    unresponsiveTime = 4;
+    [self dispplayAllView];
     if(player.audio.volume){
         player.audio.volume = 0;
     }else{
@@ -265,7 +305,6 @@
 #pragma mouseActions
 //鼠标进入监视区
 - (void)mouseEntered:(NSEvent *)theEvent{
-    unresponsiveTime = 4;
     [self dispplayAllView];
 }
 
@@ -283,15 +322,15 @@
 }
 //鼠标移动
 - (void)mouseMoved:(NSEvent *)theEvent{
-    unresponsiveTime = 4;
+    [self dispplayAllView];
 }
 //鼠标按下
 - (void)mouseDown:(NSEvent *)theEvent{
-    unresponsiveTime = 4;
+    [self dispplayAllView];
 }
 //鼠标松开
 - (void)mouseUp:(NSEvent *)theEvent{
-    unresponsiveTime = 4;
+    [self dispplayAllView];
 }
 
 
@@ -330,17 +369,16 @@
 #pragma VLCMediaPlayerDelegate
 //视频状态
 - (void)mediaPlayerStateChanged:(NSNotification *)aNotification{
-    NSLog(@"视频状态:%lu",player.state);//这个是player
-    
-    if (player.state == VLCMediaPlayerStateBuffering) {
-        if(player.videoSize.width>0){
-            [self updateLayout];
-        }
-    } else if(player.state == VLCMediaPlayerStatePaused){
-         NSLog(@"%i",player.remainingTime.intValue);
-        if (player.remainingTime.intValue > -100) {//妈的这种判断方法感觉很坑啊
+    NSLog(@"视频状态:%lu hasVideoOut：%@  willPlay:%@ position:%f seekable:%@ canPause:%@" ,player.state,player.hasVideoOut?@"YES":@"NO",player.willPlay?@"YES":@"NO",player.position,player.seekable?@"YES":@"NO",player.canPause?@"YES":@"NO");//这个是player
+    NSLog(@"%d  %d",player.media.length.intValue,player.remainingTime.intValue);
+    if(player.state == VLCMediaPlayerStatePaused){
+        //剩余时间不靠谱(这样判断也不知道有没有问题)
+        if (player.position == 1.0||controllerView.videoSlider.intValue/controllerView.videoSlider.maxValue == 1.0||player.remainingTime.intValue>-200) {
+            NSLog(@"播放结束");
             SendNotification(PLayEndNotification, nil);
         }
+    }else if(player.state == VLCMediaPlayerStateStopped){
+        NSLog(@"视频出错？");
     }
     
 }
@@ -348,18 +386,22 @@
 //时间发生变化（大约是1秒3次）
 - (void)mediaPlayerTimeChanged:(NSNotification *)aNotification{
  //intValue单位毫米
-    if (player.time.intValue == 0) {
-            NSLog(@"播放开始");
+    if (isFirstPlay == YES) {
+//    if (player.time.intValue == 0) {
+         NSLog(@"播放开始");
+         [self playStartUpdateUI];
+        isFirstPlay = NO;
     }
     if (controllerView.videoSlider.continuous) {
         controllerView.videoSlider.maxValue = player.time.intValue-player.remainingTime.intValue;
         controllerView.videoSlider.intValue = player.time.intValue;
         NSInteger intTime= controllerView.videoSlider.intValue/1000;
         controllerView.videoCurrentTimeLabel.stringValue = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",
-                                             intTime/3600,intTime%3600/60,intTime%3600%60];
+                                                            intTime/3600,intTime%3600/60,intTime%3600%60];
         NSInteger maxTime = controllerView.videoSlider.maxValue/1000;
         controllerView.videoTotalTimeLabel.stringValue = [NSString stringWithFormat:@"/%02ld:%02ld:%02ld",
-                                             maxTime/3600,maxTime%3600/60,maxTime%3600%60];
+                                                          maxTime/3600,maxTime%3600/60,maxTime%3600%60];
+       
     }
         
 }
@@ -472,8 +514,9 @@
 
 //显示全部
 - (void)dispplayAllView{
-    if (controllerView.alphaValue == 1) return;
+    unresponsiveTime = 4 ;
     
+    if (controllerView.alphaValue == 1) return;
     [playerTitleView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self.view);
         make.height.mas_equalTo(20);
@@ -500,17 +543,25 @@
     }
 }
 //视频加载成功时根据视频尺寸 更新约束布局比例
--(void)updateLayout{
-    
-    [videoPlayView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.view);
-        make.height.width.equalTo(self.view).priorityLow();
-        make.left.equalTo(videoPlayViewLeftView.mas_right);
-        make.top.equalTo(videoPlayViewTopView.mas_bottom);
-        make.right.equalTo(videoPlayViewRightView.mas_left);
-        make.bottom.equalTo(videoPlayViewBottonView.mas_top);
-        make.width.equalTo(videoPlayView.mas_height).multipliedBy(player.videoSize.width/player.videoSize.height);
+-(void)playStartUpdateUI{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [videoPlayView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self.view);
+            make.height.width.equalTo(self.view).priorityLow();
+            make.left.equalTo(videoPlayViewLeftView.mas_right);
+            make.top.equalTo(videoPlayViewTopView.mas_bottom);
+            make.right.equalTo(videoPlayViewRightView.mas_left);
+            make.bottom.equalTo(videoPlayViewBottonView.mas_top);
+            make.width.equalTo(videoPlayView.mas_height).multipliedBy(player.videoSize.width/player.videoSize.height);
+        }];
     }];
-    
 }
+//改变视频时刷新UI
+-(void)ChangeVideoUpdateUI{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        playerTitleView.titleLabel.text = [self.currentVideo.path lastPathComponent];
+        [self dispplayAllView];
+    }];
+}
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "NSLabel.h"
 
 @interface PlayerTitleView : NSView
 
@@ -18,7 +19,7 @@
 
 @property(nonatomic)NSButton* maximizeBtn;
 
-
+@property(nonatomic)NSLabel* titleLabel;
 
 @property(nonatomic)NSButton* displayPlayListBtn;
 

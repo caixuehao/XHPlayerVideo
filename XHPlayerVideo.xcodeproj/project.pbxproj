@@ -23,6 +23,7 @@
 		FC7508711D781A3D000130BC /* PlayerVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC75086F1D781A3D000130BC /* PlayerVideoViewController.m */; };
 		FC7508721D781A3D000130BC /* PlayerVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7508701D781A3D000130BC /* PlayerVideoViewController.xib */; };
 		FC7508751D781C4B000130BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC7508731D781C4B000130BC /* Main.storyboard */; };
+		FC7508781D79313D000130BC /* NSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7508771D79313D000130BC /* NSLabel.m */; };
 		FCD575B51D7469C500B181C0 /* PlayListTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD575B41D7469C500B181C0 /* PlayListTitleView.m */; };
 		FCD575B81D747D0E00B181C0 /* PlayerTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD575B71D747D0E00B181C0 /* PlayerTitleView.m */; };
 		FCD575BA1D749E0900B181C0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD575B91D749E0900B181C0 /* QuartzCore.framework */; };
@@ -101,6 +102,8 @@
 		FC75086F1D781A3D000130BC /* PlayerVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerVideoViewController.m; sourceTree = "<group>"; };
 		FC7508701D781A3D000130BC /* PlayerVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerVideoViewController.xib; sourceTree = "<group>"; };
 		FC7508741D781C4B000130BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FC7508761D79313D000130BC /* NSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSLabel.h; sourceTree = "<group>"; };
+		FC7508771D79313D000130BC /* NSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSLabel.m; sourceTree = "<group>"; };
 		FCD575B31D7469C500B181C0 /* PlayListTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListTitleView.h; sourceTree = "<group>"; };
 		FCD575B41D7469C500B181C0 /* PlayListTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListTitleView.m; sourceTree = "<group>"; };
 		FCD575B61D747D0E00B181C0 /* PlayerTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTitleView.h; sourceTree = "<group>"; };
@@ -275,6 +278,8 @@
 		FC5A85321D70AEC100267B7F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				FC7508761D79313D000130BC /* NSLabel.h */,
+				FC7508771D79313D000130BC /* NSLabel.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -590,6 +595,7 @@
 				FCFE5BB11D7336C4005DF1A4 /* PlayListModel.m in Sources */,
 				FC5A85461D70AEC100267B7F /* PlayerVideoWindowController.m in Sources */,
 				FC5A84E21D7089C200267B7F /* main.m in Sources */,
+				FC7508781D79313D000130BC /* NSLabel.m in Sources */,
 				FCFE5BA51D72F9BD005DF1A4 /* VideoModel.m in Sources */,
 				FC75086A1D77CBCD000130BC /* PlayListViewController.m in Sources */,
 				FCD575B51D7469C500B181C0 /* PlayListTitleView.m in Sources */,

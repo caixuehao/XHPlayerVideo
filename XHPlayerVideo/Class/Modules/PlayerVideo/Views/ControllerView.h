@@ -10,10 +10,15 @@
 
 @interface ControllerView : NSView
 
-//快进快退（先不写）
+//快进  (快退感觉没用先不写）
 @property(nonatomic)NSButton* fastForwardBtn;
 @property(nonatomic)NSButton* resetBtn;
 @property(nonatomic)NSButton* rewindBtn;
+
+//播放速度（快退感觉没啥用就不写了）
+@property(nonatomic)NSButton* turnDownRateBtn;
+@property(nonatomic)NSTextField* currentRateLabel;
+@property(nonatomic)NSButton* turnOnRateBtn;
 
 //上一个视频  播放暂停  下一个视频
 @property(nonatomic)NSButton* lastVideoBtn;
