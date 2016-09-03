@@ -17,11 +17,12 @@
 @implementation VideoCell{
     NSTextField* titlelabel;
     NSImageView* coverImageView;
+    NSButton* removeBtn;//右键事件获取不到，只能出此下策http://www.xuebuyuan.com/2139444.html
     VideoCellSelectedView* selectedView;
 }
 
 -(instancetype)init{
-    self = [super init];
+    self = [super initWithFrame: NSMakeRect(0, 0, VideoCellWidth, VideoCellHeight)];
     if (self) {
 
         coverImageView = ({
@@ -45,8 +46,22 @@
             [self addSubview:tf];
             tf;
         });
+        
+        removeBtn = ({
+            NSButton* btn = [[NSButton alloc] init];
+            btn.frame = NSMakeRect(VideoCellWidth-5 - 40, VideoCellHeight -5-20, 40, 20);
+            [btn setTitle:@"删除"];
+            btn.target = self;
+            [btn setAction:@selector(removeVideo)];
+            [self addSubview:btn];
+            btn;
+        });
+       
     }
     return self;
+}
+- (void)viewDidMoveToSuperview {
+    if(self.superview == nil) return;
 }
 
 - (void)dealloc{
@@ -72,12 +87,15 @@
     _video = video;
 
     titlelabel.stringValue = [video.path lastPathComponent];
-    if (video.thumbnailPath.length) {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:video.path] == NO) {
+         coverImageView.image = [NSImage imageNamed:@"videoNotExist"];
+    }else if(video.thumbnailPath.length) {
         coverImageView.image = [[NSImage alloc] initWithContentsOfFile:video.thumbnailPath];
     }else{
          NSLog(@"开始加载封面");
         [self.video loadThumnbnail:self];
     }
+    
     if ([_video isCurrentVideo]) {
         selectedView = ({
             VideoCellSelectedView *view = [[VideoCellSelectedView alloc] initWithFrame:NSMakeRect(0, 0, VideoCellWidth, VideoCellHeight)];
@@ -89,11 +107,29 @@
 
 
 #pragma Actions
+//不知为何获取不到消息
 - (void)rightMouseDown:(NSEvent *)theEvent{
+//    [super rightMouseDown:theEvent];
     NSLog(@"1234");
 }
 
-
+-(void)removeVideo{
+    if([self.video isCurrentVideo]){
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"删除"];
+        [alert addButtonWithTitle:@"取消"];
+        [alert setMessageText:@"正在播放"];
+        [alert setInformativeText:@"这个视频正在播放，如果删除将会停止。"];
+        [alert setAlertStyle:NSWarningAlertStyle];
+//        [alert runModal];
+        //单元格生存周期太短videoModel里面了。
+        [alert beginSheetModalForWindow:_window modalDelegate:self.video
+                         didEndSelector:@selector(removeAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+    }else{
+        [self.video remove];
+    }
+   
+}
 #pragma LoadThumbnailDelegate
 
 -(void)thumbnailLoaded:(NSImage *)thumbnail{
@@ -102,5 +138,6 @@
          if (thumbnail) coverImageView.image = thumbnail;
     }];
 }
+
 
 @end

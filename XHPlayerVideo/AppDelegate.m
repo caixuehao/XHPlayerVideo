@@ -23,6 +23,7 @@
 //    PlayerVideoWindowController* playerVideo = [[PlayerVideoWindowController alloc] init];
 //    [playerVideo showWindow:self];
 //    [playerVideo.window makeKeyAndOrderFront:nil];
+   
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

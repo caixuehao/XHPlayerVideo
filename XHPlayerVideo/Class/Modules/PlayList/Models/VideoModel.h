@@ -32,6 +32,10 @@
 
 //播放
 -(void)play;
+//移除
+- (void)remove;
+//异步调用（额，可能会被释放感觉有点危险）尽量只在一个地方调用删除吧
+- (void)removeAlertDidEnd:(NSAlert *)alert  returnCode:(NSInteger)returnCode   contextInfo:(void *)contextInfo;
 
 //判断是否相等
 -(BOOL)isEqualtoVideoModel:(VideoModel*)aVideoModel;

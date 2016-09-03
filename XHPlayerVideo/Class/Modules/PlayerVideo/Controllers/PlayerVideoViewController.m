@@ -54,9 +54,10 @@
     
     [self loadSubViews];
     [self loadActions];
-    
+    //音量
     controllerView.volumeSlider.intValue = (short)[[NSUserDefaults standardUserDefaults] integerForKey:@"videoVolune"];
-    if (controllerView.volumeSlider.intValue == 0)  controllerView.volumeSlider.intValue = 50;
+    if (controllerView.volumeSlider.intValue == 0)controllerView.volumeSlider.intValue = 50;
+    
     
     //加载播放列表窗口
     playListWindowController = [[PlayListWindowController alloc] init];
@@ -77,6 +78,7 @@
     [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
         player = [[VLCMediaPlayer alloc] initWithVideoView:videoPlayView];
         player.delegate = self;
+        player.audio.volume = controllerView.volumeSlider.intValue;
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             if (self.currentVideo) {
                 [player setMedia:self.currentVideo.media];
@@ -94,11 +96,13 @@
     playerTitleView.closeBtn.target = self;
     playerTitleView.minmizeBtn.target = self;
     playerTitleView.maximizeBtn.target = self;
+    playerTitleView.topBtn.target = self;
     playerTitleView.displayPlayListBtn.target = self;
     
     [playerTitleView.closeBtn setAction:@selector(close)];
     [playerTitleView.minmizeBtn setAction:@selector(minmize)];
     [playerTitleView.maximizeBtn setAction:@selector(maxmize)];
+    [playerTitleView.topBtn setAction:@selector(topWindow)];
     [playerTitleView.displayPlayListBtn setAction:@selector(displayPlayList)];
     
     //底部主控制器事件
@@ -137,6 +141,8 @@
     //注册通知
     //播放视频通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playVideo:) name:PlayVideoNotification object:nil];
+    //视频停止
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopPlayVideo:) name:StopPlayVideoNotification object:nil];
     //窗口大小改变通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResize:) name:NSWindowDidResizeNotification object:nil];
     
@@ -169,6 +175,19 @@
         isFirstPlay = YES;
     }];
 }
+//停止播放
+-(void)stopPlayVideo:(NSNotification *)notifiction{
+    if([self.currentVideo isEqualtoVideoModel:[notifiction.userInfo objectForKey:@"video"]]){
+        [self stopPlayVideo];
+    }
+}
+-(void)stopPlayVideo{
+    _currentVideo = nil;
+    [player stop];
+    [player setMedia:nil];
+    [self stopPlayVideoUpdateUI];
+}
+
 //窗口大小改变
 - (void)windowDidResize:(id)sender{
     //防止调用过快 引起打卡死
@@ -217,7 +236,18 @@
 - (void)maxmize{
     [self.view.window toggleFullScreen:nil];//全屏
 }
-
+//置顶
+- (void)topWindow{
+    NSLog(@"%lu",self.view.window.level);
+    if (self.view.window.level) {
+        [self.view.window setLevel:0];
+        [playerTitleView.topBtn setTitle:@"置顶"];
+    }else{
+        [self.view.window setLevel:NSStatusWindowLevel];
+        [playerTitleView.topBtn setTitle:@"取消置顶"];
+    }
+    
+}
 //显示（隐藏播放列表）
 - (void)displayPlayList{
     [self dispplayAllView];
@@ -297,7 +327,6 @@
         player.audio.volume = 0;
     }else{
         player.audio.volume = controllerView.volumeSlider.intValue;
-        [[NSUserDefaults standardUserDefaults] setObject:@(player.audio.volume)forKey:@"videoVolune"];
     }
 }
 
@@ -338,7 +367,31 @@
 }
 
 
-
+#pragma keyboard
+- (void)keyDown:(NSEvent *)theEvent{
+    NSLog(@"%d,%@",theEvent.keyCode,theEvent.characters);
+    switch (theEvent.keyCode) {
+        case 49://空格
+            [self playSwitch:nil];
+            break;
+        case 123://左
+            [player extraShortJumpBackward];
+            break;
+        case 124://右
+            [player extraShortJumpForward];
+            break;
+        case 125://下
+            controllerView.volumeSlider.intValue =  controllerView.volumeSlider.intValue - 5;
+            [self volumeSliderAction:nil];
+            break;
+        case 126://上
+            controllerView.volumeSlider.intValue =  controllerView.volumeSlider.intValue + 5;
+            [self volumeSliderAction:nil];
+            break;
+        default:
+            break;
+    }
+}
 
 
 #pragma SliderActions
@@ -361,6 +414,7 @@
 
 - (void)volumeSliderAction:(id)sender {
      player.audio.volume = controllerView.volumeSlider.intValue;
+    [[NSUserDefaults standardUserDefaults] setObject:@(player.audio.volume)forKey:@"videoVolune"];
 }
 
 
@@ -377,9 +431,11 @@
     NSLog(@"%d  %d",player.media.length.intValue,player.remainingTime.intValue);
     NSLog(@"audio:%p media:%p media.mediaType:%lu length:%d state:%lu",player.audio,player.media,player.media.mediaType,player.media.length.intValue,player.media.state);
     if(player.state == VLCMediaPlayerStatePaused){
+        [controllerView.playSwitchBtn setTitle:@"播放"];
         //剩余时间不靠谱(这样判断也不知道有没有问题)
         if (player.position == 1.0||controllerView.videoSlider.intValue/controllerView.videoSlider.maxValue == 1.0||player.remainingTime.intValue>-1000) {
             NSLog(@"播放结束");
+            [self stopPlayVideo];
             SendNotification(PLayEndNotification, nil);
         }
     }else if(player.state == VLCMediaPlayerStateStopped){
@@ -475,8 +531,7 @@
         [self.view addSubview:view];
         view;
     });
-    
-  
+
     //layout
     //背景图片
     [backImage mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -567,9 +622,25 @@
 
     }];
 }
+//视频停止时更新UI
+-(void)stopPlayVideoUpdateUI{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        NSLog(@"当前视频宽高:%f,%f",player.videoSize.height,player.videoSize.width);
+        [videoPlayView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self.view);
+            make.height.width.mas_equalTo(0);
+            make.left.equalTo(videoPlayViewLeftView.mas_right);
+            make.top.equalTo(videoPlayViewTopView.mas_bottom);
+            make.right.equalTo(videoPlayViewRightView.mas_left);
+            make.bottom.equalTo(videoPlayViewBottonView.mas_top);
+        }];
+        
+    }];
+}
 //改变视频时刷新UI
 -(void)ChangeVideoUpdateUI{
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [controllerView.playSwitchBtn setTitle:@"暂停"];
         playerTitleView.titleLabel.text = [self.currentVideo.path lastPathComponent];
         [self dispplayAllView];
     }];

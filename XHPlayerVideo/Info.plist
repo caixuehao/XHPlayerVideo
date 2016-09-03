@@ -365,7 +365,7 @@
 				<string>flv</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>video.icns</string>
+			<string>video</string>
 			<key>CFBundleTypeName</key>
 			<string>flv</string>
 			<key>CFBundleTypeRole</key>

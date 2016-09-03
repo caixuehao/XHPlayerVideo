@@ -50,6 +50,12 @@
         btn;
     });
     
+    _removeAllVideoBtn = ({
+        NSButton* btn = [[NSButton alloc] init];
+        [btn setTitle:@"清空列表"];
+        [self addSubview:btn];
+        btn;
+    });
     //layout
  
     [_hideBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -60,6 +66,13 @@
     
     [_playModeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_hideBtn.mas_right).offset(10);
+        make.top.equalTo(self).offset(0);
+        make.bottom.equalTo(self).offset(0);
+        make.width.mas_equalTo(60);
+    }];
+    
+    [_removeAllVideoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_playModeBtn.mas_right).offset(10);
         make.top.equalTo(self).offset(0);
         make.bottom.equalTo(self).offset(0);
         make.width.mas_equalTo(60);

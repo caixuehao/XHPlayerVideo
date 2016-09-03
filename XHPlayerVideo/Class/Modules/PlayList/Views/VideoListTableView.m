@@ -31,6 +31,7 @@
         [self addTableColumn:column1];
         [self setDataSource:self];
         [self setDelegate:self];
+        
     }
     return self;
 }

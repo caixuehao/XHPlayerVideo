@@ -50,6 +50,7 @@
     }
 }
 
+
 -(void)hideWindow{
     [playListWindow close];
     playListWindow.isDisplay = NO;

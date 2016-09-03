@@ -19,9 +19,11 @@ typedef NS_ENUM(NSInteger, PlayMode) {
 @interface PlayListModel : NSObject
 
 +(instancetype)share;
-//当改变了需要保存的数据时调用（额，因为老是崩溃我就不退出时保存了。）
+//当改变了数据时调用(用来通知显示列表)
 -(void)updateData;
 
+-(void)removeAll;
+-(void)removeVideo:(VideoModel*)video;
 
 @property(nonatomic,weak)id<PlayListUpdateDataDelegate>delegate;
 

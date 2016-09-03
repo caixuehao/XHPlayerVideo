@@ -62,6 +62,14 @@ static int currentThumbnailLoadingCount = 0;
 
 //加载缩略图
 -(void)loadThumnbnail:(id<LoadThumbnailDelegate>)delegate{
+    //查看本地是否存在
+    if([ [NSFileManager defaultManager] fileExistsAtPath:[self getThumbnailShouldSavePath]]){
+        _thumbnailPath = [self getThumbnailShouldSavePath];
+        [[PlayListModel share] updateData];
+        return;
+    }
+    
+    
     if (currentThumbnailLoadingArr == nil) currentThumbnailLoadingArr = [[NSMutableArray alloc] init];
     if([currentThumbnailLoadingArr indexOfObject:self] == NSNotFound)[currentThumbnailLoadingArr addObject:self];
     
@@ -87,6 +95,16 @@ static int currentThumbnailLoadingCount = 0;
 //播放
 -(void)play{
     [[PlayListModel share] setCurrentVideo:self];
+}
+
+//删除
+- (void)removeAlertDidEnd:(NSAlert *)alert  returnCode:(NSInteger)returnCode   contextInfo:(void *)contextInfo{
+    if (returnCode == 1000) {
+        [self remove];
+    }
+}
+- (void)remove{
+    [[PlayListModel share] removeVideo:self];
 }
 
 //判断是否相等

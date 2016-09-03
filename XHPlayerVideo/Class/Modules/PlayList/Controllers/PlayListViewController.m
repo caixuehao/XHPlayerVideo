@@ -56,9 +56,11 @@
     
     playlistTitleView.hideBtn.target = self;
     playlistTitleView.playModeBtn.target = self;
+    playlistTitleView.removeAllVideoBtn.target = self;
     
     [playlistTitleView.hideBtn setAction:@selector(hide)];
     [playlistTitleView.playModeBtn setAction:@selector(changePlayMode)];
+    [playlistTitleView.removeAllVideoBtn setAction:@selector(removeAllVideo)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playLastVideo) name:PlayLastVideoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playNextVideo) name:PlayNextVideoNotification object:nil];
@@ -151,6 +153,28 @@
     [playlistTitleView updatePlayModeBtnState];
 }
 
+
+- (void)removeAllVideo{
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:@"删除所有"];
+    [alert addButtonWithTitle:@"取消"];
+    [alert setMessageText:@"清空所有视频"];
+    [alert setInformativeText:@"你确定全部清空！？"];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    //        [alert runModal];
+    //单元格生存周期太短videoModel里面了。
+    [alert beginSheetModalForWindow:self.view.window modalDelegate:self
+                     didEndSelector:@selector(removeAllAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+}
+
+- (void)removeAllAlertDidEnd:(NSAlert *)alert  returnCode:(NSInteger)returnCode   contextInfo:(void *)contextInfo{
+    if (returnCode == 1000) {
+        [playListModel removeAll];
+    }
+}
+
+
+#pragma loadSubViews
 - (void)loadSubViews{
     
     [self.view setWantsLayer:YES];
@@ -175,7 +199,7 @@
         [self.view addSubview:tableContainer];
         tableView;
     });
-    
+
     //layout
     [playlistTitleView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);

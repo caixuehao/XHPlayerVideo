@@ -73,8 +73,6 @@ static PlayListModel* playListModelShare;
 
 
 
-
-
 //增
 -(void)addVideoModel:(VideoModel*)videoModel{
     if(videoModel==nil)return;
@@ -93,6 +91,24 @@ static PlayListModel* playListModelShare;
     }
 }
 
+//删
+-(void)removeAll{
+    if(_currentVideo)SendNotification(StopPlayVideoNotification, @{@"video":_currentVideo});
+    [_playList removeAllObjects];
+    [self updateData];
+}
+-(void)removeVideo:(VideoModel*)video{
+    if(video == nil)return;
+    
+    if([_playList indexOfObject:video] == NSNotFound)return;
+    
+    if([video isCurrentVideo]){
+        SendNotification(StopPlayVideoNotification, @{@"video":video});
+    }
+    [_playList removeObject:video];
+    [self updateData];
+    
+}
 
 
 
@@ -129,10 +145,10 @@ static PlayListModel* playListModelShare;
 
 
 -(void)updateData{
-    //防止掉用过快（如滑动音量条时）
+    //防止掉用过快
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(updateDataSelector) object:nil];
-        [self performSelector:@selector(updateDataSelector) withObject:nil afterDelay:0.5f];
+        [self performSelector:@selector(updateDataSelector) withObject:nil afterDelay:0.2f];
     }];
 }
 

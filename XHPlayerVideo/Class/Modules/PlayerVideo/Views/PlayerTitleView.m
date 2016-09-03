@@ -36,26 +36,29 @@
 //loadSubView
 - (void)loadSubView{
      _closeBtn = ({
-//        NSButton* btn = [[NSButton alloc] init];
         NSButton* btn = [NSWindow standardWindowButton:NSWindowCloseButton forStyleMask:0];
         [self addSubview:btn];
         btn;
     });
     
     _minmizeBtn = ({
-//        NSButton* btn = [[NSButton alloc] init];
         NSButton* btn =  [NSWindow standardWindowButton:NSWindowMiniaturizeButton forStyleMask:0];
         [self addSubview:btn];
         btn;
     });
     
     _maximizeBtn = ({
-//        NSButton* btn = [[NSButton alloc] init];
         NSButton* btn = [NSWindow standardWindowButton:NSWindowZoomButton forStyleMask:0];
         [self addSubview:btn];
         btn;
     });
     
+    _topBtn = ({
+        NSButton* btn = [[NSButton alloc] init];
+        [btn setTitle:@"置顶"];
+        [self addSubview:btn];
+        btn;
+    });
     
     _titleLabel =({
         NSLabel* label = [[NSLabel alloc] init];
@@ -92,8 +95,14 @@
         make.size.mas_equalTo(NSMakeSize(15, 15));
     }];
     
-    [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_topBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_maximizeBtn.mas_right).offset(10);
+        make.centerY.equalTo(self).offset(0);
+        make.size.mas_equalTo(NSMakeSize(55, 15));
+    }];
+    
+    [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_topBtn.mas_right).offset(10);
         make.centerY.equalTo(self).offset(0);
         make.height.equalTo(self.mas_height).offset(-4);
         make.right.equalTo(_displayPlayListBtn.mas_left).offset(-10);

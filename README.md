@@ -1,12 +1,19 @@
 
 
-1.在分屏播放时不正常（应该是VLC的锅吧）
+# OSX 播放器
 
-2.切换视频时内存一直没释放。（应该也是VLC的锅吧，并没有找到释放的方法）
+#### 还没解决的bug
+1.在分屏播放时不正常
+
+2.切换视频时内存一直没释放。
+
+3.VLCKit.framework 太大
+
+4.调试时不崩溃，直接打开时常崩溃。
 
 
 
+###### 截图
+<img src="https://github.com/caixuehao/XHPlayerVideo/blob/master/images/1.png" width=1000 />
 
-1.判断视频播放结束有点问题。没找到合适的判断方法
-
-
+<img src="https://github.com/caixuehao/XHPlayerVideo/blob/master/images/2.png" width=300 />
