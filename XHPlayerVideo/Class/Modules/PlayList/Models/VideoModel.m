@@ -88,7 +88,7 @@ static int currentThumbnailLoadingCount = 0;
     VLCMediaThumbnailer * mt = [VLCMediaThumbnailer thumbnailerWithMedia:[VLCMedia mediaWithPath:_path] andDelegate:self];
     mt.thumbnailHeight = VideoCellHeight;
     mt.thumbnailWidth = VideoCellWidth;
-    mt.snapshotPosition = 0.1;//视频帧位置
+    mt.snapshotPosition = 0.5;//视频帧位置
     [mt fetchThumbnail];
 }
 
