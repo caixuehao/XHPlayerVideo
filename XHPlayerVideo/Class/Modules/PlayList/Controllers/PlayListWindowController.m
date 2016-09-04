@@ -43,11 +43,11 @@
 }
 
 -(void)displaySwitch:(NSRect)playerFrame{
-    if (playListWindow.isDisplay){//&&playListWindow.visible
-        [self hideWindow];
-    }else {
+//    if (playListWindow.isDisplay){//&&playListWindow.visible
+//        [self hideWindow];
+//    }else {
         [self displayWindow:playerFrame];
-    }
+//    }
 }
 
 
