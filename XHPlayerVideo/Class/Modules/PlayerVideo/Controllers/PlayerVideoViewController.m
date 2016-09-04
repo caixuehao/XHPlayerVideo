@@ -432,14 +432,15 @@
     NSLog(@"audio:%p media:%p media.mediaType:%lu length:%d state:%lu",player.audio,player.media,player.media.mediaType,player.media.length.intValue,player.media.state);
     if(player.state == VLCMediaPlayerStatePaused){
         [controllerView.playSwitchBtn setTitle:@"播放"];
-        //剩余时间不靠谱(这样判断也不知道有没有问题)
-        if (player.position == 1.0||controllerView.videoSlider.intValue/controllerView.videoSlider.maxValue == 1.0||player.remainingTime.intValue>-1000) {
+        //剩余时间不靠谱(这样判断也不知道有没有问题，如你所见我已经把我看到的变量，差不多都试了一次)
+        if (player.position == 1.0||controllerView.videoSlider.intValue/controllerView.videoSlider.maxValue == 1.0||player.remainingTime.intValue>-2000) {
             NSLog(@"播放结束");
             [self stopPlayVideo];
             SendNotification(PLayEndNotification, nil);
         }
     }else if(player.state == VLCMediaPlayerStateStopped){
         NSLog(@"视频出错？");
+        SendNotification(PlayNextVideoNotification, nil);
     }
     
 }
@@ -467,7 +468,25 @@
     }
         
 }
+#pragma registerForDragged
+-(NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender{
+    NSPasteboard *pboard = [sender draggingPasteboard];
+    
+    if ([[pboard types] containsObject:NSFilenamesPboardType]) {
+        return NSDragOperationCopy;
+    }
+    
+    return NSDragOperationNone;
+}
 
+-(BOOL)prepareForDragOperation:(id<NSDraggingInfo>)sender{
+    // 1）、获取拖动数据中的粘贴板
+    NSPasteboard *zPasteboard = [sender draggingPasteboard];
+    // 2）、从粘贴板中提取我们想要的NSFilenamesPboardType数据，这里获取到的是一个文件链接的数组，里面保存的是所有拖动进来的文件地址，如果你只想处理一个文件，那么只需要从数组中提取一个路径就可以了。
+    NSArray *list = [zPasteboard propertyListForType:NSFilenamesPboardType];
+    NSLog(@"%@",list);
+    return YES;
+}
 
 
 
@@ -539,11 +558,6 @@
         make.size.equalTo(self.view).priorityLow();
     }];
     
-//    [videoPlayView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.center.equalTo(self.view);
-//        make.width.height.equalTo(self.view);
-//    }];
-    
     [playerTitleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self.view);
         make.height.mas_equalTo(20);
@@ -578,10 +592,6 @@
     unresponsiveTime = 4 ;
     
     if (controllerView.alphaValue == 1) return;
-//    [playerTitleView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.left.top.right.equalTo(self.view);
-//        make.height.mas_equalTo(20);
-//    }];
     playerTitleView.alphaValue = 1;
     controllerView.alphaValue = 1;
     [NSCursor unhide];
@@ -591,10 +601,6 @@
 - (void)onlyDisplayVideoView{
      if (controllerView.alphaValue == 0) return;
     
-//    [playerTitleView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.left.top.right.equalTo(self.view);
-//        make.height.mas_equalTo(0);
-//    }];
     playerTitleView.alphaValue = 0;
     controllerView.alphaValue = 0;
     

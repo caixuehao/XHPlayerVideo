@@ -56,6 +56,13 @@
         [self addSubview:btn];
         btn;
     });
+    
+    _addVideoBtn = ({
+        NSButton* btn = [[NSButton alloc] init];
+        [btn setTitle:@"添加"];
+        [self addSubview:btn];
+        btn;
+    });
     //layout
  
     [_hideBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -76,6 +83,13 @@
         make.top.equalTo(self).offset(0);
         make.bottom.equalTo(self).offset(0);
         make.width.mas_equalTo(60);
+    }];
+    
+    [_addVideoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_removeAllVideoBtn.mas_right).offset(10);
+        make.top.equalTo(self).offset(0);
+        make.bottom.equalTo(self).offset(0);
+        make.width.mas_equalTo(40);
     }];
 }
 

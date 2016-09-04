@@ -16,6 +16,8 @@
 
 @property(nonatomic)NSButton* removeAllVideoBtn;
 
+@property(nonatomic)NSButton* addVideoBtn;
+
 -(void)updatePlayModeBtnState;
 
 @end

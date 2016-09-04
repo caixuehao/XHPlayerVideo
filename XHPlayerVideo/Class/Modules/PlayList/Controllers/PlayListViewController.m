@@ -36,7 +36,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         playListModel = [PlayListModel share];
-         [playListModel setDelegate:self];
     }
     return self;
 }
@@ -53,20 +52,67 @@
 
 - (void)loadActions{
    
+    [playListModel setDelegate:self];
     
     playlistTitleView.hideBtn.target = self;
     playlistTitleView.playModeBtn.target = self;
     playlistTitleView.removeAllVideoBtn.target = self;
+    playlistTitleView.addVideoBtn.target = self;
     
     [playlistTitleView.hideBtn setAction:@selector(hide)];
     [playlistTitleView.playModeBtn setAction:@selector(changePlayMode)];
     [playlistTitleView.removeAllVideoBtn setAction:@selector(removeAllVideo)];
+    [playlistTitleView.addVideoBtn setAction:@selector(addVideo)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playLastVideo) name:PlayLastVideoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playNextVideo) name:PlayNextVideoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playEnd) name:PLayEndNotification object:nil];
+    
+}
+#pragma Actions
+- (void)hide{
+    [self.view.window close];
+}
+- (void)changePlayMode{
+    if (playListModel.playMode == 3) {
+        playListModel.playMode = 0;
+    }else{
+        ++(playListModel.playMode);
+    }
+    [playlistTitleView updatePlayModeBtnState];
 }
 
+
+- (void)removeAllVideo{
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:@"删除所有"];
+    [alert addButtonWithTitle:@"取消"];
+    [alert setMessageText:@"清空所有视频"];
+    [alert setInformativeText:@"你确定全部清空！？"];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    [alert beginSheetModalForWindow:self.view.window modalDelegate:self
+                     didEndSelector:@selector(removeAllAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+}
+
+- (void)removeAllAlertDidEnd:(NSAlert *)alert  returnCode:(NSInteger)returnCode   contextInfo:(void *)contextInfo{
+    if (returnCode == 1000) {
+        [playListModel removeAll];
+    }
+}
+
+- (void)addVideo{
+    
+//    NSInteger result = [[NSOpenPanel openPanel] runModalForTypes:@[@"flv",@"mp4",@"avi",@"rmvb",@"wma",@"flash",@"3gp",@"mkv"]];
+    NSOpenPanel* openPanel = [NSOpenPanel openPanel];
+    openPanel.allowedFileTypes = @[@"flv",@"mp4",@"avi",@"rmvb",@"wma",@"flash",@"3gp",@"mkv",@"mov"];
+    NSInteger result = [openPanel runModal];
+    if (result == NSFileHandlingPanelOKButton)
+    {
+        NSString *path = [[openPanel URL] path];
+        NSLog(@"打开文件:%@",path);
+        [[[VideoModel alloc] initWithPath:path] play];
+    }
+}
 #pragma NSNotification
 
 -(void)playLastVideo{
@@ -139,39 +185,6 @@
     [videoTableView reloadData];
 }
 
-
-#pragma Actions
-- (void)hide{
-    [self.view.window close];
-}
-- (void)changePlayMode{
-    if (playListModel.playMode == 3) {
-        playListModel.playMode = 0;
-    }else{
-        ++(playListModel.playMode);
-    }
-    [playlistTitleView updatePlayModeBtnState];
-}
-
-
-- (void)removeAllVideo{
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert addButtonWithTitle:@"删除所有"];
-    [alert addButtonWithTitle:@"取消"];
-    [alert setMessageText:@"清空所有视频"];
-    [alert setInformativeText:@"你确定全部清空！？"];
-    [alert setAlertStyle:NSWarningAlertStyle];
-    //        [alert runModal];
-    //单元格生存周期太短videoModel里面了。
-    [alert beginSheetModalForWindow:self.view.window modalDelegate:self
-                     didEndSelector:@selector(removeAllAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];
-}
-
-- (void)removeAllAlertDidEnd:(NSAlert *)alert  returnCode:(NSInteger)returnCode   contextInfo:(void *)contextInfo{
-    if (returnCode == 1000) {
-        [playListModel removeAll];
-    }
-}
 
 
 #pragma loadSubViews
