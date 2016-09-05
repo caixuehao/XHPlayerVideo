@@ -440,7 +440,7 @@
         }
     }else if(player.state == VLCMediaPlayerStateStopped){
         NSLog(@"视频出错？");
-        SendNotification(PlayNextVideoNotification, nil);
+        //SendNotification(PlayNextVideoNotification, nil);
     }
     
 }
