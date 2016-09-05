@@ -324,8 +324,10 @@
 - (void)soundSwitch:(id)sender {
     [self dispplayAllView];
     if(player.audio.volume){
+        [controllerView.soundSwitchBtn setTitle:@"🔊❌"];
         player.audio.volume = 0;
     }else{
+         [controllerView.soundSwitchBtn setTitle:@"🔊"];
         player.audio.volume = controllerView.volumeSlider.intValue;
     }
 }
