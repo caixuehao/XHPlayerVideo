@@ -206,7 +206,7 @@
     //建立tabelview
     NSScrollView * tableContainer = [[NSScrollView alloc] init];
     videoTableView = ({
-        VideoListTableView * tableView = [[VideoListTableView alloc] initWithArray:playListModel.playList];
+        VideoListTableView * tableView = [[VideoListTableView alloc] initWithModel:playListModel];
         [tableContainer setDocumentView:tableView];
         [tableContainer setHasVerticalScroller:YES];
         [self.view addSubview:tableContainer];

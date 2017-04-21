@@ -8,7 +8,7 @@
 
 #import "PlayListModel.h"
 
-
+#import "Log.h"
 #import "Macro.h"
 
 static PlayListModel* playListModelShare;
@@ -116,7 +116,7 @@ static PlayListModel* playListModelShare;
 
 -(NSString*)getPath{
     //百度QQ的用户信息都放在这里所以我参考了一下
-    NSString *path = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES)[0];
+    NSString *path = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES)[0];//NSDesktopDirectory
     path = [path stringByAppendingPathComponent:@"XHPlayerVideo"];
     path = [path stringByAppendingPathComponent:@"PlayList.plist"];
     return path;

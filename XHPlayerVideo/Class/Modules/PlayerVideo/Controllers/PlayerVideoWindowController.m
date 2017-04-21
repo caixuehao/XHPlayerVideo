@@ -87,9 +87,9 @@ static PlayerVideoWindowController* playerVideoWindowController;
     [[self.window standardWindowButton:NSWindowCloseButton] setHidden:YES];
     [[self.window standardWindowButton:NSWindowMiniaturizeButton] setHidden:YES];
     
-    //self.window.acceptsMouseMovedEvents = YES;//鼠标拖拽
+//    self.window.acceptsMouseMovedEvents = YES;//鼠标拖拽
     [self.window setReleasedWhenClosed:NO];//设置关闭时不释放
-    [self.window setContentSize:NSMakeSize(1000, 618)];
+    [self.window setContentSize:NSMakeSize(485, 273)];
     
     self.window.minSize = NSMakeSize(485, 273);
     [self.window center];

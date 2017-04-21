@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "VideoModel.h"
+#import "PlayListModel.h"
 
 @interface VideoListTableView : NSTableView
 //@property(nonatomic)id<NSTabViewDelegate> selectedDelegate;
@@ -15,5 +16,7 @@
 @property(nonatomic)NSMutableArray<VideoModel *>* videos;
 
 -(instancetype)initWithArray:(NSArray<VideoModel *>*)videos;
+
+-(instancetype)initWithModel:(PlayListModel*)model;
 
 @end

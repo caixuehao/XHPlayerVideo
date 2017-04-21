@@ -12,6 +12,7 @@
 #import <VLCKit/VLCKit.h>
 #import <Masonry.h>
 #import "Macro.h"
+#import "Log.h"
 
 #import "PlayerVideoWindowController.h"
 #import "ControllerView.h"
@@ -155,25 +156,37 @@
 //播放视频
 - (void)playVideo:(NSNotification *)notifiction{
     self.currentVideo = [notifiction.userInfo objectForKey:@"video"];
-    
-    
     //防止调用过快 引起打卡死
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(playVideo) object:nil];
     [self performSelector:@selector(playVideo) withObject:nil afterDelay:0.5f];
 }
 
 - (void)playVideo{
-    [self.view.window makeKeyAndOrderFront:self];//显示窗口
-    [self ChangeVideoUpdateUI];
+    LOG(@"playVideo start");
+    NSString *log = [NSString stringWithFormat:@"视频状态:%lu hasVideoOut：%@  willPlay:%@ position:%f seekable:%@ canPause:%@" ,player.state,player.hasVideoOut?@"YES":@"NO",player.willPlay?@"YES":@"NO",player.position,player.seekable?@"YES":@"NO",player.canPause?@"YES":@"NO"];
+    LOG(log);
+    
+    
+    log = [NSString stringWithFormat:@"%d  %d",player.media.length.intValue,player.remainingTime.intValue];
+    LOG(log);
+    
+    log = [NSString stringWithFormat:@"audio:%p media:%p media.mediaType:%lu length:%d state:%lu",player.audio,player.media,player.media.mediaType,player.media.length.intValue,player.media.state];
+    LOG(log);
     //if(player.media.state != VLCMediaStateBuffering&&player)//防止在缓冲时被释放（不知道这样写有没有问题）
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        //[player stop];
+        [self.view.window makeKeyAndOrderFront:self];//显示窗口
+        [self ChangeVideoUpdateUI];
         if (player) {
+            [player stop];
+            //LOG(@"play setMedia");
             [player setMedia:self.currentVideo.media];
+           // LOG(@"play play");
             [player play];// 不能在这里调用？
+            //LOG(@"play play end");
         }
         isFirstPlay = YES;
     }];
+    LOG(@"playVideo end");
 }
 //停止播放
 -(void)stopPlayVideo:(NSNotification *)notifiction{
@@ -307,7 +320,6 @@
         [controllerView.playSwitchBtn setTitle:@"暂停"];
         [player play];
     }
-    
 }
 
 - (void)lastVideo:(id)sender{
@@ -429,12 +441,29 @@
 #pragma VLCMediaPlayerDelegate
 //视频状态
 - (void)mediaPlayerStateChanged:(NSNotification *)aNotification{
-    NSLog(@"视频状态:%lu hasVideoOut：%@  willPlay:%@ position:%f seekable:%@ canPause:%@" ,player.state,player.hasVideoOut?@"YES":@"NO",player.willPlay?@"YES":@"NO",player.position,player.seekable?@"YES":@"NO",player.canPause?@"YES":@"NO");//这个是player
-    NSLog(@"%d  %d",player.media.length.intValue,player.remainingTime.intValue);
-    NSLog(@"audio:%p media:%p media.mediaType:%lu length:%d state:%lu",player.audio,player.media,player.media.mediaType,player.media.length.intValue,player.media.state);
+    LOG(@"mediaPlayerStateChanged strat");
+    NSString *log = [NSString stringWithFormat:@"视频状态:%lu hasVideoOut：%@  willPlay:%@ position:%f seekable:%@ canPause:%@" ,player.state,player.hasVideoOut?@"YES":@"NO",player.willPlay?@"YES":@"NO",player.position,player.seekable?@"YES":@"NO",player.canPause?@"YES":@"NO"];
+    LOG(log);
+    
+    
+    log = [NSString stringWithFormat:@"%d  %d",player.media.length.intValue,player.remainingTime.intValue];
+    LOG(log);
+    
+    log = [NSString stringWithFormat:@"audio:%p media:%p media.mediaType:%lu length:%d state:%lu",player.audio,player.media,player.media.mediaType,player.media.length.intValue,player.media.state];
+    LOG(log);
+    
+    if (player.state == 2&&(player.media.length||player.hasVideoOut)&&isFirstPlay&&player.videoSize.width) {
+        isFirstPlay = NO;
+        NSString *log = [NSString stringWithFormat:@"当前视频宽高:%f,%f",player.videoSize.width,player.videoSize.height];
+        LOG(log);
+        if (player.videoSize.height&&player.videoSize.width) {//判断一下有时候会传两个空值
+            LOG(@"播放开始");
+           // [self playStartUpdateUI];
+        }
+    } else
     if(player.state == VLCMediaPlayerStatePaused){
         [controllerView.playSwitchBtn setTitle:@"播放"];
-        //剩余时间不靠谱(这样判断也不知道有没有问题，如你所见我已经把我看到的变量，差不多都试了一次)
+        //剩余时间不靠谱(这样判断也不知道有没有问题，我已经把我看到的变量，差不多都试了一次)
         if (player.position == 1.0||controllerView.videoSlider.intValue/controllerView.videoSlider.maxValue == 1.0||player.remainingTime.intValue>-2000) {
             NSLog(@"播放结束");
             [self stopPlayVideo];
@@ -444,19 +473,15 @@
         NSLog(@"视频出错？");
         //SendNotification(PlayNextVideoNotification, nil);
     }
-    
+    LOG(@"mediaPlayerStateChanged end");
 }
 
 //时间发生变化（大约是1秒3次）
 - (void)mediaPlayerTimeChanged:(NSNotification *)aNotification{
  //intValue单位毫米
-    if (isFirstPlay == YES) {
-        if (player.videoSize.height&&player.videoSize.width) {//判断一下有时候会传两个空值
-            NSLog(@"播放开始");
-            [self playStartUpdateUI];
-            isFirstPlay = NO;
-        }
-    }
+//    if (isFirstPlay == YES) {
+//        isFirstPlay = NO;
+//    }
     if (controllerView.videoSlider.continuous) {
         controllerView.videoSlider.maxValue = player.time.intValue-player.remainingTime.intValue;
         controllerView.videoSlider.intValue = player.time.intValue;
@@ -585,7 +610,6 @@
         make.bottom.equalTo(self.view);
     }];
     
-
 }
 
 
@@ -613,11 +637,11 @@
         [NSCursor hide];
     }
 }
+
 //视频加载成功时根据视频尺寸 更新约束布局比例
 -(void)playStartUpdateUI{
+    LOG(@"playStartUpdateUI start");
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        NSLog(@"当前视频宽高:%f,%f",player.videoSize.height,player.videoSize.width);
-        
         [videoPlayView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self.view);
             make.height.width.equalTo(self.view).priorityLow();
@@ -627,13 +651,14 @@
             make.bottom.equalTo(videoPlayViewBottonView.mas_top);
             make.width.equalTo(videoPlayView.mas_height).multipliedBy(player.videoSize.width/player.videoSize.height);
         }];
-
     }];
+    LOG(@"playStartUpdateUI end");
 }
+
 //视频停止时更新UI
 -(void)stopPlayVideoUpdateUI{
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        NSLog(@"当前视频宽高:%f,%f",player.videoSize.height,player.videoSize.width);
+        NSLog(@"当前视频宽高:%f,%f",player.videoSize.width,player.videoSize.height);
         [videoPlayView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self.view);
             make.height.width.mas_equalTo(0);
@@ -642,16 +667,19 @@
             make.right.equalTo(videoPlayViewRightView.mas_left);
             make.bottom.equalTo(videoPlayViewBottonView.mas_top);
         }];
-        
+        [videoPlayView displayIfNeeded];
     }];
 }
 //改变视频时刷新UI
 -(void)ChangeVideoUpdateUI{
+    //LOG(@"ChangeVideoUpdateUI start");
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [controllerView.playSwitchBtn setTitle:@"暂停"];
         playerTitleView.titleLabel.text = [self.currentVideo.path lastPathComponent];
+        LOG(playerTitleView.titleLabel.text);
         [self dispplayAllView];
     }];
+    // LOG(@"ChangeVideoUpdateUI end");
 }
 
 @end
